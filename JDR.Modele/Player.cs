@@ -6,9 +6,12 @@
         public string Name { get; set; }
         public string? Description { get; set; } 
 
-        public Player(string name)
+        public Skills Skills { get; set; }
+
+        public Player(string name, Skills skills)
         {
             Name = name;
+            Skills = skills;
         }
 
     }
