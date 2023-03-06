@@ -9,8 +9,9 @@ namespace JDR.Modele
     public class Arme
     {
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public Vitesse Vitesse { get; set; }
+        public Illustration Illustration { get; set; }
 
         public Arme() 
         { 

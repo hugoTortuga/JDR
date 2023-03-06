@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JDR.Modele", "JDR.Modele\JDR.Modele.csproj", "{5645D1A3-E926-42A9-8922-4887646EB07C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDR.Modele", "JDR.Modele\JDR.Modele.csproj", "{5645D1A3-E926-42A9-8922-4887646EB07C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JDR.Console", "JDR.Console\JDR.Console.csproj", "{E237AA1C-38C8-4B4B-85C9-52D47526A9A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDR.Console", "JDR.Console\JDR.Console.csproj", "{E237AA1C-38C8-4B4B-85C9-52D47526A9A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JDR.Infra", "JDR.Infra\JDR.Infra.csproj", "{9ABE86D7-0248-4FBB-8CA6-622629244A57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDR.Infra", "JDR.Infra\JDR.Infra.csproj", "{9ABE86D7-0248-4FBB-8CA6-622629244A57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JDR.Service", "JDR.Service\JDR.Service.csproj", "{581E06D3-10C7-4FA0-8112-79CCED82D1FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDR.Service", "JDR.Service\JDR.Service.csproj", "{581E06D3-10C7-4FA0-8112-79CCED82D1FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JDR.Test", "JDR.Test\JDR.Test.csproj", "{DE8A1FF1-8A39-4016-9720-AE86D639AFDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{581E06D3-10C7-4FA0-8112-79CCED82D1FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{581E06D3-10C7-4FA0-8112-79CCED82D1FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{581E06D3-10C7-4FA0-8112-79CCED82D1FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE8A1FF1-8A39-4016-9720-AE86D639AFDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE8A1FF1-8A39-4016-9720-AE86D639AFDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE8A1FF1-8A39-4016-9720-AE86D639AFDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE8A1FF1-8A39-4016-9720-AE86D639AFDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
