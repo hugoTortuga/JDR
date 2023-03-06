@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JDR.Modele
 {
-    public class Caracs
+    public class Skills
     {
 
         public int Force { get; set; }
@@ -17,7 +17,7 @@ namespace JDR.Modele
         public int Discretion { get; set; }
         public int Persuasion { get; set; }
 
-        public Caracs() 
+        public Skills() 
         { 
         }
 
