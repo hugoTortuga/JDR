@@ -65,5 +65,16 @@ namespace JDR.Test
 			Assert.That(dices.PlayDices[0].NumberFaces, Is.EqualTo(6));
 		}
 
+		[Test]
+		[TestCase(1, 6)]
+		[TestCase(4, 6)]
+		[TestCase(1, 100)]
+		[TestCase(4, 20)]
+		public void CreateDicesParameters(int numberOfDice, int numberOfFace) {
+			var dices = new Dices($"{numberOfDice}d{numberOfFace}");
+			Assert.That(dices.PlayDices?.Count, Is.EqualTo(numberOfDice));
+			Assert.That(dices.PlayDices[0].NumberFaces, Is.EqualTo(numberOfFace));
+		}
+
 	}
 }
