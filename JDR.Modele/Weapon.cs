@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace JDR.Model
 {
-    public class Weapon
+    public class Weapon : InventoryObject
     {
+        public int NumberOfHand { get; set; }
+        public Speed Speed { get; set; }
 
-        public string? Name { get; set; }
-        public Speed Vitesse { get; set; }
-        public Illustration Illustration { get; set; }
+        public int BaseDamage { get; set; }
 
-        public Weapon(string name, Speed vitesse) 
+        public Dices DicesDamage { get; set; }
+
+        public Weapon(string name, Speed speed, string valueDice) : base (name)
         { 
             Name = name;
-            Vitesse = vitesse;
+            Speed = speed;
+            DicesDamage = new Dices(valueDice);
         }
 
     }

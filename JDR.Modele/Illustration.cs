@@ -9,5 +9,9 @@
             URL = uRL;
         }
 
+        public static Illustration None() {
+            return new Illustration("/noIllustration.jpg");
+        }
+
     }
 }

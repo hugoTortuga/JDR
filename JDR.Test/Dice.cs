@@ -47,5 +47,23 @@ namespace JDR.Test
 			Assert.That(result, Is.AtMost(numberOfFace));
 		}
 
+        [Test]
+        public void CreateDices() {
+            var dices = new Dices("1d6");
+            Assert.Pass();
+        }
+
+		[Test]
+		public void CreateDices1d6CheckNumber() {
+			var dices = new Dices("1d6");
+			Assert.That(dices.PlayDices?.Count, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void CreateDices1d6CheckFaces() {
+			var dices = new Dices("1d6");
+			Assert.That(dices.PlayDices[0].NumberFaces, Is.EqualTo(6));
+		}
+
 	}
 }

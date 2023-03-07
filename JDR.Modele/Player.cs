@@ -2,8 +2,6 @@
 {
     public class Player : Entity
     {
-        public int Id { get; }
-
         private string? _Name;
         public string? Name { get => _Name; set
             {

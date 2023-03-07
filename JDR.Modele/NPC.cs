@@ -8,8 +8,6 @@ namespace JDR.Model
 {
     public class NPC : Entity
     {
-        public int Id { get; }
-
         private int _HostilityLevel;
         public int HostilityLevel
         {
