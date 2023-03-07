@@ -1,4 +1,4 @@
-using JDR.Modele;
+using JDR.Model;
 
 namespace JDR.Test
 {

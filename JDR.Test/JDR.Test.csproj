@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JDR.Modele\JDR.Modele.csproj" />
+    <ProjectReference Include="..\JDR.Modele\JDR.Model.csproj" />
   </ItemGroup>
 
 </Project>

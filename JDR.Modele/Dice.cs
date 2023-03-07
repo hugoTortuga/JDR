@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JDR.Modele
+namespace JDR.Model
 {
     public class Dice
     {

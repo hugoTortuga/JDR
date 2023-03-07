@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JDR.Modele
+namespace JDR.Model
 {
     public class NPC : Entity
     {
@@ -22,6 +22,8 @@ namespace JDR.Modele
                 }
             }
         }
+
+        public int XPLevelWhenKilled { get; set; }
 
         public NPC(int hostilityLevel) {
             HostilityLevel = hostilityLevel;

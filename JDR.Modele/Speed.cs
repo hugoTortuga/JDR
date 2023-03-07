@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JDR.Modele
+namespace JDR.Model
 {
-    public enum Vitesse
+    public enum Speed
     {
 
         VerySlow = -2,
         Slow = -1,
         Moderate = 0,
         Fast = 1,
-        VeryFase = 2
+        VeryFast = 2
 
     }
 }

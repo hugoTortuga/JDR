@@ -1,4 +1,4 @@
-﻿namespace JDR.Modele
+﻿namespace JDR.Model
 {
     public class Illustration
     {

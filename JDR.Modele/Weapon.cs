@@ -4,21 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JDR.Modele
+namespace JDR.Model
 {
-    public class Arme
+    public class Weapon
     {
 
         public string? Name { get; set; }
-        public Vitesse Vitesse { get; set; }
+        public Speed Vitesse { get; set; }
         public Illustration Illustration { get; set; }
 
-        public Arme() 
+        public Weapon(string name, Speed vitesse) 
         { 
-        
+            Name = name;
+            Vitesse = vitesse;
         }
-
-
 
     }
 }

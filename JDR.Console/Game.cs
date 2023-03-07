@@ -1,4 +1,4 @@
-﻿using JDR.Modele;
+﻿using JDR.Model;
 
 public class Game
 {

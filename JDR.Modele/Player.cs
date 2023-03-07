@@ -1,8 +1,9 @@
-﻿namespace JDR.Modele
+﻿namespace JDR.Model
 {
     public class Player : Entity
     {
         public int Id { get; }
+
         private string? _Name;
         public string? Name { get => _Name; set
             {
@@ -12,7 +13,9 @@
                 }
             }
         }
-        public string? Description { get; set; } 
+
+        public string? Description { get; set; }
+        public int Level { get; set; }
 
         public Skills Skills { get; set; }
 
