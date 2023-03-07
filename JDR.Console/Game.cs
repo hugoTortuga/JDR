@@ -1,19 +1,27 @@
 ﻿using JDR.Model;
 
-public class Game
-{
-    public Game()
-    {
-    }
+public class Game {
+	public Game() {
+	}
 
-    public void Start()
-    {
-        Console.WriteLine("Lançons les dés pour voir si ils ne sont pas rouillés");
-        var d6 = new Dice(6);
-        var d20 = new Dice(20);
-        var d100 = new Dice(100);
-        Console.WriteLine("Mon dé 6 fait " + d6.Roll());
-        Console.WriteLine("Mon dé 20 fait " + d20.Roll());
-        Console.WriteLine("Mon dé 100 fait " + d100.Roll());
-    }
+	public void Start() {
+		TestAStartingWeapon();
+		TestTheDice();
+	}
+
+	public void TestTheDice() {
+		Console.WriteLine("Lançons les dés pour voir si ils ne sont pas rouillés");
+		Console.WriteLine("Mon dé 100 fait " + new Dice(100).Roll());
+	}
+
+	public void TestAStartingWeapon() {
+		var startingWeapon = GetStartingWeapon()[0];
+		Console.WriteLine(startingWeapon.Name + " a fait " + startingWeapon.DicesDamage.RollTheDice() + " dégât(s)");
+	}
+
+	private IList<Weapon> GetStartingWeapon() {
+		return new List<Weapon> {
+			new Weapon("Arc long", Speed.Slow, "2d8")
+		};
+	}
 }
