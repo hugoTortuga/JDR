@@ -1,22 +1,24 @@
-﻿namespace JDR.Service
+﻿using JDR.Model;
+
+namespace JDR.Service
 {
     public class ServiceBase
     {
-        private readonly IBaseRepository _Repository;
-        public ServiceBase(IBaseRepository repo) 
+        private readonly IGameRepository _Repository;
+        public ServiceBase(IGameRepository repo) 
         {
 			_Repository = repo;
 
 		}
 
-        public void Save(object obj) {
-			if (obj == null) return;
-			_Repository.Save(obj);
+        public void Save(Game game) {
+			if (game == null) return;
+			_Repository.Save(game);
 		}
 
-		public void Delete(object obj) {
-			if (obj == null) return;
-			_Repository.Delete(obj);
+		public void Delete(Game game) {
+			if (game == null) return;
+			_Repository.Delete(game);
 		}
 
 	}

@@ -14,9 +14,7 @@ namespace JDR.Vue.ViewModels {
         }
 
         public void OpenGameCreation() {
-			var mainViewModel = App.Current.MainWindow.DataContext as MainViewModel;
-			if (mainViewModel != null) mainViewModel.MoveToGameCreation();
-			
+			((MainViewModel)App.Current.MainWindow.DataContext).MoveToGameCreation();
 		}
 
 	}

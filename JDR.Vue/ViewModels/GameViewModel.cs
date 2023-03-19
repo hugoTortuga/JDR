@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace JDR.Vue.ViewModels {
 	public class GameViewModel : ViewModelBase {
 
-        private readonly Game Game;
-		private readonly ObservableCollection<Scene> _scenes;
+        public Game Game { get; set; }
+        private readonly ObservableCollection<Scene> _scenes;
 
 		public GameViewModel(Game game)
         {

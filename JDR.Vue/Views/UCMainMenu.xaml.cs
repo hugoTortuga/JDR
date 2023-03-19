@@ -17,8 +17,8 @@ using System.Windows.Shapes;
 namespace JDR.Vue {
 
 	public partial class UCMainMenu : UserControl {
-		public UCMainMenu() {
-			DataContext = new MainMenuViewModel();
+		public UCMainMenu(MainMenuViewModel mainMenuViewModel) {
+			DataContext = mainMenuViewModel;
 			InitializeComponent();
 		}
 	}

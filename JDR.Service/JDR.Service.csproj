@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JDR.Modele\JDR.Model.csproj" />
+  </ItemGroup>
+
 </Project>

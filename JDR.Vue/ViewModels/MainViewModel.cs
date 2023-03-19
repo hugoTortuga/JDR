@@ -26,11 +26,19 @@ namespace JDR.Vue.ViewModels {
 
         public MainViewModel()
         {
-            _CurrentControl = new UCMainMenu();
+            _CurrentControl = new UCMainMenu(new MainMenuViewModel());
+		}
+
+		private ServiceBase GetNewService() {
+            return new ServiceBase(new GameRepository(new DbContextJDR()));
 		}
 
 		public void MoveToGameCreation() {
-            _CurrentControl = new UCGameCreation(new GameCreationViewModel(new ServiceBase(new BaseRepository())));
+            _CurrentControl = new UCGameCreation(new GameCreationViewModel(GetNewService()));
+		}
+
+		public void MoveToMainMenu() {
+			_CurrentControl = new UCMainMenu(new MainMenuViewModel());
 		}
 	}
 }

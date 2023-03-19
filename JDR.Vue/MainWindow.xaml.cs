@@ -20,13 +20,9 @@ namespace JDR.Vue {
 
 	public partial class MainWindow : Window {
 		public MainWindow() {
-			var service = GetService();
 			DataContext = new MainViewModel();
 			InitializeComponent();
 		}
 
-		private ServiceBase GetService() {
-			return new ServiceBase(new BaseRepository());
-		}
 	}
 }

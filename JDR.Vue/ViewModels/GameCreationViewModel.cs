@@ -30,13 +30,12 @@ namespace JDR.Vue.ViewModels {
         }
 
         public void GoToMenu() {
-			var mainViewModel = App.Current.MainWindow.DataContext as MainViewModel;
-			if (mainViewModel != null) mainViewModel.CurrentControl = new UCMainMenu();
+			((MainViewModel)App.Current.MainWindow.DataContext).MoveToMainMenu();
 		}
 
         public void AddAScene() {
 			CurrentGame.Scenes.Add(new Scene("test"));
-            _Service.Save(CurrentGame.Scenes);
+            _Service.Save(CurrentGame.Game);
         }
 
 	}
