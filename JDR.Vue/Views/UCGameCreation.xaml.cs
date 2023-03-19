@@ -15,12 +15,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace JDR.Vue.Views {
-	/// <summary>
-	/// Logique d'interaction pour UCGameCreation.xaml
-	/// </summary>
+
 	public partial class UCGameCreation : UserControl {
-		public UCGameCreation() {
-			DataContext = new GameCreationViewModel();
+
+
+		public UCGameCreation(GameCreationViewModel gameCreationViewModel) {
+			DataContext = gameCreationViewModel;
 			InitializeComponent();
 		}
 	}

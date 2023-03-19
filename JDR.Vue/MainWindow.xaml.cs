@@ -1,4 +1,6 @@
-﻿using JDR.Vue.ViewModels;
+﻿using JDR.Infra;
+using JDR.Service;
+using JDR.Vue.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +20,13 @@ namespace JDR.Vue {
 
 	public partial class MainWindow : Window {
 		public MainWindow() {
+			var service = GetService();
 			DataContext = new MainViewModel();
 			InitializeComponent();
+		}
+
+		private ServiceBase GetService() {
+			return new ServiceBase(new BaseRepository());
 		}
 	}
 }

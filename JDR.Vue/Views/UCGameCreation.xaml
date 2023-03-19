@@ -8,6 +8,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" MaxWidth="300" MinWidth="200"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
         <StackPanel>
             <Button Content="Retour au menu">
                 <i:Interaction.Triggers>
@@ -16,7 +20,19 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <TextBlock Text="Votre partie contient 0 scène"/>
+            <Button Content="Ajouter une scène">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:CallMethodAction MethodName="AddAScene" TargetObject="{Binding}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <ListBox ItemsSource="{Binding CurrentGame.Scenes, UpdateSourceTrigger=PropertyChanged}">
+                
+            </ListBox>
         </StackPanel>
+        <Grid Grid.Column="1">
+            <TextBlock Text="Votre partie contient 0 scène"/>
+        </Grid>
     </Grid>
 </UserControl>

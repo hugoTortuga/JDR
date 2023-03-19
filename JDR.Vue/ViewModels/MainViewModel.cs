@@ -1,4 +1,7 @@
-﻿using System;
+﻿using JDR.Infra;
+using JDR.Service;
+using JDR.Vue.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,7 +12,6 @@ using System.Windows.Controls;
 
 namespace JDR.Vue.ViewModels {
 	public class MainViewModel : ViewModelBase {
-
 
         private ContentControl _CurrentControl;
         public ContentControl CurrentControl {
@@ -24,8 +26,11 @@ namespace JDR.Vue.ViewModels {
 
         public MainViewModel()
         {
-            CurrentControl = new UCMainMenu();
-        }
+            _CurrentControl = new UCMainMenu();
+		}
 
-    }
+		public void MoveToGameCreation() {
+            _CurrentControl = new UCGameCreation(new GameCreationViewModel(new ServiceBase(new BaseRepository())));
+		}
+	}
 }
