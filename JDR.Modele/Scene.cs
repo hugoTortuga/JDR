@@ -9,13 +9,15 @@ namespace JDR.Model
     public class Scene
     {
         public string Name { get; set; }
-        public Music? Music { get; set; }
-        public IList<Illustration> Illustrations { get; set; }
+        public IList<Music> Musics { get; set; }
+        public Illustration? Background { get; set; }
+        public IList<NPC> Characters { get; set; }
 
         public Scene(string name) {
             Name = name;
-            Illustrations = new List<Illustration>();
-        }
+			Musics = new List<Music>();
+			Characters = new List<NPC>();
+		}
 
 		public override string ToString() {
             return Name;

@@ -26,7 +26,7 @@ namespace JDR.Vue.ViewModels {
 
         public MainViewModel()
         {
-            _CurrentControl = new UCMainMenu(new MainMenuViewModel());
+            CurrentControl = new UCMainMenu(new MainMenuViewModel());
 		}
 
 		private ServiceBase GetNewService() {
@@ -34,11 +34,16 @@ namespace JDR.Vue.ViewModels {
 		}
 
 		public void MoveToGameCreation() {
-            _CurrentControl = new UCGameCreation(new GameCreationViewModel(GetNewService()));
+            CurrentControl = new UCGameCreation(new GameCreationViewModel(GetNewService()));
 		}
 
 		public void MoveToMainMenu() {
-			_CurrentControl = new UCMainMenu(new MainMenuViewModel());
+			CurrentControl = new UCMainMenu(new MainMenuViewModel());
 		}
+
+		public void MoveToGame() {
+			CurrentControl = new UCGame();
+		}
+
 	}
 }

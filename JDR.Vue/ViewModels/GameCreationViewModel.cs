@@ -23,6 +23,18 @@ namespace JDR.Vue.ViewModels {
                 OnPropertyChanged(nameof(CurrentGame));
             }
         }
+
+        private Scene _CurrentScene;
+        public Scene CurrentScene {
+            get {
+                return (_CurrentScene);
+            }
+            set {
+                _CurrentScene = value;
+                OnPropertyChanged(nameof(CurrentScene));
+            }
+        }
+
         public GameCreationViewModel(ServiceBase service)
         {
             _CurrentGame = new GameViewModel(new Game(new ObservableCollection<Scene>()));
@@ -34,8 +46,8 @@ namespace JDR.Vue.ViewModels {
 		}
 
         public void AddAScene() {
-			CurrentGame.Scenes.Add(new Scene("test"));
-            _Service.Save(CurrentGame.Game);
+            CurrentScene = new Scene("Scène sans titre");
+			CurrentGame.Scenes.Add(CurrentScene);
         }
 
 	}

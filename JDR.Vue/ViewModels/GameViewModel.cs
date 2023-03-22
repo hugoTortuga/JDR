@@ -12,9 +12,20 @@ namespace JDR.Vue.ViewModels {
         public Game Game { get; set; }
         private readonly ObservableCollection<Scene> _scenes;
 
+		public string Name {
+			get {
+				return (Game.Name);
+			}
+			set {
+				Game.Name = value;
+				OnPropertyChanged(nameof(Name));
+			}
+		}
+
 		public GameViewModel(Game game)
         {
             Game = game;
+			Name = game.Name;
 			_scenes = new ObservableCollection<Scene>(game.Scenes);
 		}
 
@@ -27,6 +38,7 @@ namespace JDR.Vue.ViewModels {
 				}
 			}
 		}
+
 
 	}
 }

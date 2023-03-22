@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace JDR.Model {
 	public class Game {
 
+        public string Name { get; set; }
         public int MaxPlayer { get; set; }
         public IList<Scene> Scenes { get; set; }
 

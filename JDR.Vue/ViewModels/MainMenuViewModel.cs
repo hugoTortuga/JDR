@@ -1,4 +1,5 @@
-﻿using JDR.Vue.Views;
+﻿using JDR.Infra;
+using JDR.Vue.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace JDR.Vue.ViewModels {
         }
 
         public void OpenGameCreation() {
-			((MainViewModel)App.Current.MainWindow.DataContext).MoveToGameCreation();
+            ((MainViewModel)App.Current.MainWindow.DataContext).MoveToGameCreation();
+		}
+
+		public void OpenGame() {
+			((MainViewModel)App.Current.MainWindow.DataContext).MoveToGame();
 		}
 
 	}
