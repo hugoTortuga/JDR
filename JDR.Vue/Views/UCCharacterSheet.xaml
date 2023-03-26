@@ -13,15 +13,17 @@
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="70"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Image Source="pack://application:,,,/Assets/old-paper.jpg" Stretch="UniformToFill" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
-        <TextBlock Text="Bengala, Nain (15 ans)" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20 20 20 10" FontSize="20" FontFamily="Gentium Book Basic"/>
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="5 0 0 12" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <TextBlock Text="PV: 10"  FontSize="16" FontFamily="Gentium Book Basic" />
-            <TextBlock Text="Mana: 4"  FontSize="16" FontFamily="Gentium Book Basic"/>
+        <TextBlock Text="Bengala, Nain" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20 20 20 10" FontSize="24" FontFamily="Gentium Book Basic"/>
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="5 0 0 10" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <TextBlock Text="PV:"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center"/>
+            <TextBlock Text="14"  FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
+            <TextBlock Text="Mana:"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center"/>
+            <TextBlock Text="6"  FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
         </StackPanel>
         <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Source="pack://application:,,,/Assets/bengala.png" Margin="5"/>
         <GroupBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Caractéristiques" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5">
@@ -32,13 +34,50 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="Force"/>
-                <TextBlock Grid.Row="1" Text="Agilité"/>
-                <TextBlock Grid.Row="2" Text="Intelligence"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Force" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="60" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Agilité" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="50" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Intelligence" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="20" FontSize="24" VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Observation" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="40" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="Persuasion" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBlock Grid.Row="1" Grid.Column="3" Text="40" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="Courage" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBlock Grid.Row="2" Grid.Column="3" Text="60" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="3" Grid.Column="2" Text="Discrétion" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <TextBlock Grid.Row="3" Grid.Column="3" Text="15" FontSize="24" VerticalAlignment="Center" />
+                <Grid Grid.Column="4" Grid.RowSpan="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" Source="pack://application:,,,/Assets/z_nature.png"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Ténèbres, niveau 1" VerticalAlignment="Center"/>
+                    <Image Grid.Row="2" Grid.Column="0" Source="pack://application:,,,/Assets/z_psy.png"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Guérison, niveau 1" VerticalAlignment="Center"/>
+                </Grid>
+                
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Inventaire" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5 0 5 5">
-            <TextBlock Text="Force : 1 Agilité 1"/>
+            <StackPanel Margin="5">
+                <TextBlock Text="Masse d'arme" />
+                <TextBlock Text="Bouclier" />
+            </StackPanel>
         </GroupBox>
     </Grid>
 </UserControl>
