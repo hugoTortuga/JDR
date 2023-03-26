@@ -19,7 +19,7 @@ namespace JDR.Vue {
 		}
 
 		public void OpenCharacterSheet() {
-			CurrentControl.Content = new UCCharacterSheet();
+			CurrentControl.Content = new WinCharacterSheet();
 		}
 
 		public void OpenGame() {

@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="JDR.Vue.Views.UCCharacterSheet"
+﻿<Window x:Class="JDR.Vue.Views.WinCharacterSheet"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JDR.Vue.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" Height="450" Width="730" ResizeMode="NoResize"
+             d:DesignHeight="450" Title="Fiche de personnage" d:DesignWidth="730">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="9*"/>
@@ -17,7 +17,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image Source="pack://application:,,,/Assets/old-paper.jpg" Stretch="UniformToFill" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+        <Image Source="/Assets/old-paper.jpg" Stretch="UniformToFill" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
         <TextBlock Text="Bengala, Nain" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20 20 20 10" FontSize="24" FontFamily="Gentium Book Basic"/>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="5 0 0 10" VerticalAlignment="Bottom" Orientation="Horizontal">
             <TextBlock Text="PV:"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center"/>
@@ -25,7 +25,7 @@
             <TextBlock Text="Mana:"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center"/>
             <TextBlock Text="6"  FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
         </StackPanel>
-        <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Source="pack://application:,,,/Assets/bengala.png" Margin="5"/>
+        <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Source="/Assets/bengala.png" Margin="5"/>
         <GroupBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Caractéristiques" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5">
             <Grid>
                 <Grid.RowDefinitions>
@@ -65,9 +65,9 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Grid.Column="0" Source="pack://application:,,,/Assets/z_nature.png"/>
+                    <Image Grid.Row="0" Grid.Column="0" Source="/Assets/z_nature.png"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="Ténèbres, niveau 1" VerticalAlignment="Center"/>
-                    <Image Grid.Row="2" Grid.Column="0" Source="pack://application:,,,/Assets/z_psy.png"/>
+                    <Image Grid.Row="2" Grid.Column="0" Source="/Assets/z_psy.png"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="Guérison, niveau 1" VerticalAlignment="Center"/>
                 </Grid>
 
@@ -80,4 +80,4 @@
             </StackPanel>
         </GroupBox>
     </Grid>
-</UserControl>
+</Window>

@@ -14,11 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace JDR.Vue.Views {
-	/// <summary>
-	/// Logique d'interaction pour UCCharacterSheet.xaml
-	/// </summary>
-	public partial class UCCharacterSheet : UserControl {
-		public UCCharacterSheet() {
+
+	public partial class WinCharacterSheet : Window {
+		public WinCharacterSheet() {
 			InitializeComponent();
 		}
 	}

@@ -30,12 +30,12 @@ namespace JDR.Vue.Views {
 		public UCGame(MainWindow window) {
 			_mainWindow = window;
 			InitializeComponent();
-			/*DrawFieldOfVision();
+			DrawFieldOfVision();
 			_movementTimer = new DispatcherTimer {
 				Interval = TimeSpan.FromMilliseconds(1000 / 144), // 144 FPS
 			};
 			_movementTimer.Tick += MovementTimer_Tick;
-			_movementTimer.Start();*/
+			_movementTimer.Start();
 		}
 
 		private void MovementTimer_Tick(object sender, EventArgs e) {
@@ -152,6 +152,10 @@ namespace JDR.Vue.Views {
 
 		private void OpenCharacterSheetClicked(object sender, EventArgs e) {
 			_mainWindow.OpenCharacterSheet();
+		}
+
+		private void OpenCharacterSheet(object sender, RoutedEventArgs e) {
+			new WinCharacterSheet().ShowDialog();
 		}
 	}
 }

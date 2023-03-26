@@ -8,8 +8,15 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button Panel.ZIndex="10" Margin="106,32,551,365" Content="Ouvrir fiche perso" Click="OpenCharacterSheetClicked"/>
-        <Viewbox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Button Content="Ouvrir fiche perso" Click="OpenCharacterSheet"  Width="150" Height="35" HorizontalAlignment="Left" />
+        </StackPanel>
+
+        <Viewbox Grid.Row="1">
             <Canvas Name="GameCanvas" Height="1080" Width="1800">
                 <Canvas.Background>
                     <ImageBrush ImageSource="pack://application:,,,/Assets/background.jpeg" Stretch="Uniform"/>

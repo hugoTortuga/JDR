@@ -9,8 +9,12 @@
 
   <ItemGroup>
     <None Remove="Assets\background.jpeg" />
+    <None Remove="Assets\bengala.png" />
     <None Remove="Assets\mob-lizard.png" />
+    <None Remove="Assets\old-paper.jpg" />
     <None Remove="Assets\rock.png" />
+    <None Remove="Assets\z_nature.png" />
+    <None Remove="Assets\z_psy.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,10 +25,20 @@
     <Resource Include="Assets\background.jpeg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\bengala.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\mob-lizard.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\old-paper.jpg" />
     <Resource Include="Assets\rock.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\z_nature.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\z_psy.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
