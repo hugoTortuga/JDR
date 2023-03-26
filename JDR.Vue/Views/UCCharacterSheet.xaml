@@ -70,7 +70,7 @@
                     <Image Grid.Row="2" Grid.Column="0" Source="pack://application:,,,/Assets/z_psy.png"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="Guérison, niveau 1" VerticalAlignment="Center"/>
                 </Grid>
-                
+
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Inventaire" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5 0 5 5">

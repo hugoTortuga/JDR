@@ -42,7 +42,6 @@ namespace JDR.Vue.ViewModels {
         }
 
         public void GoToMenu() {
-			((MainViewModel)App.Current.MainWindow.DataContext).MoveToMainMenu();
 		}
 
         public void AddAScene() {

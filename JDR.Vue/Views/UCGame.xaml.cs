@@ -25,15 +25,17 @@ namespace JDR.Vue.Views {
 		private readonly DispatcherTimer _movementTimer;
 		private Point _previousPlayerPosition;
 		private int fieldOfVisionDistance = 100;
+		private MainWindow _mainWindow;
 
-		public UCGame() {
+		public UCGame(MainWindow window) {
+			_mainWindow = window;
 			InitializeComponent();
-			DrawFieldOfVision();
+			/*DrawFieldOfVision();
 			_movementTimer = new DispatcherTimer {
 				Interval = TimeSpan.FromMilliseconds(1000 / 144), // 144 FPS
 			};
 			_movementTimer.Tick += MovementTimer_Tick;
-			_movementTimer.Start();
+			_movementTimer.Start();*/
 		}
 
 		private void MovementTimer_Tick(object sender, EventArgs e) {
@@ -146,6 +148,10 @@ namespace JDR.Vue.Views {
 
 		private void UserControl_KeyUp(object sender, KeyEventArgs e) {
 			_pressedKeys.Remove(e.Key);
+		}
+
+		private void OpenCharacterSheetClicked(object sender, EventArgs e) {
+			_mainWindow.OpenCharacterSheet();
 		}
 	}
 }

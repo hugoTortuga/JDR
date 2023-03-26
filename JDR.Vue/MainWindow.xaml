@@ -8,6 +8,6 @@
         xmlns:vue="clr-namespace:JDR.Vue"
         Title="Main" Height="450" Width="800">
     <Grid>
-        <UserControl Content="{Binding CurrentControl, UpdateSourceTrigger=PropertyChanged}"/>
+        <UserControl Name="CurrentControl" />
     </Grid>
 </Window>

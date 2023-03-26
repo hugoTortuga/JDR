@@ -15,12 +15,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>
-        <Button>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <i:CallMethodAction MethodName="OpenGame" TargetObject="{Binding}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+        <Button Click="Button_Click">
             Démarrer une partie
         </Button>
         <Button>Rejoindre une partie</Button>

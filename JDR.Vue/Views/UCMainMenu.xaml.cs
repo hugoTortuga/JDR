@@ -17,9 +17,16 @@ using System.Windows.Shapes;
 namespace JDR.Vue {
 
 	public partial class UCMainMenu : UserControl {
-		public UCMainMenu(MainMenuViewModel mainMenuViewModel) {
+
+		private MainWindow _mainWindow;
+		public UCMainMenu(MainMenuViewModel mainMenuViewModel, MainWindow window) {
+			_mainWindow = window;
 			DataContext = mainMenuViewModel;
 			InitializeComponent();
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e) {
+			_mainWindow.OpenGame();
 		}
 	}
 }
