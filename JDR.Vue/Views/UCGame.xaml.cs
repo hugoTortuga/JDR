@@ -21,141 +21,40 @@ namespace JDR.Vue.Views {
 	/// </summary>
 	public partial class UCGame : UserControl {
 
-		private const double MoveSpeed = 3; // Adjust as needed
-		private readonly DispatcherTimer _movementTimer;
-		private Point _previousPlayerPosition;
-		private int fieldOfVisionDistance = 100;
-		private MainWindow _mainWindow;
+		private bool _isPlayerSelected;
+		private Rectangle _selectionRectangle;
 
 		public UCGame(MainWindow window) {
-			_mainWindow = window;
 			InitializeComponent();
-			DrawFieldOfVision();
-			_movementTimer = new DispatcherTimer {
-				Interval = TimeSpan.FromMilliseconds(1000 / 144), // 144 FPS
-			};
-			_movementTimer.Tick += MovementTimer_Tick;
-			_movementTimer.Start();
-		}
-
-		private void MovementTimer_Tick(object sender, EventArgs e) {
-			MovePlayerBasedOnPressedKeys();
-		}
-
-		private void MovePlayer(double deltaX, double deltaY) {
-			double newX = Canvas.GetLeft(Player1) + deltaX;
-			double newY = Canvas.GetTop(Player1) + deltaY;
-
-			// Update the player token's position
-			Canvas.SetLeft(Player1, newX);
-			Canvas.SetTop(Player1, newY);
-		}
-
-		private Path fieldOfVision;
-
-		private void DrawFieldOfVision() {
-			Point playerPosition = new Point(Canvas.GetLeft(Player1) + Player1.ActualWidth / 2, Canvas.GetTop(Player1) + Player1.ActualHeight / 2);
-
-			// Create a geometry representing the entire canvas
-			RectangleGeometry canvasGeometry = new RectangleGeometry(new Rect(0, 0, GameCanvas.Width, GameCanvas.Height));
-
-			// Create a geometry representing the circular field of vision
-			EllipseGeometry visionGeometry = new EllipseGeometry(playerPosition, fieldOfVisionDistance, fieldOfVisionDistance);
-
-			PathGeometry fogOfWarGeometry = new PathGeometry();
-
-			// Add the main figure (the entire canvas)
-			fogOfWarGeometry.Figures.Add(new PathFigure {
-				StartPoint = new Point(0, 0),
-				IsClosed = true,
-				Segments =
-				{
-					new LineSegment(new Point(GameCanvas.Width, 0), true),
-					new LineSegment(new Point(GameCanvas.Width, GameCanvas.Height), true),
-					new LineSegment(new Point(0, GameCanvas.Height), true)
-				}
-			});
-
-			// Add the field of vision figure (cut-out circle)
-			fogOfWarGeometry.Figures.Add(new PathFigure {
-				StartPoint = new Point(playerPosition.X + fieldOfVisionDistance, playerPosition.Y),
-				IsClosed = true,
-				IsFilled = true,
-				Segments =
-				{
-					new ArcSegment(new Point(playerPosition.X - fieldOfVisionDistance, playerPosition.Y), new Size(fieldOfVisionDistance, fieldOfVisionDistance), 0, false, SweepDirection.Clockwise, true),
-					new ArcSegment(new Point(playerPosition.X + fieldOfVisionDistance, playerPosition.Y), new Size(fieldOfVisionDistance, fieldOfVisionDistance), 0, false, SweepDirection.Clockwise, true)
-				}
-			});
-
-			// Create a path for the fog of war geometry and set its properties
-			fieldOfVision = new Path {
-				Data = fogOfWarGeometry,
-				Fill = new SolidColorBrush(Color.FromArgb(153, 0, 0, 0)),
-				IsHitTestVisible = false
-			};
-
-			// Add the fog of war to the canvas
-			GameCanvas.Children.Add(fieldOfVision);
-		}
-
-
-		private readonly HashSet<Key> _pressedKeys = new HashSet<Key>();
-
-		private void UserControl_KeyDown(object sender, KeyEventArgs e) {
-			if (e.Key == Key.Z || e.Key == Key.Q || e.Key == Key.S || e.Key == Key.D) {
-				_pressedKeys.Add(e.Key);
-			}
-		}
-		private void MovePlayerBasedOnPressedKeys() {
-			double deltaX = 0;
-			double deltaY = 0;
-
-			if (_pressedKeys.Contains(Key.Z)) {
-				deltaY -= MoveSpeed;
-			}
-
-			if (_pressedKeys.Contains(Key.S)) {
-				deltaY += MoveSpeed;
-			}
-
-			if (_pressedKeys.Contains(Key.Q)) {
-				deltaX -= MoveSpeed;
-			}
-
-			if (_pressedKeys.Contains(Key.D)) {
-				deltaX += MoveSpeed;
-			}
-
-			if (deltaX != 0 || deltaY != 0) {
-				MovePlayer(deltaX, deltaY);
-
-				Point currentPlayerPosition = new Point(Canvas.GetLeft(Player1) + Player1.ActualWidth / 2, Canvas.GetTop(Player1) + Player1.ActualHeight / 2);
-				if (_previousPlayerPosition != currentPlayerPosition) {
-					_previousPlayerPosition = currentPlayerPosition;
-
-					// Redraw the field of vision after moving the player
-					GameCanvas.Children.Remove(fieldOfVision);
-					DrawFieldOfVision();
-				}
-			}
-		}
-
-
-		private void UserControl_Loaded(object sender, RoutedEventArgs e) {
-			Focus();
-		}
-
-		private void UserControl_KeyUp(object sender, KeyEventArgs e) {
-			_pressedKeys.Remove(e.Key);
-		}
-
-		private void OpenCharacterSheetClicked(object sender, EventArgs e) {
-			_mainWindow.OpenCharacterSheet();
 		}
 
 		private void OpenCharacterSheet(object sender, RoutedEventArgs e) {
 			new WinCharacterSheet().ShowDialog();
+		}
+
+		private void PlayerClicked(object sender, EventArgs e) {
+			if (_isPlayerSelected) {
+				_isPlayerSelected = false;
+				if (_selectionRectangle != null) {
+					GameCanvas.Children.Remove(_selectionRectangle);
+					_selectionRectangle = null;
+				}
+			}
+			else {
+				// Sélectionner le joueur et dessiner le carré de sélection
+				_isPlayerSelected = true;
+				_selectionRectangle = new Rectangle {
+					Width = Player1.ActualWidth + 4,
+					Height = Player1.ActualHeight + 4,
+					Stroke = Brushes.Red,
+					StrokeThickness = 2
+				};
+
+				Canvas.SetLeft(_selectionRectangle, Canvas.GetLeft(Player1) - 2);
+				Canvas.SetTop(_selectionRectangle, Canvas.GetTop(Player1) - 2);
+
+				GameCanvas.Children.Add(_selectionRectangle);
+			}
 		}
 	}
 }
