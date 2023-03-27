@@ -56,5 +56,27 @@ namespace JDR.Vue.Views {
 				GameCanvas.Children.Add(_selectionRectangle);
 			}
 		}
+
+		private void GameCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e) {
+			if (_isPlayerSelected) {
+				var newMousePosition = e.GetPosition(GameCanvas);
+
+				Canvas.SetLeft(Player1, newMousePosition.X - (Player1.Width / 2));
+				Canvas.SetTop(Player1, newMousePosition.Y - (Player1.Height / 2));
+
+				Canvas.SetLeft(_selectionRectangle, newMousePosition.X - (Player1.Width / 2));
+				Canvas.SetTop(_selectionRectangle, newMousePosition.Y - (Player1.Height / 2));
+			}
+		}
+
+		private void GameCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+			
+		}
+
+		private void GameCanvas_MouseMove(object sender, MouseEventArgs e) {
+			if (_isPlayerSelected && GameCanvas.IsMouseCaptured) {
+				
+			}
+		}
 	}
 }
