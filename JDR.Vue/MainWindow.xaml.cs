@@ -23,7 +23,7 @@ namespace JDR.Vue {
 		}
 
 		public void OpenGame() {
-			CurrentControl.Content = new UCGame(this);
+			CurrentControl.Content = new UCGame();
 		}
 	}
 }

@@ -21,7 +21,8 @@
                 <Canvas.Background>
                     <ImageBrush ImageSource="/Assets/background.jpeg" Stretch="Uniform"/>
                 </Canvas.Background>
-                <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" />
+                <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" 
+                       MouseLeftButtonUp="Player1_MouseLeftButtonUp" MouseLeftButtonDown="PlayerClicked" MouseMove="Player1_MouseMove"/>
                 <Image Source="/Assets/rock.png" Canvas.Left="880" Canvas.Top="249" Name="Obstacle1" Height="40" Width="40"/>
             </Canvas>
         </Viewbox>
