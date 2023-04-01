@@ -12,12 +12,13 @@
             <RowDefinition Height="35"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <Button Content="Ouvrir fiche perso" Click="OpenCharacterSheet"  Width="150" Height="35" HorizontalAlignment="Left" />
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Changer de map" Click="ChangeMap" Width="150" Height="35" HorizontalAlignment="Left" Margin="5 0" />
+            <Button Content="Ouvrir fiche perso" Click="OpenCharacterSheet"  Width="150" Height="35" HorizontalAlignment="Left" Margin="5 0" />
         </StackPanel>
 
         <Viewbox Grid.Row="1">
-            <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseRightButtonDown="GameCanvas_MouseRightButtonDown" MouseLeftButtonDown="GameCanvas_MouseLeftButtonDown">
+            <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseRightButtonDown="GameCanvas_MouseRightButtonDown">
                 <Canvas.Background>
                     <ImageBrush ImageSource="/Assets/background.jpeg" Stretch="Uniform"/>
                 </Canvas.Background>
