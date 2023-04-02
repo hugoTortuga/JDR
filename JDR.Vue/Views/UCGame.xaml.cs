@@ -123,19 +123,19 @@ namespace JDR.Vue.Views {
 		}
 
 		private void UpButton_Click(object sender, RoutedEventArgs e) {
-			_TranslateTransformBackgroundMap.Y += 10;
-		}
-
-		private void DownButton_Click(object sender, RoutedEventArgs e) {
 			_TranslateTransformBackgroundMap.Y -= 10;
 		}
 
+		private void DownButton_Click(object sender, RoutedEventArgs e) {
+			_TranslateTransformBackgroundMap.Y += 10;
+		}
+
 		private void LeftButton_Click(object sender, RoutedEventArgs e) {
-			_TranslateTransformBackgroundMap.X += 10;
+			_TranslateTransformBackgroundMap.X -= 10;
 		}
 
 		private void RightButton_Click(object sender, RoutedEventArgs e) {
-			_TranslateTransformBackgroundMap.X -= 10;
+			_TranslateTransformBackgroundMap.X += 10;
 		}
 
 		private void ChangeToken(object sender, RoutedEventArgs e) {
