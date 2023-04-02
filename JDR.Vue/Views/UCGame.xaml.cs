@@ -28,11 +28,14 @@ namespace JDR.Vue.Views {
 		private int _FormSize = 16;
 		private double _BackgroundWidth;
 		private double _BackgroundHeight;
+		private TranslateTransform _TranslateTransform;
 
 		public UCGame(MainWindow window) {
 			InitializeComponent();
 			_BackgroundWidth = BackgroundImageBrush.ImageSource.Width;
 			_BackgroundHeight = BackgroundImageBrush.ImageSource.Height;
+			_TranslateTransform = new TranslateTransform();
+			BackgroundImageBrush.Transform = _TranslateTransform;
 		}
 
 		private void OpenCharacterSheet(object sender, RoutedEventArgs e) {
@@ -74,6 +77,8 @@ namespace JDR.Vue.Views {
 				var image = new ImageBrush(new BitmapImage(new Uri(dialog.FileName)));
 				image.Stretch = Stretch.UniformToFill;
 				BackgroundImageBrush = image;
+				_TranslateTransform = new TranslateTransform();
+				BackgroundImageBrush.Transform = _TranslateTransform;
 				GameCanvas.Background = BackgroundImageBrush;
 			}
 		}
@@ -107,6 +112,22 @@ namespace JDR.Vue.Views {
 			BackgroundImageBrush.Viewport = new Rect(0, 0, newWidth, newHeight);
 			BackgroundImageBrush.ViewportUnits = BrushMappingMode.Absolute;
 			BackgroundImageBrush.Stretch = Stretch.UniformToFill;
+		}
+
+		private void UpButton_Click(object sender, RoutedEventArgs e) {
+			_TranslateTransform.Y += 10;
+		}
+
+		private void DownButton_Click(object sender, RoutedEventArgs e) {
+			_TranslateTransform.Y -= 10;
+		}
+
+		private void LeftButton_Click(object sender, RoutedEventArgs e) {
+			_TranslateTransform.X += 10;
+		}
+
+		private void RightButton_Click(object sender, RoutedEventArgs e) {
+			_TranslateTransform.X -= 10;
 		}
 	}
 }
