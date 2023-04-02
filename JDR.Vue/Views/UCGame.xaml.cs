@@ -26,9 +26,13 @@ namespace JDR.Vue.Views {
 		private bool _IsPlayerSelected;
 		private Ellipse _SelectionForm;
 		private int _FormSize = 16;
+		private double _BackgroundWidth;
+		private double _BackgroundHeight;
 
 		public UCGame(MainWindow window) {
 			InitializeComponent();
+			_BackgroundWidth = BackgroundImageBrush.ImageSource.Width;
+			_BackgroundHeight = BackgroundImageBrush.ImageSource.Height;
 		}
 
 		private void OpenCharacterSheet(object sender, RoutedEventArgs e) {
@@ -69,7 +73,8 @@ namespace JDR.Vue.Views {
 			if (dialog.ShowDialog() == true) {
 				var image = new ImageBrush(new BitmapImage(new Uri(dialog.FileName)));
 				image.Stretch = Stretch.UniformToFill;
-				GameCanvas.Background = image;
+				BackgroundImageBrush = image;
+				GameCanvas.Background = BackgroundImageBrush;
 			}
 		}
 
@@ -86,9 +91,22 @@ namespace JDR.Vue.Views {
 				Canvas.SetTop(_SelectionForm, newPosition.Y - (Player1.Height / 2) - (_FormSize / 2));
 			}
 		}
+
 		protected override void OnMouseUp(MouseButtonEventArgs e) {
 			Player1.ReleaseMouseCapture();
 			base.OnMouseUp(e);
+		}
+
+		private void ResizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+			if (GameCanvas?.Background == null) return;
+			double newWidth = e.NewValue;
+			double aspectRatio = _BackgroundHeight / _BackgroundWidth;
+
+			double newHeight = newWidth * aspectRatio;
+
+			BackgroundImageBrush.Viewport = new Rect(0, 0, newWidth, newHeight);
+			BackgroundImageBrush.ViewportUnits = BrushMappingMode.Absolute;
+			BackgroundImageBrush.Stretch = Stretch.UniformToFill;
 		}
 	}
 }

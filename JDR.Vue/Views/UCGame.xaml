@@ -14,12 +14,13 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Content="Changer de map" Click="ChangeMap" Width="150" Height="35" HorizontalAlignment="Left" Margin="5 0" />
+            <Slider x:Name="ResizeSlider" Grid.Row="1" Margin="10" Minimum="100" Maximum="2000" Value="1000" Width="300"  ValueChanged="ResizeSlider_ValueChanged" />
         </StackPanel>
 
         <Viewbox Grid.Row="1">
             <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseRightButtonDown="GameCanvas_MouseRightButtonDown">
                 <Canvas.Background>
-                    <ImageBrush ImageSource="/Assets/background.jpeg" Stretch="Uniform"/>
+                    <ImageBrush x:Name="BackgroundImageBrush" ImageSource="/Assets/background.jpeg" Stretch="Uniform" />
                 </Canvas.Background>
                 <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" MouseMove="ImageMouseMove" >
                     <Image.ContextMenu>
