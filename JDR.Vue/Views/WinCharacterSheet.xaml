@@ -18,12 +18,19 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Image Source="/Assets/old-paper.jpg" Stretch="UniformToFill" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
-        <TextBlock Text="Bengala, Nain" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20 20 20 10" FontSize="24" FontFamily="Gentium Book Basic"/>
+        <TextBlock Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20 20 20 10" FontSize="24" FontFamily="Gentium Book Basic">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0}, {1}">
+                    <Binding Path="Player.Name"/>
+                    <Binding Path="Player.Race"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="5 0 0 10" VerticalAlignment="Bottom" Orientation="Horizontal">
             <TextBlock Text="PV:"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center"/>
-            <TextBlock Text="14"  FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
+            <TextBlock Text="{Binding Player.HPMax}" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
             <TextBlock Text="Mana:"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center"/>
-            <TextBlock Text="6"  FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
+            <TextBlock Text="{Binding Player.ManaMax}" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
         </StackPanel>
         <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Source="/Assets/bengala.png" Margin="5"/>
         <GroupBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Caractéristiques" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5">
@@ -42,20 +49,20 @@
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Force" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="60" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Player.Skills.Force}" FontSize="24" VerticalAlignment="Center" />
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Agilité" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="50" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Player.Skills.Agility}" FontSize="24" VerticalAlignment="Center" />
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Intelligence" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="20" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Player.Skills.Intelligence}" FontSize="24" VerticalAlignment="Center" />
 
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="Observation" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="0" Grid.Column="3" Text="40" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding Player.Skills.Observation}" FontSize="24" VerticalAlignment="Center" />
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="Persuasion" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="1" Grid.Column="3" Text="40" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Player.Skills.Persuasion}" FontSize="24" VerticalAlignment="Center" />
                 <TextBlock Grid.Row="2" Grid.Column="2" Text="Courage" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="2" Grid.Column="3" Text="60" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding Player.Skills.Courage}" FontSize="24" VerticalAlignment="Center" />
                 <TextBlock Grid.Row="3" Grid.Column="2" Text="Discrétion" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="3" Grid.Column="3" Text="15" FontSize="24" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding Player.Skills.Discretion}" FontSize="24" VerticalAlignment="Center" />
                 <Grid Grid.Column="4" Grid.RowSpan="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="110"/>
@@ -75,8 +82,7 @@
         </GroupBox>
         <GroupBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Inventaire" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5 0 5 5">
             <StackPanel Margin="5">
-                <TextBlock Text="Masse d'arme" />
-                <TextBlock Text="Bouclier" />
+                <TextBlock Text="{Binding Player.Inventory}" TextWrapping="Wrap" />
             </StackPanel>
         </GroupBox>
     </Grid>

@@ -37,7 +37,17 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Joueurs présents" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <ListBox Grid.Row="1" ItemsSource="{Binding Players, UpdateSourceTrigger=PropertyChanged}">
-
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}">
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="View Details" Click="OpenCharacterSheet"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
 
@@ -49,7 +59,6 @@
                     <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" MouseMove="ImageMouseMove" >
                         <Image.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Ouvrir la fiche du personnage" Click="OpenCharacterSheet"/>
                                 <MenuItem Header="Changer le token" Click="ChangeToken"/>
                             </ContextMenu>
                         </Image.ContextMenu>

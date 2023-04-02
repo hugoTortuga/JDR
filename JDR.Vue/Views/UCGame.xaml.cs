@@ -1,4 +1,5 @@
-﻿using JDR.Vue.ViewModels;
+﻿using JDR.Model;
+using JDR.Vue.ViewModels;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,10 @@ namespace JDR.Vue.Views {
 		}
 
 		private void OpenCharacterSheet(object sender, RoutedEventArgs e) {
-			new WinCharacterSheet().ShowDialog();
+			var menuItem = sender as MenuItem;
+			var selectedPlayer = menuItem.DataContext as Player;
+			if (selectedPlayer != null)
+				new WinCharacterSheet(selectedPlayer).ShowDialog();
 		}
 
 		private void PlayerClicked(object sender, MouseButtonEventArgs e) {
@@ -154,5 +158,7 @@ namespace JDR.Vue.Views {
 			}
 			throw new ApplicationException("Aucune image sélectionnée");
 		}
+
+		
 	}
 }

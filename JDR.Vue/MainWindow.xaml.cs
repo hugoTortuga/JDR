@@ -18,10 +18,6 @@ namespace JDR.Vue {
 			CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
 		}
 
-		public void OpenCharacterSheet() {
-			CurrentControl.Content = new WinCharacterSheet();
-		}
-
 		public void OpenGame() {
 			CurrentControl.Content = new UCGame(this);
 		}

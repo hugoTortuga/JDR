@@ -19,5 +19,9 @@ namespace JDR.Model {
 			Name = name;
 			Illustration = illustration;
 		}
+
+		public override string ToString() {
+			return Name;
+		}
 	}
 }
