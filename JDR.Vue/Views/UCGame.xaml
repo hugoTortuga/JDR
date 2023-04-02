@@ -34,10 +34,10 @@
                     <Image.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Ouvrir la fiche du personnage" Click="OpenCharacterSheet"/>
+                            <MenuItem Header="Changer le token" Click="ChangeToken"/>
                         </ContextMenu>
                     </Image.ContextMenu>
                 </Image>
-                <Image Source="/Assets/rock.png" Canvas.Left="880" Canvas.Top="249" Name="Obstacle1" Height="40" Width="40"/>
             </Canvas>
         </Viewbox>
     </Grid>

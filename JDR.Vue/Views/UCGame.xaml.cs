@@ -72,19 +72,22 @@ namespace JDR.Vue.Views {
 		}
 
 		private void ChangeMap(object sender, RoutedEventArgs e) {
-			var dialog = new OpenFileDialog();
-			if (dialog.ShowDialog() == true) {
-				var image = new ImageBrush(new BitmapImage(new Uri(dialog.FileName)));
+			try {
+				var imagePath = GetImageURL();
+				var image = new ImageBrush(new BitmapImage(new Uri(imagePath)));
 				image.Stretch = Stretch.UniformToFill;
 				BackgroundImageBrush = image;
 				_TranslateTransform = new TranslateTransform();
 				BackgroundImageBrush.Transform = _TranslateTransform;
 				GameCanvas.Background = BackgroundImageBrush;
 			}
+			catch {
+				
+			}
 		}
 
 		private void ImageMouseMove(object sender, MouseEventArgs e) {
-			if (Player1.IsMouseCaptured) 
+			if (Player1.IsMouseCaptured)
 				MovePlayerToNewPosition(e.GetPosition(Player1.Parent as UIElement));
 		}
 
@@ -128,6 +131,23 @@ namespace JDR.Vue.Views {
 
 		private void RightButton_Click(object sender, RoutedEventArgs e) {
 			_TranslateTransform.X -= 10;
+		}
+
+		private void ChangeToken(object sender, RoutedEventArgs e) {
+			try {
+				Player1.Source = new BitmapImage(new Uri(GetImageURL()));
+			}
+			catch {
+
+			}
+		}
+
+		private string GetImageURL() {
+			var dialog = new OpenFileDialog();
+			if (dialog.ShowDialog() == true) {
+				return dialog.FileName;
+			}
+			throw new ApplicationException("Aucune image sélectionnée");
 		}
 	}
 }
