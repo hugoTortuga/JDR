@@ -14,7 +14,6 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Content="Changer de map" Click="ChangeMap" Width="150" Height="35" HorizontalAlignment="Left" Margin="5 0" />
-            <Button Content="Ouvrir fiche perso" Click="OpenCharacterSheet"  Width="150" Height="35" HorizontalAlignment="Left" Margin="5 0" />
         </StackPanel>
 
         <Viewbox Grid.Row="1">
@@ -22,7 +21,13 @@
                 <Canvas.Background>
                     <ImageBrush ImageSource="/Assets/background.jpeg" Stretch="Uniform"/>
                 </Canvas.Background>
-                <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" />
+                <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" MouseMove="ImageMouseMove" >
+                    <Image.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Ouvrir la fiche du personnage" Click="OpenCharacterSheet"/>
+                        </ContextMenu>
+                    </Image.ContextMenu>
+                </Image>
                 <Image Source="/Assets/rock.png" Canvas.Left="880" Canvas.Top="249" Name="Obstacle1" Height="40" Width="40"/>
             </Canvas>
         </Viewbox>

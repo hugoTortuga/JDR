@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace JDR.Vue.Views {
 	/// <summary>
@@ -34,7 +35,8 @@ namespace JDR.Vue.Views {
 			new WinCharacterSheet().ShowDialog();
 		}
 
-		private void PlayerClicked(object sender, EventArgs e) {
+		private void PlayerClicked(object sender, MouseButtonEventArgs e) {
+			Player1.CaptureMouse();
 			if (_IsPlayerSelected) {
 				_IsPlayerSelected = false;
 				if (_SelectionForm != null) {
@@ -43,8 +45,6 @@ namespace JDR.Vue.Views {
 				}
 			}
 			else {
-				// Sélectionner le joueur et dessiner le carré de sélection
-				
 				_IsPlayerSelected = true;
 				_SelectionForm = new Ellipse {
 					Width = Player1.ActualWidth + _FormSize,
@@ -62,17 +62,7 @@ namespace JDR.Vue.Views {
 		}
 
 		private void GameCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e) {
-			if (_IsPlayerSelected) {
-				var newMousePosition = e.GetPosition(GameCanvas);
-
-				Canvas.SetLeft(Player1, newMousePosition.X - (Player1.Width / 2));
-				Canvas.SetTop(Player1, newMousePosition.Y - (Player1.Height / 2));
-
-				Canvas.SetLeft(_SelectionForm, newMousePosition.X - (Player1.Width / 2) - (_FormSize / 2));
-				Canvas.SetTop(_SelectionForm, newMousePosition.Y - (Player1.Height / 2) - (_FormSize / 2));
-			}
 		}
-
 
 		private void ChangeMap(object sender, RoutedEventArgs e) {
 			var dialog = new OpenFileDialog();
@@ -80,10 +70,25 @@ namespace JDR.Vue.Views {
 				var image = new ImageBrush(new BitmapImage(new Uri(dialog.FileName)));
 				image.Stretch = Stretch.UniformToFill;
 				GameCanvas.Background = image;
-
-
 			}
+		}
 
+		private void ImageMouseMove(object sender, MouseEventArgs e) {
+			if (Player1.IsMouseCaptured) 
+				MovePlayerToNewPosition(e.GetPosition(Player1.Parent as UIElement));
+		}
+
+		private void MovePlayerToNewPosition(Point newPosition) {
+			Canvas.SetLeft(Player1, newPosition.X - (Player1.Width / 2));
+			Canvas.SetTop(Player1, newPosition.Y - (Player1.Height / 2));
+			if (_IsPlayerSelected) {
+				Canvas.SetLeft(_SelectionForm, newPosition.X - (Player1.Width / 2) - (_FormSize / 2));
+				Canvas.SetTop(_SelectionForm, newPosition.Y - (Player1.Height / 2) - (_FormSize / 2));
+			}
+		}
+		protected override void OnMouseUp(MouseButtonEventArgs e) {
+			Player1.ReleaseMouseCapture();
+			base.OnMouseUp(e);
 		}
 	}
 }
