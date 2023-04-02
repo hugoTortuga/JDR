@@ -15,6 +15,7 @@ namespace JDR.Model
         public int Courage { get; set; }
         public int Discretion { get; set; }
         public int Persuasion { get; set; }
+        public int Observation { get; set; }
 
         public Skills() 
         { 

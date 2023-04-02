@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:JDR.Vue.Views" Focusable="True" 
-             mc:Ignorable="d" Background="Black"
+             mc:Ignorable="d"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -25,20 +25,38 @@
             </StackPanel>
         </StackPanel>
 
-        <Viewbox Grid.Row="1">
-            <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseRightButtonDown="GameCanvas_MouseRightButtonDown">
-                <Canvas.Background>
-                    <ImageBrush x:Name="BackgroundImageBrush" ImageSource="/Assets/background.jpeg" Stretch="Uniform" />
-                </Canvas.Background>
-                <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" MouseMove="ImageMouseMove" >
-                    <Image.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Ouvrir la fiche du personnage" Click="OpenCharacterSheet"/>
-                            <MenuItem Header="Changer le token" Click="ChangeToken"/>
-                        </ContextMenu>
-                    </Image.ContextMenu>
-                </Image>
-            </Canvas>
-        </Viewbox>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Joueurs présents" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <ListBox Grid.Row="1" ItemsSource="{Binding Players, UpdateSourceTrigger=PropertyChanged}">
+
+                </ListBox>
+            </Grid>
+
+            <Viewbox Grid.Column="1">
+                <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseRightButtonDown="GameCanvas_MouseRightButtonDown">
+                    <Canvas.Background>
+                        <ImageBrush x:Name="BackgroundImageBrush" ImageSource="/Assets/background.jpeg" Stretch="Uniform" />
+                    </Canvas.Background>
+                    <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" MouseMove="ImageMouseMove" >
+                        <Image.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Ouvrir la fiche du personnage" Click="OpenCharacterSheet"/>
+                                <MenuItem Header="Changer le token" Click="ChangeToken"/>
+                            </ContextMenu>
+                        </Image.ContextMenu>
+                    </Image>
+                </Canvas>
+            </Viewbox>
+        </Grid>
+
     </Grid>
 </UserControl>
