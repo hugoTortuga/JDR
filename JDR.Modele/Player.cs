@@ -14,13 +14,17 @@
 
         public string? Description { get; set; }
         public int Level { get; set; }
-
+        public Race Race { get; set; }
         public Skills Skills { get; set; }
 
-        public Player(string name, Skills skills)
+        public IList<Spell> Spells { get; set; }
+
+        public Player(string name, Race race, Skills skills)
         {
             Name = name;
             Skills = skills;
+            Spells = new List<Spell>();
+            Race = race;
         }
 
         public override string ToString() {
