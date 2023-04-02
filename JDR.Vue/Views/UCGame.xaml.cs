@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using JDR.Vue.ViewModels;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,17 +26,23 @@ namespace JDR.Vue.Views {
 
 		private bool _IsPlayerSelected;
 		private Ellipse _SelectionForm;
-		private int _FormSize = 16;
+		private int _SelectionFormSize = 16;
 		private double _BackgroundWidth;
 		private double _BackgroundHeight;
-		private TranslateTransform _TranslateTransform;
+		private TranslateTransform _TranslateTransformBackgroundMap;
 
 		public UCGame(MainWindow window) {
+			DataContext = new TableTopViewModel();
 			InitializeComponent();
+			SetMapProperties();
+		}
+
+		private void SetMapProperties() {
 			_BackgroundWidth = BackgroundImageBrush.ImageSource.Width;
 			_BackgroundHeight = BackgroundImageBrush.ImageSource.Height;
-			_TranslateTransform = new TranslateTransform();
-			BackgroundImageBrush.Transform = _TranslateTransform;
+			_TranslateTransformBackgroundMap = new TranslateTransform();
+			BackgroundImageBrush.Transform = _TranslateTransformBackgroundMap;
+			GameCanvas.Background = BackgroundImageBrush;
 		}
 
 		private void OpenCharacterSheet(object sender, RoutedEventArgs e) {
@@ -54,15 +61,15 @@ namespace JDR.Vue.Views {
 			else {
 				_IsPlayerSelected = true;
 				_SelectionForm = new Ellipse {
-					Width = Player1.ActualWidth + _FormSize,
-					Height = Player1.ActualHeight + _FormSize,
+					Width = Player1.ActualWidth + _SelectionFormSize,
+					Height = Player1.ActualHeight + _SelectionFormSize,
 					Stroke = Brushes.Black,
 					StrokeThickness = 2,
 					Opacity = 0.8
 				};
 
-				Canvas.SetLeft(_SelectionForm, Canvas.GetLeft(Player1) - _FormSize / 2);
-				Canvas.SetTop(_SelectionForm, Canvas.GetTop(Player1) - _FormSize / 2);
+				Canvas.SetLeft(_SelectionForm, Canvas.GetLeft(Player1) - _SelectionFormSize / 2);
+				Canvas.SetTop(_SelectionForm, Canvas.GetTop(Player1) - _SelectionFormSize / 2);
 
 				GameCanvas.Children.Add(_SelectionForm);
 			}
@@ -77,12 +84,10 @@ namespace JDR.Vue.Views {
 				var image = new ImageBrush(new BitmapImage(new Uri(imagePath)));
 				image.Stretch = Stretch.UniformToFill;
 				BackgroundImageBrush = image;
-				_TranslateTransform = new TranslateTransform();
-				BackgroundImageBrush.Transform = _TranslateTransform;
-				GameCanvas.Background = BackgroundImageBrush;
+				SetMapProperties();
 			}
 			catch {
-				
+
 			}
 		}
 
@@ -95,8 +100,8 @@ namespace JDR.Vue.Views {
 			Canvas.SetLeft(Player1, newPosition.X - (Player1.Width / 2));
 			Canvas.SetTop(Player1, newPosition.Y - (Player1.Height / 2));
 			if (_IsPlayerSelected) {
-				Canvas.SetLeft(_SelectionForm, newPosition.X - (Player1.Width / 2) - (_FormSize / 2));
-				Canvas.SetTop(_SelectionForm, newPosition.Y - (Player1.Height / 2) - (_FormSize / 2));
+				Canvas.SetLeft(_SelectionForm, newPosition.X - (Player1.Width / 2) - (_SelectionFormSize / 2));
+				Canvas.SetTop(_SelectionForm, newPosition.Y - (Player1.Height / 2) - (_SelectionFormSize / 2));
 			}
 		}
 
@@ -118,19 +123,19 @@ namespace JDR.Vue.Views {
 		}
 
 		private void UpButton_Click(object sender, RoutedEventArgs e) {
-			_TranslateTransform.Y += 10;
+			_TranslateTransformBackgroundMap.Y += 10;
 		}
 
 		private void DownButton_Click(object sender, RoutedEventArgs e) {
-			_TranslateTransform.Y -= 10;
+			_TranslateTransformBackgroundMap.Y -= 10;
 		}
 
 		private void LeftButton_Click(object sender, RoutedEventArgs e) {
-			_TranslateTransform.X += 10;
+			_TranslateTransformBackgroundMap.X += 10;
 		}
 
 		private void RightButton_Click(object sender, RoutedEventArgs e) {
-			_TranslateTransform.X -= 10;
+			_TranslateTransformBackgroundMap.X -= 10;
 		}
 
 		private void ChangeToken(object sender, RoutedEventArgs e) {

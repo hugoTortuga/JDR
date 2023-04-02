@@ -4,17 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:JDR.Vue.Views" Focusable="True" 
-             mc:Ignorable="d" 
+             mc:Ignorable="d" Background="Black"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Content="Changer de map" Click="ChangeMap" Width="150" Height="35" HorizontalAlignment="Left" Margin="5 0" />
-            <Slider x:Name="ResizeSlider" Grid.Row="1" Margin="10" Minimum="100" Maximum="2000" Value="1000" Width="300"  ValueChanged="ResizeSlider_ValueChanged" />
+            <Slider x:Name="ResizeSlider" Grid.Row="1" Margin="10" Minimum="100" Maximum="2000" Value="1000" Width="300" Height="35"  ValueChanged="ResizeSlider_ValueChanged" />
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="&#x2190;" FontSize="18" Width="25" Height="25" Click="RightButton_Click" />
                 <StackPanel Orientation="Vertical">
