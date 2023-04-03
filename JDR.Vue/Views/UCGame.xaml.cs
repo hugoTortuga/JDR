@@ -50,7 +50,7 @@ namespace JDR.Vue.Views {
 			var menuItem = sender as MenuItem;
 			var selectedPlayer = menuItem.DataContext as Player;
 			if (selectedPlayer != null)
-				new WinCharacterSheet(selectedPlayer).ShowDialog();
+				new WinCharacterSheet(selectedPlayer).Show();
 		}
 
 		private void PlayerClicked(object sender, MouseButtonEventArgs e) {

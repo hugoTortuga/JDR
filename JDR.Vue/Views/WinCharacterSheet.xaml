@@ -7,7 +7,7 @@
              xmlns:viewmodels="clr-namespace:JDR.Vue.ViewModels" 
              d:DataContext="{d:DesignInstance Type=viewmodels:CharacterSheetViewModel}"
              mc:Ignorable="d" Height="450" Width="730" ResizeMode="NoResize"
-             d:DesignHeight="450" Title="Fiche de personnage" d:DesignWidth="730">
+             d:DesignHeight="450" Title="{Binding Player.Name}" d:DesignWidth="730">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="9*"/>
@@ -68,9 +68,9 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Grid.Column="0" Source="/Assets/z_nature.png"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Ténèbres, niveau 1" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Player.Spells[0]}" VerticalAlignment="Center"/>
                     <Image Grid.Row="2" Grid.Column="0" Source="/Assets/z_psy.png"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Guérison, niveau 1" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Player.Spells[1]}" VerticalAlignment="Center"/>
                 </Grid>
 
             </Grid>

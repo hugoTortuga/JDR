@@ -7,17 +7,24 @@
              mc:Ignorable="d" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <Button Content="Créer partie">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel VerticalAlignment="Center">
+        <!--<Button Content="Créer partie">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <i:CallMethodAction MethodName="OpenGameCreation" TargetObject="{Binding}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-        </Button>
+        </Button>-->
         <Button Click="Button_Click">
-            Démarrer une partie
+            Démarrer la partie
         </Button>
-        <Button>Rejoindre une partie</Button>
+        <!--<Button>Rejoindre une partie</Button>-->
     </StackPanel>
 </UserControl>
