@@ -13,4 +13,25 @@ namespace JDR.Model {
 		HumanElve,
 		DwarfElve
 	}
+
+	public static class Races {
+		public static string ToString(Race race) {
+			switch (race) {
+				case Race.Human:
+					return "Humain";
+				case Race.Dwarf:
+					return "Nain";
+				case Race.Elve:
+					return "Elfe";
+				case Race.HumanDwarf:
+					return "Demi-Nain";
+				case Race.HumanElve:
+					return "Demi-Elfe";
+				case Race.DwarfElve:
+					return "Nain-Elfe";
+				default:
+					throw new NotImplementedException();
+			}
+		}
+	}
 }

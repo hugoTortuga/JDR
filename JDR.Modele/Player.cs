@@ -29,7 +29,7 @@
         }
 
         public override string ToString() {
-            return Name;
+            return $"{Name}, {Races.ToString(Race)}";
         }
     }
 }
