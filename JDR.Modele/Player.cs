@@ -12,6 +12,7 @@
             }
         }
 
+        public Illustration Illustration { get; set; }
         public string? Description { get; set; }
         public int Level { get; set; }
         public Race Race { get; set; }

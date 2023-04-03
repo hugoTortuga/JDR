@@ -43,6 +43,7 @@ namespace JDR.Vue.ViewModels {
 							Observation = 40
 						}
 					) {
+						Illustration = new Illustration("joueurs\\bengala.png"),
 						HP = 14,
 						HPMax = 14,
 						Mana = 6,
@@ -80,6 +81,7 @@ namespace JDR.Vue.ViewModels {
 							Observation = 40
 						}
 					) {
+				Illustration = new Illustration("joueurs\\biscuit.png"),
 				HP = 12,
 				HPMax = 12,
 				Mana = 8,
@@ -116,6 +118,7 @@ namespace JDR.Vue.ViewModels {
 							Observation = 50
 						}
 					) {
+				Illustration = new Illustration("joueurs\\ailurus.png"),
 				HP = 11,
 				HPMax = 11,
 				Mana = 9,

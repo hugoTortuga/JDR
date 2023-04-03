@@ -3,14 +3,15 @@
     public class Illustration
     {
 
-        public string URL { get; set; }
-        public Illustration(string uRL)
+        public Uri Uri { get; set; }
+        public Illustration(string URI)
         {
-            URL = uRL;
+            Uri = new Uri("C:\\Users\\Hugo\\Desktop\\jdr\\ArthosV2\\" + URI);
         }
 
-        public static Illustration None() {
-            return new Illustration("/noIllustration.jpg");
+
+		public static Illustration None() {
+            return new Illustration("");
         }
 
     }
