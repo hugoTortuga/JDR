@@ -28,6 +28,7 @@ namespace JDR.Vue.Views {
 		private bool _IsPlayerSelected;
 		private Ellipse _SelectionForm;
 		private int _SelectionFormSize = 16;
+		private int _FOV = 300;
 		private double _BackgroundWidth;
 		private double _BackgroundHeight;
 		private TranslateTransform _TranslateTransformBackgroundMap;
@@ -35,30 +36,17 @@ namespace JDR.Vue.Views {
 
 		public UCGame(MainWindow window) {
 			DataContext = new TableTopViewModel();
+
+			_Obstacles = new List<Geometry> { 
+				new RectangleGeometry(new Rect {
+					Width = 60,
+					Height = 60,
+					Location = new Point(120, 250)
+				})
+			};
 			InitializeComponent();
 			SetMapProperties();
-		}
-
-		private void DrawVision() {
-			//EllipseGeometry fieldOfVision = new EllipseGeometry(Player1., visionRadius, visionRadius);
-			//GeometryGroup visibleArea = new GeometryGroup();
-			//visibleArea.Children.Add(fieldOfVision);
-
-			//foreach (var obstacle in _Obstacles) {
-			//	CombinedGeometry subtracted = new CombinedGeometry(GeometryCombineMode.Exclude, visibleArea, obstacle);
-			//	visibleArea = subtracted;
-			//}
-
-			//ImageBrush mapBrush = new ImageBrush(new BitmapImage(new Uri("path/to/your/map/image")));
-			//mapBrush.OpacityMask = new GeometryDrawing(Brushes.Black, null, visibleArea);
-
-			//Canvas background = new Canvas {
-			//	Width = canvasWidth,
-			//	Height = canvasHeight,
-			//	Background = mapBrush
-			//};
-			//mainCanvas.Children.Add(background);
-			//mainCanvas.Children.Add(tokenImage);
+			DrawFieldOfVision(GetPlayerPosition(), _FOV);
 		}
 
 		private void SetMapProperties() {
@@ -119,8 +107,10 @@ namespace JDR.Vue.Views {
 		}
 
 		private void ImageMouseMove(object sender, MouseEventArgs e) {
-			if (Player1.IsMouseCaptured)
+			if (Player1.IsMouseCaptured) {
+				DrawFieldOfVision(GetPlayerPosition(), _FOV);
 				MovePlayerToNewPosition(e.GetPosition(Player1.Parent as UIElement));
+			}
 		}
 
 		private void MovePlayerToNewPosition(Point newPosition) {
@@ -182,6 +172,70 @@ namespace JDR.Vue.Views {
 			throw new ApplicationException("Aucune image sélectionnée");
 		}
 
-		
+
+		private Path CurrentFOVPath;
+
+		public void DrawFieldOfVision(Point playerPosition, double radius) {
+			GameCanvas.Children.Remove(CurrentFOVPath);
+			var pathGeometry = new PathGeometry();
+			var pathFigure = new PathFigure { StartPoint = playerPosition, IsClosed = true, IsFilled = true };
+			pathGeometry.Figures.Add(pathFigure);
+
+			int numberOfRays = 720;
+			double angleStep = 360.0 / numberOfRays;
+
+			for (int i = 0; i <= numberOfRays; i++) {
+				var ray = ComputeRay(playerPosition, angleStep, radius, i);
+				pathFigure.Segments.Add(ray);
+			}
+
+			var canvasRect = new Rect(0, 0, 2000, 1400);
+			var canvasRectangleGeometry = new RectangleGeometry(canvasRect);
+
+			var combinedGeometry = new CombinedGeometry(GeometryCombineMode.Exclude, canvasRectangleGeometry, pathGeometry);
+
+			CurrentFOVPath = new Path {
+				Fill = new SolidColorBrush(Colors.Black) { Opacity = 1 },
+				Data = combinedGeometry
+			};
+
+			GameCanvas.Children.Add(CurrentFOVPath);
+		}
+
+		private LineSegment ComputeRay(Point playerPosition, double angleStep, double radius, int i) {
+			double angle = i * angleStep;
+			double x = playerPosition.X + radius * Math.Cos(Math.PI * angle / 180.0);
+			double y = playerPosition.Y + radius * Math.Sin(Math.PI * angle / 180.0);
+
+			var endPoint = new Point(x, y);
+			var ray = new LineSegment(endPoint, true);
+
+			var playerToEndpoint = new Line(playerPosition, endPoint);
+			Point? nearestIntersection = null;
+			double nearestIntersectionDistance = double.MaxValue;
+
+			foreach (var obstacle in _Obstacles) {
+				var intersectionPoints = playerToEndpoint.Intersects(obstacle);
+
+				foreach (var intersectionPoint in intersectionPoints) {
+					double distance = (playerPosition - intersectionPoint).Length;
+					if (distance < nearestIntersectionDistance) {
+						nearestIntersection = intersectionPoint;
+						nearestIntersectionDistance = distance;
+					}
+				}
+			}
+
+			if (nearestIntersection.HasValue) {
+				ray.Point = nearestIntersection.Value;
+			}
+			return ray;
+		}
+
+		private Point GetPlayerPosition() {
+			return new Point(Canvas.GetLeft(Player1) - _SelectionFormSize / 2, Canvas.GetTop(Player1) - _SelectionFormSize / 2);
+		}
+
+
 	}
 }

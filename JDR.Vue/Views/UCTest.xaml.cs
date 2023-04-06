@@ -59,7 +59,7 @@ namespace JDR.Vue.Views {
 				double y = playerPosition.Y + radius * Math.Sin(Math.PI * angle / 180.0);
 
 				Point endPoint = new Point(x, y);
-				LineSegment ray = new LineSegment(endPoint, true);
+				var ray = new LineSegment(endPoint, true);
 
 				// Check for intersections with the rock obstacle
 				var playerToEndpoint = new Line(playerPosition, endPoint);
@@ -97,25 +97,6 @@ namespace JDR.Vue.Views {
 
 			// Add the Path object to the Canvas
 			GameCanvas.Children.Add(path);
-
-			//EllipseGeometry fieldOfVision = new EllipseGeometry(new Point(200,200), 400, 400);
-			//GeometryGroup visibleArea = new GeometryGroup();
-			//visibleArea.Children.Add(fieldOfVision);
-			//Geometry obstacleGeometry = Geometry.Parse("M 100,200 C 100,25 400,350 400,175 H 280");
-			//CombinedGeometry subtracted = new CombinedGeometry(GeometryCombineMode.Exclude, visibleArea, obstacleGeometry);
-			//visibleArea.Children.Add(subtracted);
-			//visibleArea.Children.Add(subtracted);
-			//visibleArea = subtracted;
-
-			//ImageBrush mapBrush = new ImageBrush(new BitmapImage(new Uri("/Assets/background.jpeg"))) {
-			//	Opacity = new GeometryDrawing(Brushes.Black, null, visibleArea)
-			//};
-
-			//Canvas background = new Canvas {
-			//	Width = 1000,
-			//	Height = 800,
-			//	Background = mapBrush
-			//};
 		}
 
 		private void UserControl_KeyDown(object sender, KeyEventArgs e) {
@@ -126,67 +107,5 @@ namespace JDR.Vue.Views {
 			Focus();
 		}
 	}
-	public class Line {
-		public Point Start { get; set; }
-		public Point End { get; set; }
 
-		public Line(Point start, Point end) {
-			Start = start;
-			End = end;
-		}
-
-		public IList<Point> Intersects(Rect rect) {
-			Line[] rectEdges =
-			{
-				new Line(new Point(rect.Left, rect.Top), new Point(rect.Right, rect.Top)),
-				new Line(new Point(rect.Right, rect.Top), new Point(rect.Right, rect.Bottom)),
-				new Line(new Point(rect.Right, rect.Bottom), new Point(rect.Left, rect.Bottom)),
-				new Line(new Point(rect.Left, rect.Bottom), new Point(rect.Left, rect.Top))
-			};
-
-			var intersectionPoints = new List<Point>();
-
-			foreach (var edge in rectEdges) {
-				var point = TryGetIntersectionWith(edge);
-				if (point != null) intersectionPoints.Add(point.Value);
-			}
-
-			return intersectionPoints;
-		}
-
-		public Point? TryGetIntersectionWith(Line other) {
-			var intersection = new Point();
-
-			double a1 = End.Y - Start.Y;
-			double b1 = Start.X - End.X;
-			double c1 = a1 * Start.X + b1 * Start.Y;
-
-			double a2 = other.End.Y - other.Start.Y;
-			double b2 = other.Start.X - other.End.X;
-			double c2 = a2 * other.Start.X + b2 * other.Start.Y;
-
-			double delta = a1 * b2 - a2 * b1;
-			if (delta == 0) {
-				return null;
-			}
-
-			intersection.X = Math.Round((b2 * c1 - b1 * c2) / delta, 5, MidpointRounding.ToEven);
-			intersection.Y = Math.Round((a1 * c2 - a2 * c1) / delta, 5, MidpointRounding.ToEven);
-
-			if (IsInsideLineBounds(intersection) && other.IsInsideLineBounds(intersection)) {
-				return intersection;
-			}
-
-			return null;
-		}
-
-		private bool IsInsideLineBounds(Point point) {
-			double minX = Math.Min(Start.X, End.X);
-			double maxX = Math.Max(Start.X, End.X);
-			double minY = Math.Min(Start.Y, End.Y);
-			double maxY = Math.Max(Start.Y, End.Y);
-
-			return minX <= point.X && point.X <= maxX && minY <= point.Y && point.Y <= maxY;
-		}
-	}
 }
