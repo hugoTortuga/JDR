@@ -31,11 +31,34 @@ namespace JDR.Vue.Views {
 		private double _BackgroundWidth;
 		private double _BackgroundHeight;
 		private TranslateTransform _TranslateTransformBackgroundMap;
+		private IList<Geometry> _Obstacles;
 
 		public UCGame(MainWindow window) {
 			DataContext = new TableTopViewModel();
 			InitializeComponent();
 			SetMapProperties();
+		}
+
+		private void DrawVision() {
+			//EllipseGeometry fieldOfVision = new EllipseGeometry(Player1., visionRadius, visionRadius);
+			//GeometryGroup visibleArea = new GeometryGroup();
+			//visibleArea.Children.Add(fieldOfVision);
+
+			//foreach (var obstacle in _Obstacles) {
+			//	CombinedGeometry subtracted = new CombinedGeometry(GeometryCombineMode.Exclude, visibleArea, obstacle);
+			//	visibleArea = subtracted;
+			//}
+
+			//ImageBrush mapBrush = new ImageBrush(new BitmapImage(new Uri("path/to/your/map/image")));
+			//mapBrush.OpacityMask = new GeometryDrawing(Brushes.Black, null, visibleArea);
+
+			//Canvas background = new Canvas {
+			//	Width = canvasWidth,
+			//	Height = canvasHeight,
+			//	Background = mapBrush
+			//};
+			//mainCanvas.Children.Add(background);
+			//mainCanvas.Children.Add(tokenImage);
 		}
 
 		private void SetMapProperties() {
