@@ -5,17 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JDR.Model {
-	public class InventoryObject {
+	public class InventoryItem {
 
 		public string Name { get; set; }
 		public Illustration Illustration { get; set; }
 
-		public InventoryObject(string name) {
+		public InventoryItem(string name) {
 			Name = name;
 			Illustration = Illustration.None();
 		}
 
-		public InventoryObject(string name, Illustration illustration) {
+		public InventoryItem(string name, Illustration illustration) {
 			Name = name;
 			Illustration = illustration;
 		}

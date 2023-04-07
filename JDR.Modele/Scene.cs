@@ -13,10 +13,13 @@ namespace JDR.Model
         public Illustration? Background { get; set; }
         public IList<NPC> Characters { get; set; }
 
+        public IList<Obstacle> Obstacles { get; set; }
+
         public Scene(string name) {
             Name = name;
 			Musics = new List<Music>();
 			Characters = new List<NPC>();
+            Obstacles = new List<Obstacle>();
 		}
 
 		public override string ToString() {

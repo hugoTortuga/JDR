@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JDR.Model {
-	public class PieceOfArmor : InventoryObject {
+	public class PieceOfArmor : InventoryItem {
 
         public PieceOfArmor(string name) : base(name)
         {

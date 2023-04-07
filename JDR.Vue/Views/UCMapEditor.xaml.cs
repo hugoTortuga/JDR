@@ -19,15 +19,27 @@ namespace JDR.Vue.Views {
 	/// </summary>
 	public partial class UCMapEditor : UserControl {
 		private MainWindow _MainWindow;
-        public UCMapEditor(MainWindow window) {
+		private Polygon _CurrentPolygon;
+		private IList<Polygon> _AllPolygons;
+		public UCMapEditor(MainWindow window) {
 			_MainWindow = window;
 			InitializeComponent();
+			_CurrentPolygon = MyPolygon;
+			_AllPolygons = new List<Polygon>();
 		}
 
 		private void MyCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+
+			if (e.ClickCount == 2)
+			{
+				DoubleClick();
+				return;
+			}
+
 			Point clickPosition = e.GetPosition(MyCanvas);
 
-			var pointEllipse = new Ellipse {
+			// Create an ellipse to represent the point
+			Ellipse pointEllipse = new Ellipse {
 				Width = 5,
 				Height = 5,
 				Fill = Brushes.Black
@@ -39,10 +51,27 @@ namespace JDR.Vue.Views {
 
 			// Add the point to the canvas and the polygon
 			MyCanvas.Children.Add(pointEllipse);
-			MyPolygon.Points.Add(clickPosition);
+			_CurrentPolygon.Points.Add(clickPosition);
+		}
+
+		private void DoubleClick() {
+			if (_CurrentPolygon.Points.Count > 2) {
+				// Close the current polygon
+				_CurrentPolygon.Points.Add(_CurrentPolygon.Points[0]);
+				_AllPolygons.Add(_CurrentPolygon);
+				// Create a new polygon for the next set of points
+				_CurrentPolygon = new Polygon {
+					Stroke = Brushes.Black,
+					StrokeThickness = 1,
+					Fill = Brushes.Transparent
+				};
+
+				MyCanvas.Children.Add(_CurrentPolygon);
+			}
 		}
 
 		private void BackToMenu(object sender, RoutedEventArgs e) {
+			_MainWindow.testPolygones = _AllPolygons;
 			_MainWindow.BackToMenu();
 		}
 	}

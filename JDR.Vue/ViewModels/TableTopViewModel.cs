@@ -60,9 +60,9 @@ namespace JDR.Vue.ViewModels {
 								}
 							},
 						Inventory = new Inventory {
-							Objects = new List<InventoryObject> {
-								new InventoryObject("Masse"),
-								new InventoryObject("Bouclier")
+							Objects = new List<InventoryItem> {
+								new InventoryItem("Masse"),
+								new InventoryItem("Bouclier")
 							}
 						}
 			};
@@ -98,8 +98,8 @@ namespace JDR.Vue.ViewModels {
 								}
 							},
 				Inventory = new Inventory {
-					Objects = new List<InventoryObject> {
-								new InventoryObject("4 dagues")
+					Objects = new List<InventoryItem> {
+								new InventoryItem("4 dagues")
 							}
 				}
 			};
@@ -135,8 +135,8 @@ namespace JDR.Vue.ViewModels {
 								}
 							},
 				Inventory = new Inventory {
-					Objects = new List<InventoryObject> {
-								new InventoryObject("Bâton")
+					Objects = new List<InventoryItem> {
+								new InventoryItem("Bâton")
 							}
 				}
 			};

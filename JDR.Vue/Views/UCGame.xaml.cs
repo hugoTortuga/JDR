@@ -33,8 +33,10 @@ namespace JDR.Vue.Views {
 		private double _BackgroundHeight;
 		private TranslateTransform _TranslateTransformBackgroundMap;
 		private IList<Geometry> _Obstacles;
+		private MainWindow _MainWindow;
 
 		public UCGame(MainWindow window) {
+			_MainWindow = window;
 			DataContext = new TableTopViewModel();
 			InitializeComponent();
 			InitObstacles();
@@ -43,24 +45,27 @@ namespace JDR.Vue.Views {
 		}
 
 		private void InitObstacles() {
-
-			_Obstacles = new List<Geometry> {
-				new RectangleGeometry(new Rect {
-					Width = 60,
-					Height = 100,
-					Location = new Point(220, 250)
-				}),
-				new RectangleGeometry(new Rect {
-					Width = 180,
-					Height = 60,
-					Location = new Point(420, 250)
-				}),
-				new RectangleGeometry(new Rect {
-					Width = 40,
-					Height = 60,
-					Location = new Point(600, 500)
-				})
-			};
+			_Obstacles = new List<Geometry>();
+			foreach (var polygone in _MainWindow.testPolygones) {
+				_Obstacles.Add(polygone.RenderedGeometry);
+			}
+			//_Obstacles = new List<Geometry> {
+			//	new RectangleGeometry(new Rect {
+			//		Width = 60,
+			//		Height = 100,
+			//		Location = new Point(220, 250)
+			//	}),
+			//	new RectangleGeometry(new Rect {
+			//		Width = 180,
+			//		Height = 60,
+			//		Location = new Point(420, 250)
+			//	}),
+			//	new RectangleGeometry(new Rect {
+			//		Width = 40,
+			//		Height = 60,
+			//		Location = new Point(600, 500)
+			//	})
+			//};
 		}
 
 		private void SetMapProperties() {

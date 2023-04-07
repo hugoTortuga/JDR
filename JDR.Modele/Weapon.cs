@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JDR.Model
 {
-    public class Weapon : InventoryObject
+    public class Weapon : InventoryItem
     {
         public int NumberOfHand { get; set; }
         public Speed Speed { get; set; }

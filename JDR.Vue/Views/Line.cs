@@ -37,43 +37,76 @@ namespace JDR.Vue.Views {
 					//IterateLinePoints(lineGeometry);
 					break;
 				case PathGeometry pathGeometry:
-					//IteratePathGeometryPoints(pathGeometry);
-					break;
+					return GetLinesFromPathGeometry(pathGeometry);
 			}
-			return null;
+			return new List<Line>();
+		}
 
-			//PathGeometry pathGeometry = PathGeometry.CreateFromGeometry(geometry);
+		private List<Line> GetLinesFromPathGeometry(PathGeometry pathGeometry) {
+			var lines = new List<Line>();
+			foreach (PathFigure figure in pathGeometry.Figures) {
+				Console.WriteLine("PathFigure:");
 
-			//foreach (PathFigure figure in pathGeometry.Figures) {
-			//	Point startPoint = figure.StartPoint;
+				Point startPoint = figure.StartPoint;
+				Console.WriteLine($"  Start point: ({startPoint.X}, {startPoint.Y})");
 
-			//	foreach (PathSegment segment in figure.Segments) {
-			//		if (segment is LineSegment lineSegment) {
-			//			Point endPoint = lineSegment.Point;
-			//			lines.Add(new Line(startPoint, endPoint));
-			//			startPoint = endPoint;
-			//		}
-			//		else if (segment is PolyLineSegment polyLineSegment) {
-			//			foreach (Point point in polyLineSegment.Points) {
-			//				lines.Add(new Line(startPoint, point));
-			//				startPoint = point;
-			//			}
-			//		}
-			//	}
-				
-			//}
-			//return lines;
+				foreach (PathSegment segment in figure.Segments) {
+					Console.WriteLine($" PathSegment type: {segment.GetType().Name}");
+					if (segment is PolyLineSegment polyLineSegment) {
+						Point? previousPoint = null;
+						foreach (Point point in polyLineSegment.Points) {
+							if (previousPoint != null)
+								lines.Add(new Line(previousPoint.Value, point));
+							previousPoint = point;
+						}
+						lines.Add(new Line(polyLineSegment.Points[0], polyLineSegment.Points[polyLineSegment.Points.Count - 1]));
+					}
+					else if (segment is LineSegment lineSegment) {
+						Point point = lineSegment.Point;
+						Console.WriteLine($"    Point: ({point.X}, {point.Y})");
+					}
+					else if (segment is ArcSegment arcSegment) {
+						Point point = arcSegment.Point;
+						Console.WriteLine($"    Point: ({point.X}, {point.Y})");
+						Console.WriteLine($"    Size: ({arcSegment.Size.Width}, {arcSegment.Size.Height})");
+						Console.WriteLine($"    Rotation Angle: {arcSegment.RotationAngle}");
+						Console.WriteLine($"    IsLargeArc: {arcSegment.IsLargeArc}");
+						Console.WriteLine($"    SweepDirection: {arcSegment.SweepDirection}");
+					}
+					else if (segment is BezierSegment bezierSegment) {
+						Point point1 = bezierSegment.Point1;
+						Point point2 = bezierSegment.Point2;
+						Point point3 = bezierSegment.Point3;
+
+						Console.WriteLine($"    Point1: ({point1.X}, {point1.Y})");
+						Console.WriteLine($"    Point2: ({point2.X}, {point2.Y})");
+						Console.WriteLine($"    Point3: ({point3.X}, {point3.Y})");
+					}
+					else if (segment is QuadraticBezierSegment quadraticBezierSegment) {
+						Point point1 = quadraticBezierSegment.Point1;
+						Point point2 = quadraticBezierSegment.Point2;
+
+						Console.WriteLine($"    Point1: ({point1.X}, {point1.Y})");
+						Console.WriteLine($"    Point2: ({point2.X}, {point2.Y})");
+					}
+					else {
+						Console.WriteLine("    Unsupported PathSegment type.");
+					}
+				}
+			}
+
+			return lines;
 		}
 
 		private List<Line> GetLinesFromRectangle(RectangleGeometry rectangleGeometry) {
-			var lines = new List<Line>();
-			var rect = rectangleGeometry.Rect;
 
-			lines.Add(new Line(rect.TopLeft, rect.TopRight));
-			lines.Add(new Line(rect.TopRight, rect.BottomRight));
-			lines.Add(new Line(rect.BottomRight, rect.BottomLeft));
-			lines.Add(new Line(rect.BottomLeft, rect.TopLeft));
-			
+			var rectangle = rectangleGeometry.Rect;
+			var lines = new List<Line>() {
+				new Line(rectangle.TopLeft, rectangle.TopRight),
+				new Line(rectangle.TopRight, rectangle.BottomRight),
+				new Line(rectangle.BottomRight, rectangle.BottomLeft),
+				new Line(rectangle.BottomLeft, rectangle.TopLeft)
+			};
 			return lines;
 		}
 

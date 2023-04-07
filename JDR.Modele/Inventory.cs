@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace JDR.Model {
 	public class Inventory {
 
-		public IList<InventoryObject> Objects { get; set; }
+		public IList<InventoryItem> Objects { get; set; }
 
         public Inventory()
         {
-			Objects = new List<InventoryObject>();
+			Objects = new List<InventoryItem>();
         }
 
 		public override string ToString() {

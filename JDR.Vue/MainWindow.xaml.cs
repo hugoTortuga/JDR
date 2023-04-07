@@ -8,12 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace JDR.Vue {
 
 	public partial class MainWindow : Window {
+		public IList<Polygon> testPolygones { get; set; }
 		public MainWindow() {
-			DataContext = new MainViewModel();
 			InitializeComponent();
 			CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
 		}
