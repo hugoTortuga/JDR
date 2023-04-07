@@ -27,49 +27,56 @@ namespace JDR.Vue.Views {
 		}
 
 		private List<Line> GetLinesFromGeometry(Geometry geometry) {
-			var lines = new List<Line>();
-
-			PathGeometry pathGeometry = PathGeometry.CreateFromGeometry(geometry);
-
-			foreach (PathFigure figure in pathGeometry.Figures) {
-				Point startPoint = figure.StartPoint;
-
-				foreach (PathSegment segment in figure.Segments) {
-					if (segment is LineSegment lineSegment) {
-						Point endPoint = lineSegment.Point;
-						lines.Add(new Line(startPoint, endPoint));
-						startPoint = endPoint;
-					}
-					else if (segment is PolyLineSegment polyLineSegment) {
-						foreach (Point point in polyLineSegment.Points) {
-							lines.Add(new Line(startPoint, point));
-							startPoint = point;
-						}
-					}
-				}
-				
+			switch (geometry) {
+				case RectangleGeometry rectangleGeometry:
+					return GetLinesFromRectangle(rectangleGeometry);
+				case EllipseGeometry ellipseGeometry:
+					//IterateEllipsePoints(ellipseGeometry);
+					break;
+				case LineGeometry lineGeometry:
+					//IterateLinePoints(lineGeometry);
+					break;
+				case PathGeometry pathGeometry:
+					//IteratePathGeometryPoints(pathGeometry);
+					break;
 			}
+			return null;
+
+			//PathGeometry pathGeometry = PathGeometry.CreateFromGeometry(geometry);
+
+			//foreach (PathFigure figure in pathGeometry.Figures) {
+			//	Point startPoint = figure.StartPoint;
+
+			//	foreach (PathSegment segment in figure.Segments) {
+			//		if (segment is LineSegment lineSegment) {
+			//			Point endPoint = lineSegment.Point;
+			//			lines.Add(new Line(startPoint, endPoint));
+			//			startPoint = endPoint;
+			//		}
+			//		else if (segment is PolyLineSegment polyLineSegment) {
+			//			foreach (Point point in polyLineSegment.Points) {
+			//				lines.Add(new Line(startPoint, point));
+			//				startPoint = point;
+			//			}
+			//		}
+			//	}
+				
+			//}
+			//return lines;
+		}
+
+		private List<Line> GetLinesFromRectangle(RectangleGeometry rectangleGeometry) {
+			var lines = new List<Line>();
+			var rect = rectangleGeometry.Rect;
+
+			lines.Add(new Line(rect.TopLeft, rect.TopRight));
+			lines.Add(new Line(rect.TopRight, rect.BottomRight));
+			lines.Add(new Line(rect.BottomRight, rect.BottomLeft));
+			lines.Add(new Line(rect.BottomLeft, rect.TopLeft));
+			
 			return lines;
 		}
 
-		public IList<Point> Intersects(Rect rect) {
-			Line[] rectEdges =
-			{
-				new Line(new Point(rect.Left, rect.Top), new Point(rect.Right, rect.Top)),
-				new Line(new Point(rect.Right, rect.Top), new Point(rect.Right, rect.Bottom)),
-				new Line(new Point(rect.Right, rect.Bottom), new Point(rect.Left, rect.Bottom)),
-				new Line(new Point(rect.Left, rect.Bottom), new Point(rect.Left, rect.Top))
-			};
-
-			var intersectionPoints = new List<Point>();
-
-			foreach (var edge in rectEdges) {
-				var point = TryGetIntersectionWith(edge);
-				if (point != null) intersectionPoints.Add(point.Value);
-			}
-
-			return intersectionPoints;
-		}
 
 		public Point? TryGetIntersectionWith(Line other) {
 			var intersection = new Point();

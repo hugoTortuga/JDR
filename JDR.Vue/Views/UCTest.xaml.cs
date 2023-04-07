@@ -42,7 +42,7 @@ namespace JDR.Vue.Views {
 		}
 
 		public void DrawFieldOfVision(Point playerPosition, double radius, Rect rockRect) {
-			GameCanvas.Children.Clear();
+			/*GameCanvas.Children.Clear();
 
 			// Create the PathGeometry
 			var pathGeometry = new PathGeometry();
@@ -96,7 +96,7 @@ namespace JDR.Vue.Views {
 			};
 
 			// Add the Path object to the Canvas
-			GameCanvas.Children.Add(path);
+			GameCanvas.Children.Add(path);*/
 		}
 
 		private void UserControl_KeyDown(object sender, KeyEventArgs e) {

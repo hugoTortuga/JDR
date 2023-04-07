@@ -28,7 +28,7 @@ namespace JDR.Vue.Views {
 		private bool _IsPlayerSelected;
 		private Ellipse _SelectionForm;
 		private int _SelectionFormSize = 16;
-		private int _FOV = 300;
+		private int _FOV = 400;
 		private double _BackgroundWidth;
 		private double _BackgroundHeight;
 		private TranslateTransform _TranslateTransformBackgroundMap;
@@ -46,7 +46,7 @@ namespace JDR.Vue.Views {
 			};
 			InitializeComponent();
 			SetMapProperties();
-			DrawFieldOfVision(GetPlayerPosition(), _FOV);
+			DrawFieldOfVision();
 		}
 
 		private void SetMapProperties() {
@@ -108,7 +108,7 @@ namespace JDR.Vue.Views {
 
 		private void ImageMouseMove(object sender, MouseEventArgs e) {
 			if (Player1.IsMouseCaptured) {
-				DrawFieldOfVision(GetPlayerPosition(), _FOV);
+				DrawFieldOfVision();
 				MovePlayerToNewPosition(e.GetPosition(Player1.Parent as UIElement));
 			}
 		}
@@ -175,7 +175,8 @@ namespace JDR.Vue.Views {
 
 		private Path CurrentFOVPath;
 
-		public void DrawFieldOfVision(Point playerPosition, double radius) {
+		public void DrawFieldOfVision() {
+			var playerPosition = GetPlayerCenterPostition();
 			GameCanvas.Children.Remove(CurrentFOVPath);
 			var pathGeometry = new PathGeometry();
 			var pathFigure = new PathFigure { StartPoint = playerPosition, IsClosed = true, IsFilled = true };
@@ -185,7 +186,7 @@ namespace JDR.Vue.Views {
 			double angleStep = 360.0 / numberOfRays;
 
 			for (int i = 0; i <= numberOfRays; i++) {
-				var ray = ComputeRay(playerPosition, angleStep, radius, i);
+				var ray = ComputeRay(playerPosition, angleStep, _FOV, i);
 				pathFigure.Segments.Add(ray);
 			}
 
@@ -232,10 +233,9 @@ namespace JDR.Vue.Views {
 			return ray;
 		}
 
-		private Point GetPlayerPosition() {
-			return new Point(Canvas.GetLeft(Player1) - _SelectionFormSize / 2, Canvas.GetTop(Player1) - _SelectionFormSize / 2);
+		private Point GetPlayerCenterPostition() {
+			return new Point(Canvas.GetLeft(Player1) + Player1.Width / 2, Canvas.GetTop(Player1) + Player1.Height / 2);
 		}
-
 
 	}
 }
