@@ -28,7 +28,7 @@ namespace JDR.Vue.Views {
 		private bool _IsPlayerSelected;
 		private Ellipse _SelectionForm;
 		private int _SelectionFormSize = 16;
-		private int _FOV = 400;
+		private int _FOV = 450;
 		private double _BackgroundWidth;
 		private double _BackgroundHeight;
 		private TranslateTransform _TranslateTransformBackgroundMap;
@@ -36,17 +36,31 @@ namespace JDR.Vue.Views {
 
 		public UCGame(MainWindow window) {
 			DataContext = new TableTopViewModel();
-
-			_Obstacles = new List<Geometry> { 
-				new RectangleGeometry(new Rect {
-					Width = 60,
-					Height = 60,
-					Location = new Point(120, 250)
-				})
-			};
 			InitializeComponent();
+			InitObstacles();
 			SetMapProperties();
 			DrawFieldOfVision();
+		}
+
+		private void InitObstacles() {
+
+			_Obstacles = new List<Geometry> {
+				new RectangleGeometry(new Rect {
+					Width = 60,
+					Height = 100,
+					Location = new Point(220, 250)
+				}),
+				new RectangleGeometry(new Rect {
+					Width = 180,
+					Height = 60,
+					Location = new Point(420, 250)
+				}),
+				new RectangleGeometry(new Rect {
+					Width = 40,
+					Height = 60,
+					Location = new Point(600, 500)
+				})
+			};
 		}
 
 		private void SetMapProperties() {

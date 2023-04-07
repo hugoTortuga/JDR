@@ -22,8 +22,11 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Button>-->
-        <Button Click="Button_Click">
+        <Button Click="OpenGame">
             Démarrer la partie
+        </Button>
+        <Button Click="OpenMapEditor">
+            Editeur de map
         </Button>
         <!--<Button>Rejoindre une partie</Button>-->
     </StackPanel>

@@ -20,7 +20,14 @@ namespace JDR.Vue {
 
 		public void OpenGame() {
 			CurrentControl.Content = new UCGame(this);
-			//CurrentControl.Content = new UCTest(this);
+		}
+
+		internal void BackToMenu() {
+			CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
+		}
+
+		internal void OpenMapEditor() {
+			CurrentControl.Content = new UCMapEditor(this);
 		}
 	}
 }

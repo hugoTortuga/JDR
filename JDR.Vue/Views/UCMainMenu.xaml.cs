@@ -25,8 +25,12 @@ namespace JDR.Vue {
 			InitializeComponent();
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e) {
+		private void OpenGame(object sender, RoutedEventArgs e) {
 			_mainWindow.OpenGame();
+		}
+
+		private void OpenMapEditor(object sender, RoutedEventArgs e) {
+			_mainWindow.OpenMapEditor();
 		}
 	}
 }
