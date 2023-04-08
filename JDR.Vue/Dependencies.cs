@@ -1,15 +1,11 @@
 ﻿using JDR.Infra;
-using JDR.Service;
 using JDR.Vue.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
+using JDR.Service;
 
 namespace JDR.Vue {
 	public static class Dependencies {
@@ -32,8 +28,11 @@ namespace JDR.Vue {
 			);
 
 			// Enregistrez les services et les dépôts
-			services.AddScoped<IInventoryItemRepository, InventoryItemRepository>();
+			services.AddAutoMapper(typeof(AutoMapperProfile));
+			services.AddScoped<IDynamicMapperService, DynamicMapperService>();
+			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 			services.AddScoped<InventoryService>();
+
 
 			// Enregistrez les ViewModels
 			services.AddTransient<MainViewModel>();

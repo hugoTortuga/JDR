@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace JDR.Vue.ViewModels {
 	public class GameCreationViewModel : ViewModelBase {
 
-        private readonly ServiceBase _Service;
 
         private GameViewModel _CurrentGame;
         public GameViewModel CurrentGame {
@@ -35,10 +34,9 @@ namespace JDR.Vue.ViewModels {
             }
         }
 
-        public GameCreationViewModel(ServiceBase service)
+        public GameCreationViewModel()
         {
             _CurrentGame = new GameViewModel(new Game(new ObservableCollection<Scene>()));
-            _Service = service;
         }
 
         public void GoToMenu() {

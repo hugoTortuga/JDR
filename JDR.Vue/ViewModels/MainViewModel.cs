@@ -20,8 +20,8 @@ namespace JDR.Vue.ViewModels {
 		}
 
 		public async void Test() {
-			var shield = new InventoryItem("Bouclier 4");
-			await Service.AddProduct(shield);
+			var shield = new InventoryItem("Bouclier 6");
+			await Service.AddInventoryItemAsync(shield);
 		}
 
 		
