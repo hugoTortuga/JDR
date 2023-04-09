@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JDR.Infra {
+namespace JDR.Infra.Entities
+{
 
     [Table("inventory_item")]
-	public class InventoryItemEntity {
+    public class InventoryItemEntity
+    {
 
         public Guid Id { get; set; }
         public string Name { get; set; }

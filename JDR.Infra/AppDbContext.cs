@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JDR.Infra.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace JDR.Infra {
 	public class AppDbContext : DbContext {
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-		public DbSet<InventoryItemEntity> Products { get; set; }
+		public DbSet<InventoryItemEntity> InventoryItems { get; set; }
+		public DbSet<SceneEntity> Scenes { get; set; }
 	}
 }

@@ -13,15 +13,15 @@ using System.Windows.Controls;
 
 namespace JDR.Vue.ViewModels {
 	public class MainViewModel : ViewModelBase {
-		private InventoryService Service;
-        public MainViewModel(InventoryService service)
+		private InventoryCore Service;
+        public MainViewModel(InventoryCore service)
         {
 			Service = service;
 		}
 
 		public async void Test() {
-			var shield = new InventoryItem("Bouclier 6");
-			await Service.AddInventoryItemAsync(shield);
+			var shield = new InventoryItem("Bouclier 7");
+			await Service.AddItem(shield);
 		}
 
 		

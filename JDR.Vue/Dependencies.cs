@@ -28,10 +28,8 @@ namespace JDR.Vue {
 			);
 
 			// Enregistrez les services et les dépôts
-			services.AddAutoMapper(typeof(AutoMapperProfile));
-			services.AddScoped<IDynamicMapperService, DynamicMapperService>();
-			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-			services.AddScoped<InventoryService>();
+			services.AddScoped<IMainRepository, MainRepository>();
+			services.AddScoped<InventoryCore>();
 
 
 			// Enregistrez les ViewModels
