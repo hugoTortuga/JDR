@@ -8,6 +8,8 @@ managing tabletop role-playing games, such as Dungeons & Dragons.
 - Opening a scene (background image and obstacles), with a dynamic lightening
 
 ## Architecture
-![diagram_architecture](https://user-images.githubusercontent.com/40737323/230769029-36b19b7f-9ab7-4cd8-a0eb-f582d01870c7.svg)
+I'm using the ports and adapters architecture, which allows me to easely create my unit tests
+and uncouple my logic from my dependencies
 
+![diagram_architecture](https://user-images.githubusercontent.com/40737323/230769450-8c6230dd-d102-44f1-9d21-03de9b417148.svg)
 
