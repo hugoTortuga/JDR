@@ -6,6 +6,7 @@ managing tabletop role-playing games, such as Dungeons & Dragons.
 
 ## Key features
 - Opening a scene (background image and obstacles), with a dynamic lightening
+- Creating a game (wich is basically a list of scenes) (in developement, about 20% done)
 
 ## Architecture
 I'm using the ports and adapters architecture, which allows me to easely create my unit tests
