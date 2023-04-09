@@ -1,4 +1,5 @@
 ﻿using JDR.Vue.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,15 @@ namespace JDR.Vue.Views {
 
 	public partial class UCGameCreation : UserControl {
 
-
-		public UCGameCreation(GameCreationViewModel gameCreationViewModel) {
-			DataContext = gameCreationViewModel;
+		private MainWindow _MainWindow;
+		public UCGameCreation(MainWindow mainWindow) {
+			_MainWindow = mainWindow;
+			DataContext = ((App)Application.Current).ServiceProvider.GetRequiredService<GameCreationViewModel>();
 			InitializeComponent();
+		}
+
+		private void BackToMenu(object sender, RoutedEventArgs e) {
+			_MainWindow.BackToMenu();
 		}
 	}
 }

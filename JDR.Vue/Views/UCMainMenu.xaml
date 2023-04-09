@@ -15,19 +15,11 @@
         </Style>
     </UserControl.Resources>
     <StackPanel VerticalAlignment="Center">
-        <!--<Button Content="Créer partie">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <i:CallMethodAction MethodName="OpenGameCreation" TargetObject="{Binding}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>-->
         <Button Click="OpenGame">
             Démarrer la partie
         </Button>
-        <Button Click="OpenMapEditor">
-            Editeur de map
+        <Button Click="OpenGameCreation">
+            Créer une partie
         </Button>
-        <!--<Button>Rejoindre une partie</Button>-->
     </StackPanel>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using JDR.Model;
+﻿using JDR.Core;
+using JDR.Model;
 using JDR.Service;
 using JDR.Vue.Views;
 using System;
@@ -34,10 +35,19 @@ namespace JDR.Vue.ViewModels {
             }
         }
 
-        public GameCreationViewModel()
+        private GameCore _GameCore;
+
+        public GameCreationViewModel(GameCore gameCore)
         {
-            _CurrentGame = new GameViewModel(new Game(new ObservableCollection<Scene>()));
-        }
+			_GameCore = gameCore;
+            var currentGame = _GameCore.GetLastGame();
+            if (currentGame == null) {
+                currentGame = new Game();
+            }
+			_CurrentGame = new GameViewModel(currentGame);
+            CurrentScene = new Scene("Pas de nom");
+
+		}
 
         public void GoToMenu() {
 		}

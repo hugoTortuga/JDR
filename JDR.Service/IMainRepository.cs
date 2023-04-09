@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JDR.Service {
 	public interface IMainRepository {
-
+		Game GetLastGame();
 		Task SaveItem(InventoryItem item);
 
 	}

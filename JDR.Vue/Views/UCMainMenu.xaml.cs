@@ -30,8 +30,11 @@ namespace JDR.Vue {
 		}
 
 		private void OpenMapEditor(object sender, RoutedEventArgs e) {
-			(_mainWindow.DataContext as MainViewModel).Test();
 			_mainWindow.OpenMapEditor();
 		}
-	}
+
+		private void OpenGameCreation(object sender, RoutedEventArgs e) {
+			_mainWindow.OpenGameCreation();
+		}
+    }
 }

@@ -12,19 +12,17 @@ namespace JDR.Vue {
 
 	public partial class App : Application {
 
-		private readonly ServiceProvider _serviceProvider;
+		public ServiceProvider ServiceProvider { get; }
 
 		public App() {
-			_serviceProvider = Dependencies.ConfigureServices();
+			var appInjections = new AppInjections();
+			ServiceProvider = appInjections.ServiceProvider;
 		}
 
 		protected override void OnStartup(StartupEventArgs e) {
 			base.OnStartup(e);
 
-			// Instanciez MainViewModel à l'aide de l'injection de dépendances
-			var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-
-			// Instanciez et affichez la fenêtre principale
+			var mainViewModel = ServiceProvider.GetRequiredService<MainViewModel>();
 			var mainWindow = new MainWindow { DataContext = mainViewModel };
 			mainWindow.Show();
 		}

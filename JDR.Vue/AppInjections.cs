@@ -6,12 +6,14 @@ using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using AutoMapper;
 using JDR.Service;
+using JDR.Core;
 
 namespace JDR.Vue {
-	public static class Dependencies {
+	public class AppInjections {
 
-		public static ServiceProvider ConfigureServices() {
+		public ServiceProvider ServiceProvider { get; }
 
+		public AppInjections() {
 
 			var configuration = new ConfigurationBuilder()
 			.SetBasePath(Directory.GetCurrentDirectory())
@@ -22,20 +24,18 @@ namespace JDR.Vue {
 
 			string connectionString = configuration.GetConnectionString("MySqlConnection");
 
-			// Ajoutez la configuration du DbContext
 			services.AddDbContext<AppDbContext>(options =>
 				options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 			);
 
-			// Enregistrez les services et les dépôts
 			services.AddScoped<IMainRepository, MainRepository>();
 			services.AddScoped<InventoryCore>();
+			services.AddScoped<GameCore>();
 
-
-			// Enregistrez les ViewModels
 			services.AddTransient<MainViewModel>();
+			services.AddTransient<GameCreationViewModel>();
 
-			return services.BuildServiceProvider();
+			ServiceProvider = services.BuildServiceProvider();
 		}
 
 	}

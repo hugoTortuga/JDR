@@ -71,7 +71,6 @@ namespace JDR.Vue.Views {
 		}
 
 		private void BackToMenu(object sender, RoutedEventArgs e) {
-			_MainWindow.testPolygones = _AllPolygons;
 			_MainWindow.BackToMenu();
 		}
 	}

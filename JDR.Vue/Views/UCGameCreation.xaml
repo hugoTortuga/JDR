@@ -13,13 +13,7 @@
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <Button Content="Retour au menu">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <i:CallMethodAction MethodName="GoToMenu" TargetObject="{Binding}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
+            <Button Content="Retour au menu" Click="BackToMenu"/>
             <Button Content="Ajouter une scène">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">

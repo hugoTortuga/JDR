@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 namespace JDR.Vue {
 
 	public partial class MainWindow : Window {
-		public IList<Polygon> testPolygones { get; set; }
+
 		public MainWindow() {
 			InitializeComponent();
 			CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
@@ -23,12 +23,16 @@ namespace JDR.Vue {
 			CurrentControl.Content = new UCGame(this);
 		}
 
-		internal void BackToMenu() {
+		public void BackToMenu() {
 			CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
 		}
 
-		internal void OpenMapEditor() {
+		public void OpenMapEditor() {
 			CurrentControl.Content = new UCMapEditor(this);
+		}
+
+		public void OpenGameCreation() {
+			CurrentControl.Content = new UCGameCreation(this);
 		}
 	}
 }
