@@ -20,5 +20,8 @@ namespace JDR.Core {
             return _Repository.GetLastGame();
         }
 
-    }
+		public async Task SaveGame(Game game) {
+            await _Repository.SaveGame(game);
+		}
+	}
 }

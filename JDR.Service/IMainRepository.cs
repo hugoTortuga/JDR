@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace JDR.Service {
 	public interface IMainRepository {
 		Game GetLastGame();
+		Task SaveGame(Game game);
 		Task SaveItem(InventoryItem item);
 
 	}

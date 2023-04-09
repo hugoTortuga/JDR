@@ -29,10 +29,6 @@ namespace JDR.Vue {
 			_mainWindow.OpenGame();
 		}
 
-		private void OpenMapEditor(object sender, RoutedEventArgs e) {
-			_mainWindow.OpenMapEditor();
-		}
-
 		private void OpenGameCreation(object sender, RoutedEventArgs e) {
 			_mainWindow.OpenGameCreation();
 		}

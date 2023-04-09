@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JDR.Vue.Views"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" Background="White"
+             d:DesignHeight="700" d:DesignWidth="1080">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" MaxWidth="300" MinWidth="200"/>
@@ -14,6 +14,13 @@
         </Grid.ColumnDefinitions>
         <StackPanel>
             <Button Content="Retour au menu" Click="BackToMenu"/>
+            <Button Content="Sauvegarder">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:CallMethodAction TargetObject="{Binding}" MethodName="SaveGameSettings"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
             <Button Content="Ajouter une scène">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
@@ -27,51 +34,39 @@
         </StackPanel>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="65"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <GroupBox Header="Information sur la partie">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock Text="Nom de la partie"/>
-                        <TextBox Text="{Binding CurrentGame.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1">
-                        <TextBlock Text="Nombre de joueurs max"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="2">
-                        <TextBlock Text="définir un mot de passe"/>
+                        <TextBlock Text="Nom de la partie" VerticalAlignment="Center"/>
+                        <TextBox Height="30" Width="150" Margin="5" Text="{Binding CurrentGame.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                 VerticalContentAlignment="Center" />
+                        <TextBlock Text="Nombre de joueurs max" VerticalAlignment="Center"/>
+                        <TextBox Height="30" Width="50" Margin="5" VerticalContentAlignment="Center" />
                     </StackPanel>
                 </Grid>
             </GroupBox>
             <GroupBox Grid.Row="1" Header="Edition de la scène courante">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock Text="Nom de la scène"/>
-                        <TextBox Text="{Binding CurrentScene.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <TextBlock Text="Nom de la scène" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding CurrentScene.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" Height="30" Width="150"
+                                 VerticalContentAlignment="Center"/>
+                        <TextBlock Text="Choix des NPC" VerticalAlignment="Center" />
+                        <Button Content="Gestion des NPC" Height="30" Margin="5" Padding="5 0"/>
+                        <TextBlock Text="Choix des musiques" VerticalAlignment="Center" />
+                        <Button Content="Gestion des musiques" Height="30" Margin="5" Padding="5 0"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="1">
-                        <TextBlock Text="Choix du background"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="2">
-                        <TextBlock Text="Choix des NPC"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="3">
-                        <TextBlock Text="Choix des musiques"/>
-                    </StackPanel>
-                    
+                    <local:UCMapEditor Grid.Row="1" DataContext="{Binding MapEditorViewModel, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
             </GroupBox>
         </Grid>

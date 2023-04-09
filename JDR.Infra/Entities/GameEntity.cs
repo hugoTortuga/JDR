@@ -5,20 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JDR.Infra.Entities
-{
+namespace JDR.Infra.Entities {
 
-    [Table("inventory_item")]
-    public class InventoryItemEntity
-    {
+	[Table("game")]
+	public class GameEntity {
 
         public Guid Id { get; set; }
         public string? Name { get; set; }
-        public string? Description { get; set; }
+        public int MaxPlayer { get; set; }
+        public IList<SceneEntity> Scenes { get; set; }
 
-        public InventoryItemEntity()
+        public GameEntity()
         {
-            
+            Scenes = new List<SceneEntity>();
         }
 
     }

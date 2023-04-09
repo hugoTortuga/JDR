@@ -1,4 +1,7 @@
-﻿using System;
+﻿using JDR.Model;
+using JDR.Vue.ViewModels;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +21,10 @@ namespace JDR.Vue.Views {
 	/// Logique d'interaction pour UCMapEditor.xaml
 	/// </summary>
 	public partial class UCMapEditor : UserControl {
-		private MainWindow _MainWindow;
 		private Polygon _CurrentPolygon;
 		private IList<Polygon> _AllPolygons;
-		public UCMapEditor(MainWindow window) {
-			_MainWindow = window;
+		private string _ImagePath;
+		public UCMapEditor() {
 			InitializeComponent();
 			_CurrentPolygon = MyPolygon;
 			_AllPolygons = new List<Polygon>();
@@ -56,10 +58,11 @@ namespace JDR.Vue.Views {
 
 		private void DoubleClick() {
 			if (_CurrentPolygon.Points.Count > 2) {
-				// Close the current polygon
+
 				_CurrentPolygon.Points.Add(_CurrentPolygon.Points[0]);
 				_AllPolygons.Add(_CurrentPolygon);
-				// Create a new polygon for the next set of points
+				UpdateObstacles(_CurrentPolygon);
+
 				_CurrentPolygon = new Polygon {
 					Stroke = Brushes.Black,
 					StrokeThickness = 1,
@@ -70,8 +73,20 @@ namespace JDR.Vue.Views {
 			}
 		}
 
-		private void BackToMenu(object sender, RoutedEventArgs e) {
-			_MainWindow.BackToMenu();
+		private void UpdateObstacles(Polygon currentPolygon) {
+			var obstacles = ((MapEditorViewModel)DataContext).Obstacles;
+			var obstacle = new Obstacle();
+			for (int i = 0; i < currentPolygon.Points.Count - 1; i++) {
+				Point startPoint = currentPolygon.Points[i];
+				Point endPoint = currentPolygon.Points[(i + 1) % currentPolygon.Points.Count];
+
+				var li = new Model.Line(
+					new System.Drawing.Point((int)startPoint.X, (int)startPoint.Y),
+					new System.Drawing.Point((int)endPoint.X, (int)endPoint.Y)
+				);
+				obstacle.Lines.Add(li);
+			}
+			obstacles.Add(obstacle);
 		}
 	}
 }

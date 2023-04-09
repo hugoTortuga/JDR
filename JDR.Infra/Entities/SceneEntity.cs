@@ -12,8 +12,14 @@ namespace JDR.Infra.Entities {
 	public class SceneEntity {
 
 		public Guid Id { get; set; }
-		public string Name { get; set; }
-		public string BackgroundImage { get; set; }
+		public string? Name { get; set; }
+
+		public IList<Obstacle> Obstacles { get; set; }
+		public string? BackgroundImage { get; set; }
+
+		public SceneEntity() { 
+			Obstacles = new List<Obstacle>();
+		}	
 
     }
 }

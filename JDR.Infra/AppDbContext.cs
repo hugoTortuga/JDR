@@ -11,6 +11,8 @@ namespace JDR.Infra {
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
 		public DbSet<InventoryItemEntity> InventoryItems { get; set; }
+		public DbSet<GameEntity> Games { get; set; }
 		public DbSet<SceneEntity> Scenes { get; set; }
+
 	}
 }

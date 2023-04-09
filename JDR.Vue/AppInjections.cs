@@ -7,6 +7,7 @@ using System.IO;
 using AutoMapper;
 using JDR.Service;
 using JDR.Core;
+using System;
 
 namespace JDR.Vue {
 	public class AppInjections {
@@ -22,7 +23,7 @@ namespace JDR.Vue {
 
 			var services = new ServiceCollection();
 
-			string connectionString = configuration.GetConnectionString("MySqlConnection");
+			string connectionString = configuration.GetConnectionString("MySqlConnection") ?? throw new ApplicationException("Aucune connexion string");
 
 			services.AddDbContext<AppDbContext>(options =>
 				options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))

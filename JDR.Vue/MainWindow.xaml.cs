@@ -27,10 +27,6 @@ namespace JDR.Vue {
 			CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
 		}
 
-		public void OpenMapEditor() {
-			CurrentControl.Content = new UCMapEditor(this);
-		}
-
 		public void OpenGameCreation() {
 			CurrentControl.Content = new UCGameCreation(this);
 		}
