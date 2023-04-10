@@ -89,44 +89,34 @@ namespace JDR.Vue.ViewModels
 
         public void SaveGame()
         {
-            if (CurrentScene != null)
-            {
-                var fileinfo = MapEditorViewModel?.FileInfoBackground;
-                if (fileinfo != null)
-                {
-                    var illustration = new Illustration
-                    {
-                        Content = File.ReadAllBytes(fileinfo.FullName),
-                        Extension = fileinfo.Extension,
-                        Name = fileinfo.Name
-                    };
-                    CurrentScene.Background = illustration;
-                    CurrentScene.Obstacles = MapEditorViewModel?.Obstacles ?? new List<Obstacle>();
-                }
-            }
+            AddCurrentSceneToGameScenes();
             CurrentGame.Scenes = Scenes;
             _GameCore.SaveGame(CurrentGame);
+        }
+
+        private void AddCurrentSceneToGameScenes()
+        {
+            if (CurrentScene == null) return;
+
+            var fileinfo = MapEditorViewModel?.FileInfoBackground;
+            if (fileinfo != null)
+            {
+                var illustration = new Illustration
+                {
+                    Content = File.ReadAllBytes(fileinfo.FullName),
+                    Extension = fileinfo.Extension,
+                    Name = fileinfo.Name.Substring(0, fileinfo.Name.Length - fileinfo.Extension.Length)                
+                };
+                CurrentScene.Background = illustration;
+                CurrentScene.Obstacles = MapEditorViewModel?.Obstacles ?? new List<Obstacle>();
+            }
 
         }
 
         public void AddAScene()
         {
-            if (CurrentScene != null)
-            {
-                var fileinfo = MapEditorViewModel?.FileInfoBackground;
-                if (fileinfo != null)
-                {
-                    var illustration = new Illustration
-                    {
-                        Content = File.ReadAllBytes(fileinfo.FullName),
-                        Extension = fileinfo.Extension,
-                        Name = fileinfo.Name
-                    };
-                    CurrentScene.Background = illustration;
-                    CurrentScene.Obstacles = MapEditorViewModel?.Obstacles ?? new List<Obstacle>();
-                }
-                SaveCurrentSceneIfNeeded();
-            }
+            AddCurrentSceneToGameScenes();
+            SaveCurrentSceneIfNeeded();
 
             CurrentScene = new Scene("Scène sans titre");
             CurrentGame.Scenes.Add(CurrentScene);

@@ -35,10 +35,11 @@ namespace JDR.Core {
 
 		public async Task<bool> SaveScene(Scene currentScene) {
 			try {
-				if (currentScene.Background?.Content != null
+				if (currentScene?.Background != null
+                    && currentScene.Background?.Content != null
 					&& !string.IsNullOrEmpty(currentScene.Background.Name)
 					&& !string.IsNullOrEmpty(currentScene.Background.Extension))
-					await _ImageUploader.Upload(currentScene.Background.Content, currentScene.Background.Name);
+					await _ImageUploader.Upload(currentScene.Background.Content, currentScene.Background.Name + currentScene.Background.Extension);
 				return true;
 			}
 			catch (Exception) {
