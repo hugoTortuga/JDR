@@ -17,6 +17,17 @@ namespace JDR.Infra {
 
 		}
 
+        public Illustration Get(string? backgroundImage)
+        {
+            var fileInfo = new FileInfo(backgroundImage);
+            return new Illustration
+            {
+                Content = File.ReadAllBytes(_BasePath + backgroundImage),
+                Name = fileInfo.Name.Substring(0, fileInfo.Name.Length - fileInfo.Extension.Length),
+                Extension = fileInfo.Extension,
+            };
+        }
+
         public async Task Upload(byte[] fileContent, string nameImage) {
 			File.WriteAllBytes(_BasePath + nameImage, fileContent);
 		}

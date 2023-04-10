@@ -1,4 +1,5 @@
-﻿using JDR.Model;
+﻿using JDR.Core;
+using JDR.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,14 +22,28 @@ namespace JDR.Vue.ViewModels {
             }
         }
 
-        public TableTopViewModel()
+		private ObservableCollection<Scene> _Scenes;
+		public ObservableCollection<Scene> Scenes
+		{
+			get { 
+				return _Scenes;
+			}
+			set { 
+				_Scenes = value; 
+				OnPropertyChanged(nameof(Scenes));
+			}
+		}
+
+        public TableTopViewModel(GameCore gameCore)
         {
             Players = new ObservableCollection<Player> {
 				CreateBengala(),
 				CreateBiscuit(),
 				CreateAilurus()
 			};
-		}
+			Scenes = new ObservableCollection<Scene>(gameCore.GetAvailableScenes());
+
+        }
 
         private Player CreateBengala() {
 			return new Player("Bengala",

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using JDR.Core;
 using JDR.Infra.Entities;
 using JDR.Model;
 using JDR.Service;
@@ -14,11 +15,23 @@ namespace JDR.Infra {
 	public class MainRepository : IMainRepository {
 
 		private readonly AppDbContext _DbContext;
-		public MainRepository(AppDbContext dbContext) {
+		private readonly IImageUploader _ImageManager;
+		public MainRepository(AppDbContext dbContext, IImageUploader imageUploader) {
 			_DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-		}
+			_ImageManager = imageUploader;
 
-		public Game GetLastGame() {
+        }
+
+        public List<Scene> GetAllScenes()
+        {
+			return _DbContext.Scenes.Select(s => new Scene(s.Name)
+			{
+				Obstacles = s.Obstacles,
+				Background = _ImageManager.Get(s.BackgroundImage)
+			}).ToList();
+        }
+
+        public Game GetLastGame() {
 			//TODO not done yet
 			return new Game();
 		}

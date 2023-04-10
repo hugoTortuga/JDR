@@ -1,5 +1,6 @@
 ﻿using JDR.Model;
 using JDR.Vue.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -17,12 +18,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace JDR.Vue.Views {
-	/// <summary>
-	/// Logique d'interaction pour UCGame.xaml
-	/// </summary>
+
 	public partial class UCGame : UserControl {
 
 		private bool _IsPlayerSelected;
@@ -37,7 +35,7 @@ namespace JDR.Vue.Views {
 
 		public UCGame(MainWindow window) {
 			_MainWindow = window;
-			DataContext = new TableTopViewModel();
+			DataContext = ((App)Application.Current).ServiceProvider.GetRequiredService<TableTopViewModel>();
 			InitializeComponent();
 			InitObstacles();
 			SetMapProperties();

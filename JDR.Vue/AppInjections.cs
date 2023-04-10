@@ -38,7 +38,8 @@ namespace JDR.Vue {
 			services.AddScoped<GameCore>();
 
 			services.AddTransient<MainViewModel>();
-			services.AddTransient<GameCreationViewModel>();
+            services.AddTransient<TableTopViewModel>();
+            services.AddTransient<GameCreationViewModel>();
 
 			ServiceProvider = services.BuildServiceProvider();
 		}

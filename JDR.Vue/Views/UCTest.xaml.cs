@@ -31,7 +31,7 @@ namespace JDR.Vue.Views {
 		private IList<Geometry> _Obstacles;
 
 		public UCTest(MainWindow window) {
-			DataContext = new TableTopViewModel();
+			//ataContext = new TableTopViewModel();
 			InitializeComponent();
 			_BackgroundWidth = BackgroundImageBrush.ImageSource.Width;
 			_BackgroundHeight = BackgroundImageBrush.ImageSource.Height;

@@ -2,6 +2,7 @@
 using JDR.Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,12 @@ namespace JDR.Core {
 			_ImageUploader = imageUploader;
 		}
 
-		public Game GetLastGame() {
+        public List<Scene> GetAvailableScenes()
+        {
+			return _Repository.GetAllScenes();
+        }
+
+        public Game GetLastGame() {
 			return _Repository.GetLastGame();
 		}
 
