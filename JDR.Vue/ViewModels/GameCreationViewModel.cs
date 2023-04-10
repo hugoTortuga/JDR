@@ -74,7 +74,7 @@ namespace JDR.Vue.ViewModels {
 			game.Scenes[0].Background = new Illustration(currentScenePath);
 			game.Scenes[0].Obstacles = MapEditorViewModel.Obstacles;
 
-			_GameCore.SaveGame(game).GetAwaiter().GetResult();
+			_GameCore.SaveGame(game);
 		}
 
 		public void AddAScene() {

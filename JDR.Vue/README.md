@@ -13,3 +13,13 @@ and uncouple my logic from my dependencies
 
 ![diagram_architecture](https://user-images.githubusercontent.com/40737323/230769450-8c6230dd-d102-44f1-9d21-03de9b417148.svg)
 
+### Version NaN
+Not playable, so there is no version yet
+
+### TODO
+- Precise my ef session usage (not sure yet)
+- Continue in the db + mapping
+- Ctrl z implementation to come back on the save
+- Ctrl s to save the game creation
+- Make the interface beautiful and user friendly
+

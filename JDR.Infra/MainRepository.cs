@@ -24,20 +24,27 @@ namespace JDR.Infra {
 		}
 
 		public async Task SaveGame(Game game) {
-			await _DbContext.Games.AddAsync(new GameEntity {
-				Name = game.Name,
-				MaxPlayer = game.MaxPlayer,
-				Scenes = game.Scenes.Select(s => new SceneEntity {
-					BackgroundImage = s.Background?.Uri?.LocalPath,
-					Name = s.Name,
-					Obstacles = s.Obstacles
-				}).ToList()
-			});
-			await _DbContext.SaveChangesAsync();
+			try {
+				await _DbContext.Games.AddAsync(new GameEntity {
+					Name = game.Name,
+					MaxPlayer = game.MaxPlayer,
+					Scenes = game.Scenes.Select(s => new SceneEntity {
+						BackgroundImage = s.Background?.Uri?.LocalPath,
+						Name = s.Name,
+						Obstacles = s.Obstacles
+					}).ToList()
+				});
+				await _DbContext.SaveChangesAsync();
+			}
+			catch (Exception ex) {
+
+				throw;
+			}
+
 		}
 
 		public async Task SaveItem(InventoryItem item) {
-			await _DbContext.InventoryItems.AddAsync(new InventoryItemEntity { Name = item.Name});
+			await _DbContext.InventoryItems.AddAsync(new InventoryItemEntity { Name = item.Name });
 			await _DbContext.SaveChangesAsync();
 		}
 
