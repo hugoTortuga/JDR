@@ -6,30 +6,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JDR.Infra {
-	public class ImageUploader : IImageUploader {
+namespace JDR.Infra
+{
+    public class ImageUploader : IImageUploader
+    {
 
         private string _BasePath;
 
         public ImageUploader(string basePath)
         {
-			_BasePath = basePath;
+            _BasePath = basePath;
 
-		}
+        }
 
         public Illustration Get(string? backgroundImage)
         {
-            var fileInfo = new FileInfo(backgroundImage);
-            return new Illustration
+            
+            try
             {
-                Content = File.ReadAllBytes(_BasePath + backgroundImage),
-                Name = fileInfo.Name.Substring(0, fileInfo.Name.Length - fileInfo.Extension.Length),
-                Extension = fileInfo.Extension,
-            };
+                var fileInfo = new FileInfo(_BasePath + backgroundImage);
+                return new Illustration
+                {
+                    Content = File.ReadAllBytes(_BasePath + backgroundImage),
+                    Name = fileInfo.Name.Substring(0, fileInfo.Name.Length - fileInfo.Extension.Length),
+                    Extension = fileInfo.Extension,
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
-        public async Task Upload(byte[] fileContent, string nameImage) {
-			File.WriteAllBytes(_BasePath + nameImage, fileContent);
-		}
-	}
+        public async Task Upload(byte[] fileContent, string nameImage)
+        {
+            File.WriteAllBytes(_BasePath + nameImage, fileContent);
+        }
+    }
 }
