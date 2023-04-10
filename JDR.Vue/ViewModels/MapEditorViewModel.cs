@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
 using JDR.Model;
+using System.IO;
 
 namespace JDR.Vue.ViewModels {
 	public class MapEditorViewModel : ViewModelBase {
@@ -35,7 +36,9 @@ namespace JDR.Vue.ViewModels {
 			}
 		}
 
-		public MapEditorViewModel()
+        public FileInfo? FileInfoBackground { get; set; }
+
+        public MapEditorViewModel()
         {
 			_Obstacles = new List<Obstacle>();
 		}
@@ -47,6 +50,7 @@ namespace JDR.Vue.ViewModels {
 		private string GetImageURL() {
 			var dialog = new OpenFileDialog();
 			if (dialog.ShowDialog() == true) {
+				FileInfoBackground = new FileInfo(dialog.FileName);
 				return dialog.FileName;
 			}
 			throw new ApplicationException("Aucune image sélectionnée");

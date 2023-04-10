@@ -28,7 +28,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <ListBox ItemsSource="{Binding CurrentGame.Scenes, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox ItemsSource="{Binding Scenes, UpdateSourceTrigger=PropertyChanged}">
                 
             </ListBox>
         </StackPanel>
