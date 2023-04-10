@@ -24,6 +24,11 @@ namespace JDR.Infra {
 					v => JsonConvert.DeserializeObject<List<Obstacle>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }))
 				.HasColumnType("obstacles");
 			});
+			modelBuilder.Entity<GameEntity>()
+			.HasMany(g => g.Scenes)
+			.WithOne()
+			.HasForeignKey("idGame")
+			.IsRequired();
 		}
 
 	}

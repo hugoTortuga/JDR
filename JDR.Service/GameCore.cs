@@ -20,8 +20,16 @@ namespace JDR.Core {
             return _Repository.GetLastGame();
         }
 
-		public async Task SaveGame(Game game) {
-            await _Repository.SaveGame(game);
+		public async Task<bool> SaveGame(Game game) {
+			try {
+				await _Repository.SaveGame(game);
+				return true;
+			}
+			catch (Exception) {
+				//TODO i dont know how i'll handle exception for now
+				return false;
+			}
+            
 		}
 	}
 }
