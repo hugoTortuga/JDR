@@ -21,15 +21,19 @@ namespace JDR.Vue {
 			.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
 			.Build();
 
-			var services = new ServiceCollection();
-
 			string connectionString = configuration.GetConnectionString("MySqlConnection") ?? throw new ApplicationException("Aucune connexion string");
+			string basePathImageDB = configuration.GetSection("Paths")["ImageDBPath"] ?? throw new ApplicationException("Aucune base de données d'images accessible");
+
+			var services = new ServiceCollection();
 
 			services.AddDbContext<AppDbContext>(options =>
 				options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 			);
 
 			services.AddScoped<IMainRepository, MainRepository>();
+			services.AddScoped<IImageUploader, ImageUploader>(basePathParameter => {
+				return new ImageUploader(basePathImageDB);
+			});
 			services.AddScoped<InventoryCore>();
 			services.AddScoped<GameCore>();
 

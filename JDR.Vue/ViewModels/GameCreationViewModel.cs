@@ -57,30 +57,32 @@ namespace JDR.Vue.ViewModels {
 				currentGame = new Game();
 			}
 			_CurrentGame = currentGame;
-			if (_CurrentGame.Scenes.Count == 0) {
-				CurrentScene = new Scene("Pas de nom");
-				_CurrentGame.Scenes.Add(CurrentScene);
-			}
-
-			else
-				CurrentScene = _CurrentGame.Scenes[0];
 
 			MapEditorViewModel = new MapEditorViewModel();
 		}
 
-		public void SaveGameSettings() {
+		public void SaveGame() {
 			var game = CurrentGame;
 			var currentScenePath = MapEditorViewModel.BackgroundPath;
 			game.Scenes[0].Background = new Illustration(currentScenePath);
 			game.Scenes[0].Obstacles = MapEditorViewModel.Obstacles;
 
-			_GameCore.SaveGame(game).GetAwaiter().GetResult();
+			_GameCore.SaveGame(game);
+
 		}
 
 		public void AddAScene() {
+
+			SaveCurrentSceneIfNeeded();
+
 			CurrentScene = new Scene("Scène sans titre");
 			CurrentGame.Scenes.Add(CurrentScene);
+			
 		}
 
+		private void SaveCurrentSceneIfNeeded() {
+			if (CurrentScene == null) return;
+			_GameCore.SaveScene(CurrentScene);
+		}
 	}
 }

@@ -17,7 +17,7 @@
             <Button Content="Sauvegarder">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <i:CallMethodAction TargetObject="{Binding}" MethodName="SaveGameSettings"/>
+                        <i:CallMethodAction TargetObject="{Binding}" MethodName="SaveGame"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
@@ -52,6 +52,16 @@
                 </Grid>
             </GroupBox>
             <GroupBox Grid.Row="1" Header="Edition de la scène courante">
+                <GroupBox.Style>
+                    <Style TargetType="GroupBox">
+                        <Setter Property="IsEnabled" Value="True" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentScene}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </GroupBox.Style>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
