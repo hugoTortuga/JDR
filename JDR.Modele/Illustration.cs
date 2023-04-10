@@ -3,15 +3,16 @@
     public class Illustration
     {
 
-        public Uri Uri { get; set; }
-        public Illustration(string URI)
+        public string? Name { get; set; }
+        public string? Extension { get; set; }
+        public byte[]? Content { get; set; }
+
+        public Illustration()
         {
-            Uri = new Uri(URI);
         }
 
-
 		public static Illustration None() {
-            return new Illustration("none.jpg");
+            return new Illustration();
         }
 
     }

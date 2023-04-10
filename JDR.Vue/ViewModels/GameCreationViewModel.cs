@@ -64,7 +64,7 @@ namespace JDR.Vue.ViewModels {
 		public void SaveGame() {
 			var game = CurrentGame;
 			var currentScenePath = MapEditorViewModel.BackgroundPath;
-			game.Scenes[0].Background = new Illustration(currentScenePath);
+			game.Scenes[0].Background = new Illustration();
 			game.Scenes[0].Obstacles = MapEditorViewModel.Obstacles;
 
 			_GameCore.SaveGame(game);
@@ -74,7 +74,6 @@ namespace JDR.Vue.ViewModels {
 		public void AddAScene() {
 
 			SaveCurrentSceneIfNeeded();
-
 			CurrentScene = new Scene("Scène sans titre");
 			CurrentGame.Scenes.Add(CurrentScene);
 			

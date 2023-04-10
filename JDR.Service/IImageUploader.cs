@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace JDR.Core {
 	public interface IImageUploader {
-		Task Upload(string uriImage);
+		Task Upload(byte[] fileContent, string nameImage);
 	}
 }

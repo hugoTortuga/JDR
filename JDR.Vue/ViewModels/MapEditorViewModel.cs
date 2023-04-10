@@ -13,7 +13,6 @@ using JDR.Model;
 namespace JDR.Vue.ViewModels {
 	public class MapEditorViewModel : ViewModelBase {
 
-
 		private string? _BackgroundPath;
 		public string? BackgroundPath {
 			get {

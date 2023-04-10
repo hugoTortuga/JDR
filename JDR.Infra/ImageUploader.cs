@@ -17,8 +17,8 @@ namespace JDR.Infra {
 
 		}
 
-        public async Task Upload(string uriImage) {
-			File.Copy(uriImage, _BasePath);
+        public async Task Upload(byte[] fileContent, string nameImage) {
+			File.WriteAllBytes(_BasePath + nameImage, fileContent);
 		}
 	}
 }

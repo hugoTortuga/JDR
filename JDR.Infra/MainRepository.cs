@@ -28,7 +28,7 @@ namespace JDR.Infra {
 				Name = game.Name,
 				MaxPlayer = game.MaxPlayer,
 				Scenes = game.Scenes.Select(s => new SceneEntity {
-					BackgroundImage = s.Background?.Uri?.LocalPath,
+					BackgroundImage = s.Background?.Name + "." + s.Background?.Extension,
 					Name = s.Name,
 					Obstacles = s.Obstacles
 				}).ToList()

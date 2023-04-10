@@ -26,7 +26,7 @@ namespace JDR.Vue.Views {
 	public partial class UCGame : UserControl {
 
 		private bool _IsPlayerSelected;
-		private Ellipse _SelectionForm;
+		private Ellipse? _SelectionForm;
 		private int _SelectionFormSize = 16;
 		private int _FOV = 450;
 		private double _BackgroundWidth;
@@ -73,8 +73,7 @@ namespace JDR.Vue.Views {
 		}
 
 		private void OpenCharacterSheet(object sender, RoutedEventArgs e) {
-			var menuItem = sender as MenuItem;
-			var selectedPlayer = menuItem.DataContext as Player;
+			var selectedPlayer = (Player)((MenuItem)sender).DataContext;
 			if (selectedPlayer != null)
 				new WinCharacterSheet(selectedPlayer).Show();
 		}
@@ -178,6 +177,12 @@ namespace JDR.Vue.Views {
 
 			}
 		}
+
+		private void BackToMenu(object sender, RoutedEventArgs e)
+		{
+            _MainWindow.BackToMenu();
+
+        }
 
 		private string GetImageURL() {
 			var dialog = new OpenFileDialog();
