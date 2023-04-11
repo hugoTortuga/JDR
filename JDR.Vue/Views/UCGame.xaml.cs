@@ -63,11 +63,11 @@ namespace JDR.Vue.Views {
 		}
 
 		private void SetMapProperties() {
-			_BackgroundWidth = BackgroundImageBrush.ImageSource.Width;
-			_BackgroundHeight = BackgroundImageBrush.ImageSource.Height;
+			//_BackgroundWidth = BackgroundImageBrush.ImageSource.Width;
+			/*_BackgroundHeight = BackgroundImageBrush.ImageSource.Height;
 			_TranslateTransformBackgroundMap = new TranslateTransform();
 			BackgroundImageBrush.Transform = _TranslateTransformBackgroundMap;
-			GameCanvas.Background = BackgroundImageBrush;
+			GameCanvas.Background = BackgroundImageBrush;*/
 		}
 
 		private void OpenCharacterSheet(object sender, RoutedEventArgs e) {

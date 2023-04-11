@@ -5,15 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:JDR.Vue.Views" Focusable="True" 
              mc:Ignorable="d"
+             xmlns:converters="clr-namespace:JDR.Vue.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:ByteToImageConverter x:Key="ByteToImage" />
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Height="50">
-            <Button Content="Changer de map" Click="ChangeMap" Width="150" Height="35" HorizontalAlignment="Left" Margin="5 0" />
+            <ComboBox ItemsSource="{Binding Scenes, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="35" 
+                      HorizontalAlignment="Left" Margin="5 0" SelectedItem="{Binding CurrentScene, UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:CallMethodAction TargetObject="{Binding}" MethodName="SceneSelected"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
             <Slider x:Name="ResizeSlider" Grid.Row="1" Margin="10" Minimum="100" Maximum="2000" Value="1000" Width="300" 
                     ValueChanged="ResizeSlider_ValueChanged" VerticalAlignment="Center" />
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -55,7 +68,7 @@
             <Viewbox Grid.Column="1">
                 <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseRightButtonDown="GameCanvas_MouseRightButtonDown">
                     <Canvas.Background>
-                        <ImageBrush x:Name="BackgroundImageBrush" ImageSource="/Assets/background.jpeg" Stretch="Uniform" />
+                        <ImageBrush x:Name="BackgroundImageBrush" ImageSource="{Binding CurrentScene, Converter={StaticResource ByteToImage}}" Stretch="Uniform" />
                     </Canvas.Background>
                     <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" MouseMove="ImageMouseMove" >
                         <Image.ContextMenu>

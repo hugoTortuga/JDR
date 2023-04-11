@@ -34,6 +34,17 @@ namespace JDR.Vue.ViewModels {
 			}
 		}
 
+		private Scene _CurrentScene;
+		public Scene CurrentScene
+		{
+			get { return _CurrentScene; }
+			set
+			{
+				_CurrentScene = value;
+				OnPropertyChanged(nameof(CurrentScene));
+			}
+		}
+
         public TableTopViewModel(GameCore gameCore)
         {
             Players = new ObservableCollection<Player> {
@@ -42,7 +53,12 @@ namespace JDR.Vue.ViewModels {
 				CreateAilurus()
 			};
 			Scenes = new ObservableCollection<Scene>(gameCore.GetAvailableScenes());
+			CurrentScene = Scenes[0];
+        }
 
+		public void SceneSelected()
+		{
+			var test = CurrentScene.Background.Name + " " + CurrentScene.Background.Extension;
         }
 
         private Player CreateBengala() {
