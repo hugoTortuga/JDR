@@ -19,6 +19,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Height="50">
+            <Button Click="BackToMenu" Content="Retour au menu" Height="35" Margin="5" Padding="5 0"/>
             <ComboBox ItemsSource="{Binding Scenes, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="35" 
                       HorizontalAlignment="Left" Margin="5 0" SelectedItem="{Binding CurrentScene, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>

@@ -58,7 +58,7 @@ namespace JDR.Vue.ViewModels {
 
 		public void SceneSelected()
 		{
-			var test = CurrentScene.Background.Name + " " + CurrentScene.Background.Extension;
+			var test = CurrentScene.Background?.Name + " " + CurrentScene.Background?.Extension;
         }
 
         private Player CreateBengala() {
