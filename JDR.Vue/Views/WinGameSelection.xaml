@@ -12,7 +12,7 @@
         <ListBox ItemsSource="{Binding Games, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedGame, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:CallMethodAction TargetObject="{Binding}" MethodName="GameSelected"/>
+                    <i:CallMethodAction TargetObject="{Binding}" MethodName="GameSelected" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>

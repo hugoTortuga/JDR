@@ -80,13 +80,7 @@ namespace JDR.Vue.ViewModels
         public GameCreationViewModel(GameCore gameCore)
         {
             _GameCore = gameCore;
-            var currentGame = _GameCore.GetLastGame();
-            if (currentGame == null)
-            {
-                currentGame = new Game();
-            }
-            _CurrentGame = currentGame;
-
+            _CurrentGame = new Game();
             Scenes = new ObservableCollection<Scene>(_CurrentGame.Scenes);
             MapEditorViewModel = new MapEditorViewModel();
         }

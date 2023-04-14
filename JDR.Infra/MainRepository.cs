@@ -32,13 +32,16 @@ namespace JDR.Infra {
         }
 
         public Game GetLastGame() {
-			//TODO not done yet
-			return new Game();
+			var lastGame = _DbContext.Games.OrderBy(g => g.Name).Last();
+			if (lastGame == null) return new Game();
+			return lastGame.ToGame(_ImageManager);
 		}
 
         public IList<Game> GetYourGames()
         {
-			var gameEntities = _DbContext.Games.ToList();
+			var gameEntities = _DbContext.Games
+				.Include(g => g.Scenes)
+				.ToList();
 			if (gameEntities == null) return new List<Game>();
 
 			return gameEntities.Select(g => g.ToGame(_ImageManager)).ToList();
