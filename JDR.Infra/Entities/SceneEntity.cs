@@ -1,4 +1,5 @@
-﻿using JDR.Model;
+﻿using JDR.Core;
+using JDR.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,5 +22,13 @@ namespace JDR.Infra.Entities {
 			Obstacles = new List<Obstacle>();
 		}	
 
+		public Scene ToScene(IImageUploader imageUploader)
+		{
+			return new Scene(Name)
+			{
+				Obstacles = Obstacles,
+				Background = imageUploader.Get(BackgroundImage)
+			};
+        }
     }
 }

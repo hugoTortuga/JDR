@@ -1,4 +1,5 @@
 ﻿using JDR.Vue.ViewModels;
+using JDR.Vue.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,19 +19,25 @@ namespace JDR.Vue {
 
 	public partial class UCMainMenu : UserControl {
 
-		private MainWindow _mainWindow;
+		private MainWindow _MainWindow;
 		public UCMainMenu(MainMenuViewModel mainMenuViewModel, MainWindow window) {
-			_mainWindow = window;
-			DataContext = mainMenuViewModel;
+			_MainWindow = window;
+            DataContext = mainMenuViewModel;
 			InitializeComponent();
 		}
 
 		private void OpenGame(object sender, RoutedEventArgs e) {
-			_mainWindow.OpenGame();
+			_MainWindow.OpenGame();
 		}
 
 		private void OpenGameCreation(object sender, RoutedEventArgs e) {
-			_mainWindow.OpenGameCreation();
+			_MainWindow.OpenGameCreation();
+		}
+
+		private void EditGame(object sender, RoutedEventArgs e)
+		{
+			var window = new WinGameSelection(_MainWindow);
+			window.ShowDialog();
 		}
     }
 }

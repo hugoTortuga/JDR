@@ -36,7 +36,15 @@ namespace JDR.Infra {
 			return new Game();
 		}
 
-		public async Task SaveGame(Game game) {
+        public IList<Game> GetYourGames()
+        {
+			var gameEntities = _DbContext.Games.ToList();
+			if (gameEntities == null) return new List<Game>();
+
+			return gameEntities.Select(g => g.ToGame(_ImageManager)).ToList();
+        }
+
+        public async Task SaveGame(Game game) {
 			await _DbContext.Games.AddAsync(new GameEntity {
 				Name = game.Name,
 				MaxPlayer = game.MaxPlayer,

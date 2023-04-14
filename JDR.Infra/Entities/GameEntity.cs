@@ -1,4 +1,6 @@
-﻿using System;
+﻿using JDR.Core;
+using JDR.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -18,6 +20,16 @@ namespace JDR.Infra.Entities {
         public GameEntity()
         {
             Scenes = new List<SceneEntity>();
+        }
+
+        public Game ToGame(IImageUploader imageUploader)
+        {
+            return new Game
+            {
+                MaxPlayer = MaxPlayer,
+                Name = Name,
+                Scenes = Scenes.Select(s => s.ToScene(imageUploader)).ToList(),
+            };
         }
 
     }

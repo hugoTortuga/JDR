@@ -9,7 +9,8 @@ namespace JDR.Service {
 	public interface IMainRepository {
         List<Scene> GetAllScenes();
         Game GetLastGame();
-		Task SaveGame(Game game);
+        IList<Game> GetYourGames();
+        Task SaveGame(Game game);
 		Task SaveItem(InventoryItem item);
 
 	}

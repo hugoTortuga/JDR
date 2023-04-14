@@ -18,6 +18,11 @@ namespace JDR.Core {
 			_ImageUploader = imageUploader;
 		}
 
+        public IList<Game> GetAvailableGames()
+        {
+			return _Repository.GetYourGames();
+        }
+
         public List<Scene> GetAvailableScenes()
         {
 			return _Repository.GetAllScenes();

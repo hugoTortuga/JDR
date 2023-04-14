@@ -16,5 +16,10 @@ namespace JDR.Model {
             Scenes = new List<Scene>();
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 }

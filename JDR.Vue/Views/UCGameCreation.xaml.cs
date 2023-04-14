@@ -1,4 +1,5 @@
-﻿using JDR.Vue.ViewModels;
+﻿using JDR.Model;
+using JDR.Vue.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,19 +16,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace JDR.Vue.Views {
+namespace JDR.Vue.Views
+{
 
-	public partial class UCGameCreation : UserControl {
+    public partial class UCGameCreation : UserControl
+    {
 
-		private MainWindow _MainWindow;
-		public UCGameCreation(MainWindow mainWindow) {
-			_MainWindow = mainWindow;
-			DataContext = ((App)Application.Current).ServiceProvider.GetRequiredService<GameCreationViewModel>();
-			InitializeComponent();
-		}
+        private MainWindow _MainWindow;
+        public UCGameCreation(MainWindow mainWindow, Game? existingGame = null)
+        {
+            _MainWindow = mainWindow;
+            DataContext = ((App)Application.Current).ServiceProvider.GetRequiredService<GameCreationViewModel>();
+            if (existingGame != null)
+                ((GameCreationViewModel)DataContext).CurrentGame = existingGame;
+            InitializeComponent();
+        }
 
-		private void BackToMenu(object sender, RoutedEventArgs e) {
-			_MainWindow.BackToMenu();
-		}
-	}
+        private void BackToMenu(object sender, RoutedEventArgs e)
+        {
+            _MainWindow.BackToMenu();
+        }
+    }
 }

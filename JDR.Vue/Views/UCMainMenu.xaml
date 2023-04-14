@@ -18,6 +18,9 @@
         <Button Click="OpenGame">
             Démarrer la partie
         </Button>
+        <Button Click="EditGame">
+            Editer une partie
+        </Button>
         <Button Click="OpenGameCreation">
             Créer une partie
         </Button>

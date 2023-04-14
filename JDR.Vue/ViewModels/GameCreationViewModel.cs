@@ -26,6 +26,10 @@ namespace JDR.Vue.ViewModels
             set
             {
                 _CurrentGame = value;
+                if (value != null)
+                {
+                    Scenes = new ObservableCollection<Scene>(_CurrentGame.Scenes);
+                }
                 OnPropertyChanged(nameof(CurrentGame));
             }
         }
@@ -110,17 +114,23 @@ namespace JDR.Vue.ViewModels
                 CurrentScene.Background = illustration;
                 CurrentScene.Obstacles = MapEditorViewModel?.Obstacles ?? new List<Obstacle>();
             }
-            _GameCore.SaveScene(CurrentScene);
+
         }
 
         public void AddAScene()
         {
             AddCurrentSceneToGameScenes();
+            SaveCurrentSceneIfNeeded();
 
             CurrentScene = new Scene("Scène sans titre");
             CurrentGame.Scenes.Add(CurrentScene);
             Scenes.Add(CurrentScene);
 
+        }
+
+        private void SaveCurrentSceneIfNeeded()
+        {
+            _GameCore.SaveScene(CurrentScene);
         }
     }
 }

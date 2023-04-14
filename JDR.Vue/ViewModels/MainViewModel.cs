@@ -1,4 +1,5 @@
-﻿using JDR.Infra;
+﻿using JDR.Core;
+using JDR.Infra;
 using JDR.Model;
 using JDR.Service;
 using JDR.Vue.Views;
@@ -14,10 +15,15 @@ using System.Windows.Controls;
 namespace JDR.Vue.ViewModels {
 	public class MainViewModel : ViewModelBase {
 
-		private InventoryCore Service;
-        public MainViewModel(InventoryCore service)
+		private GameCore _GameCore;
+
+		public IList<Game> AvailableGames
+		{ get; protected set; }
+
+        public MainViewModel(GameCore gameCore)
         {
-			Service = service;
+            _GameCore = gameCore;
+			AvailableGames = _GameCore.GetAvailableGames();
 		}
 		
 	}

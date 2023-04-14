@@ -1,4 +1,5 @@
 ﻿using JDR.Infra;
+using JDR.Model;
 using JDR.Service;
 using JDR.Vue.ViewModels;
 using JDR.Vue.Views;
@@ -30,5 +31,10 @@ namespace JDR.Vue {
 		public void OpenGameCreation() {
 			CurrentControl.Content = new UCGameCreation(this);
 		}
-	}
+
+        public void OpenGameCreation(Game existingGame)
+        {
+            CurrentControl.Content = new UCGameCreation(this, existingGame);
+        }
+    }
 }
