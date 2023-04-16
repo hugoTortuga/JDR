@@ -69,7 +69,7 @@
             <Viewbox Grid.Column="1">
                 <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseRightButtonDown="GameCanvas_MouseRightButtonDown">
                     <Canvas.Background>
-                        <ImageBrush x:Name="BackgroundImageBrush" ImageSource="{Binding CurrentScene, Converter={StaticResource ByteToImage}}" Stretch="Uniform" />
+                        <ImageBrush x:Name="BackgroundImageBrush" ImageSource="{Binding CurrentScene.Background.Content, Converter={StaticResource ByteToImage}}" Stretch="UniformToFill" />
                     </Canvas.Background>
                     <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" MouseMove="ImageMouseMove" >
                         <Image.ContextMenu>

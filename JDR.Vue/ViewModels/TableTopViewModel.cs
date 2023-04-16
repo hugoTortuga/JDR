@@ -44,21 +44,30 @@ namespace JDR.Vue.ViewModels {
 				OnPropertyChanged(nameof(CurrentScene));
 			}
 		}
-
+		private Game _CurrentGame;
         public Game CurrentGame { 
-			get; 
-			set;
+			get { return  (_CurrentGame); }
+			set
+			{
+				_CurrentGame = value;
+				if (value != null)
+				{
+					Scenes = new ObservableCollection<Scene>(_CurrentGame.Scenes);
+				}
+				OnPropertyChanged(nameof(CurrentGame));
+			}
 		}
+
+		private GameCore _GameCore;
 
         public TableTopViewModel(GameCore gameCore)
         {
+			_GameCore = gameCore;
             Players = new ObservableCollection<Player> {
 				CreateBengala(),
 				CreateBiscuit(),
 				CreateAilurus()
 			};
-			Scenes = new ObservableCollection<Scene>(gameCore.GetAvailableScenes());
-			CurrentScene = Scenes[0];
         }
 
 		public void SceneSelected()
