@@ -28,7 +28,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <ListBox ItemsSource="{Binding Scenes, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox ItemsSource="{Binding Scenes, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding CurrentScene, UpdateSourceTrigger=PropertyChanged}">
                 
             </ListBox>
         </StackPanel>

@@ -15,11 +15,11 @@ namespace JDR.Vue.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null && value is Scene scene && scene.Background != null && scene.Background.Content != null) {
+            if (value != null && value is byte[] rawContent) {
                 
                 var image = new BitmapImage();
                 image.BeginInit();
-                image.StreamSource = new MemoryStream(scene.Background.Content);
+                image.StreamSource = new MemoryStream(rawContent);
                 image.EndInit();
                 return image;
             }

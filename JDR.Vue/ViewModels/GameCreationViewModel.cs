@@ -29,6 +29,8 @@ namespace JDR.Vue.ViewModels
                 if (value != null)
                 {
                     Scenes = new ObservableCollection<Scene>(_CurrentGame.Scenes);
+                    if (Scenes.Count > 0)
+                        CurrentScene = Scenes[0];
                 }
                 OnPropertyChanged(nameof(CurrentGame));
             }
@@ -44,6 +46,7 @@ namespace JDR.Vue.ViewModels
             set
             {
                 _CurrentScene = value;
+                _MapEditorViewModel.ContentImage = _CurrentScene?.Background?.Content ?? new byte[] { };
                 OnPropertyChanged(nameof(CurrentScene));
             }
         }
@@ -75,14 +78,15 @@ namespace JDR.Vue.ViewModels
             }
         }
 
+        private IImageUploader _ImageManager;
 
-
-        public GameCreationViewModel(GameCore gameCore)
+        public GameCreationViewModel(GameCore gameCore, IImageUploader imageUploader)
         {
             _GameCore = gameCore;
             _CurrentGame = new Game();
             Scenes = new ObservableCollection<Scene>(_CurrentGame.Scenes);
             MapEditorViewModel = new MapEditorViewModel();
+            _ImageManager = imageUploader;
         }
 
         public void SaveGame()
@@ -115,11 +119,9 @@ namespace JDR.Vue.ViewModels
         {
             AddCurrentSceneToGameScenes();
             SaveCurrentSceneIfNeeded();
-
             CurrentScene = new Scene("Scène sans titre");
             CurrentGame.Scenes.Add(CurrentScene);
             Scenes.Add(CurrentScene);
-
         }
 
         private void SaveCurrentSceneIfNeeded()

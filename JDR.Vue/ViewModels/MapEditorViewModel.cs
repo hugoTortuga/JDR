@@ -11,50 +11,74 @@ using System.Windows;
 using JDR.Model;
 using System.IO;
 
-namespace JDR.Vue.ViewModels {
-	public class MapEditorViewModel : ViewModelBase {
+namespace JDR.Vue.ViewModels
+{
+    public class MapEditorViewModel : ViewModelBase
+    {
 
-		private string? _BackgroundPath;
-		public string? BackgroundPath {
-			get {
-				return (_BackgroundPath);
-			}
-			set {
-				_BackgroundPath = value;
-				OnPropertyChanged(nameof(BackgroundPath));
-			}
-		}
+        private string? _BackgroundPath;
+        public string? BackgroundPath
+        {
+            get
+            {
+                return (_BackgroundPath);
+            }
+            set
+            {
+                _BackgroundPath = value;
+                OnPropertyChanged(nameof(BackgroundPath));
+            }
+        }
 
-		private IList<Obstacle> _Obstacles;
-		public IList<Obstacle> Obstacles {
-			get {
-				return (_Obstacles);
-			}
-			set {
-				_Obstacles = value;
-				OnPropertyChanged(nameof(Obstacles));
-			}
-		}
+        private IList<Obstacle> _Obstacles;
+        public IList<Obstacle> Obstacles
+        {
+            get
+            {
+                return (_Obstacles);
+            }
+            set
+            {
+                _Obstacles = value;
+                OnPropertyChanged(nameof(Obstacles));
+            }
+        }
+
+        private byte[] _ContentImage;
+        public byte[] ContentImage
+        {
+            get { return _ContentImage; }
+            set
+            {
+                _ContentImage = value;
+                OnPropertyChanged(nameof(ContentImage));
+            }
+        }
 
         public FileInfo? FileInfoBackground { get; set; }
 
         public MapEditorViewModel()
         {
-			_Obstacles = new List<Obstacle>();
-		}
+            _Obstacles = new List<Obstacle>();
+            _ContentImage = new byte[0];
+        }
 
-		public void ChangeBackground() {
-			BackgroundPath = GetImageURL();
-		}
+        public void ChangeBackground()
+        {
+            BackgroundPath = GetImageURL();
+        }
 
-		private string GetImageURL() {
-			var dialog = new OpenFileDialog();
-			if (dialog.ShowDialog() == true) {
-				FileInfoBackground = new FileInfo(dialog.FileName);
-				return dialog.FileName;
-			}
-			throw new ApplicationException("Aucune image sélectionnée");
-		}
+        private string GetImageURL()
+        {
+            var dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                FileInfoBackground = new FileInfo(dialog.FileName);
+                ContentImage = File.ReadAllBytes(dialog.FileName);
+                return dialog.FileName;
+            }
+            throw new ApplicationException("Aucune image sélectionnée");
+        }
 
-	}
+    }
 }
