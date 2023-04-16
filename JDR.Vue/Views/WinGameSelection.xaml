@@ -9,12 +9,18 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Title="Sélectionner une partie" Height="300" Width="200">
     <Grid>
-        <ListBox ItemsSource="{Binding Games, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedGame, UpdateSourceTrigger=PropertyChanged}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" ItemsSource="{Binding Games, UpdateSourceTrigger=PropertyChanged}" Margin="4 4 4 0"
+                 SelectedItem="{Binding SelectedGame, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:CallMethodAction TargetObject="{Binding}" MethodName="GameSelected" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>
+        <Button Content="Annuler" Click="CancelClicked" Grid.Row="1" Margin="4"/>
     </Grid>
 </Window>

@@ -23,8 +23,13 @@ namespace JDR.Vue.Views
     {
         public WinGameSelection(IList<Game> availableGames)
         {
-            DataContext = new GameSelectionViewModel(new Action(()=> Close()), availableGames);
+            DataContext = new GameSelectionViewModel(new Action(() => Close()), availableGames);
             InitializeComponent();
+        }
+
+        private void CancelClicked(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
