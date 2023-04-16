@@ -1,4 +1,5 @@
-﻿using JDR.Vue.ViewModels;
+﻿using JDR.Model;
+using JDR.Vue.ViewModels;
 using JDR.Vue.Views;
 using System;
 using System.Collections.Generic;
@@ -27,8 +28,10 @@ namespace JDR.Vue {
 		}
 
 		private void OpenGame(object sender, RoutedEventArgs e) {
-			_MainWindow.OpenGame();
-		}
+            var selectedGame = SelectGame();
+            if (selectedGame != null)
+                _MainWindow.OpenGame(selectedGame);
+        }
 
 		private void OpenGameCreation(object sender, RoutedEventArgs e) {
 			_MainWindow.OpenGameCreation();
@@ -36,8 +39,17 @@ namespace JDR.Vue {
 
 		private void EditGame(object sender, RoutedEventArgs e)
 		{
-			var window = new WinGameSelection(_MainWindow);
-			window.ShowDialog();
-		}
+			var selectedGame = SelectGame();
+			if (selectedGame != null)
+				_MainWindow.OpenGameCreation(selectedGame);
+        }
+
+		private Game SelectGame()
+		{
+            var availableGames = ((MainViewModel)_MainWindow.DataContext).AvailableGames;
+            var window = new WinGameSelection(availableGames);
+            window.ShowDialog();
+			return ((GameSelectionViewModel)window.DataContext).SelectedGame;
+        } 
     }
 }

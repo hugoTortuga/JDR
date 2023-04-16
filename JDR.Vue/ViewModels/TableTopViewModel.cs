@@ -45,6 +45,11 @@ namespace JDR.Vue.ViewModels {
 			}
 		}
 
+        public Game CurrentGame { 
+			get; 
+			set;
+		}
+
         public TableTopViewModel(GameCore gameCore)
         {
             Players = new ObservableCollection<Player> {

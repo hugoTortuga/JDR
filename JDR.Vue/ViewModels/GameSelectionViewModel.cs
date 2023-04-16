@@ -35,12 +35,10 @@ namespace JDR.Vue.ViewModels
             }
         }
 
-        private MainWindow _MainWindow;
         private Action CloseWindow;
 
-        public GameSelectionViewModel(MainWindow window, Action closeWindow, IList<Game> games)
+        public GameSelectionViewModel(Action closeWindow, IList<Game> games)
         {
-            _MainWindow = window;
             CloseWindow = closeWindow;
             Games = new ObservableCollection<Game>(games);
         }
@@ -48,7 +46,6 @@ namespace JDR.Vue.ViewModels
         public void GameSelected()
         {
             if (SelectedGame == null) return;
-            _MainWindow.OpenGameCreation(SelectedGame);
             CloseWindow.Invoke();
         }
 

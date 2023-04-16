@@ -33,9 +33,11 @@ namespace JDR.Vue.Views {
 		private IList<Geometry> _Obstacles;
 		private MainWindow _MainWindow;
 
-		public UCGame(MainWindow window) {
+		public UCGame(MainWindow window, Game selectedGame) {
 			_MainWindow = window;
-			DataContext = ((App)Application.Current).ServiceProvider.GetRequiredService<TableTopViewModel>();
+			var tableTopViewModel = ((App)Application.Current).ServiceProvider.GetRequiredService<TableTopViewModel>();
+			tableTopViewModel.CurrentGame = selectedGame;
+            DataContext = tableTopViewModel;
 			InitializeComponent();
 			InitObstacles();
 			SetMapProperties();

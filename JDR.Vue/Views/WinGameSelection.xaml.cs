@@ -21,10 +21,9 @@ namespace JDR.Vue.Views
     /// </summary>
     public partial class WinGameSelection : Window
     {
-        public WinGameSelection(MainWindow window)
+        public WinGameSelection(IList<Game> availableGames)
         {
-            var availableGames = ((MainViewModel)window.DataContext).AvailableGames;
-            DataContext = new GameSelectionViewModel(window, new Action(()=> Close()), availableGames);
+            DataContext = new GameSelectionViewModel(new Action(()=> Close()), availableGames);
             InitializeComponent();
         }
     }

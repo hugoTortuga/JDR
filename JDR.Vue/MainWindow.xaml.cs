@@ -20,10 +20,6 @@ namespace JDR.Vue {
 			CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
 		}
 
-		public void OpenGame() {
-			CurrentControl.Content = new UCGame(this);
-		}
-
 		public void BackToMenu() {
 			CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
 		}
@@ -35,6 +31,11 @@ namespace JDR.Vue {
         public void OpenGameCreation(Game existingGame)
         {
             CurrentControl.Content = new UCGameCreation(this, existingGame);
+        }
+
+        public void OpenGame(Game selectedGame)
+        {
+            CurrentControl.Content = new UCGame(this, selectedGame);
         }
     }
 }
