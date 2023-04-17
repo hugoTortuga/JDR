@@ -21,17 +21,15 @@ namespace JDR.Vue.Views {
 	/// Logique d'interaction pour UCMapEditor.xaml
 	/// </summary>
 	public partial class UCMapEditor : UserControl {
-		private Polygon _CurrentPolygon;
 		private IList<Polygon> _AllPolygons;
-		private string _ImagePath;
 		public UCMapEditor() {
 			InitializeComponent();
-			_CurrentPolygon = MyPolygon;
 			_AllPolygons = new List<Polygon>();
 		}
 
-		private void MyCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-
+		private void MyCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) 
+		{
+			if (CurrentPolygon == null) CurrentPolygon = new Polygon();
 			if (e.ClickCount == 2)
 			{
 				DoubleClick();
@@ -40,36 +38,33 @@ namespace JDR.Vue.Views {
 
 			Point clickPosition = e.GetPosition(MyCanvas);
 
-			// Create an ellipse to represent the point
-			Ellipse pointEllipse = new Ellipse {
+			var pointEllipse = new Ellipse {
 				Width = 5,
 				Height = 5,
 				Fill = Brushes.Black
 			};
 
-			// Position the ellipse at the clicked point
 			Canvas.SetLeft(pointEllipse, clickPosition.X - pointEllipse.Width / 2);
 			Canvas.SetTop(pointEllipse, clickPosition.Y - pointEllipse.Height / 2);
 
-			// Add the point to the canvas and the polygon
 			MyCanvas.Children.Add(pointEllipse);
-			_CurrentPolygon.Points.Add(clickPosition);
+			CurrentPolygon.Points.Add(clickPosition);
 		}
 
 		private void DoubleClick() {
-			if (_CurrentPolygon.Points.Count > 2) {
+			if (CurrentPolygon.Points.Count > 2) {
 
-				_CurrentPolygon.Points.Add(_CurrentPolygon.Points[0]);
-				_AllPolygons.Add(_CurrentPolygon);
-				UpdateObstacles(_CurrentPolygon);
+				CurrentPolygon.Points.Add(CurrentPolygon.Points[0]);
+				_AllPolygons.Add(CurrentPolygon);
+				UpdateObstacles(CurrentPolygon);
 
-				_CurrentPolygon = new Polygon {
+				CurrentPolygon = new Polygon {
 					Stroke = Brushes.Black,
 					StrokeThickness = 1,
 					Fill = Brushes.Transparent
 				};
 
-				MyCanvas.Children.Add(_CurrentPolygon);
+				MyCanvas.Children.Add(CurrentPolygon);
 			}
 		}
 

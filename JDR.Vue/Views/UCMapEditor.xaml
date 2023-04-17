@@ -10,7 +10,16 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
-            <conv:ByteToImageConverter x:Key="ByteToImageConverter"/>
+            <conv:ByteToImageConverter x:Key="ByteToImageConverter" />
+            <conv:ObstaclesToPolygonesConverter x:Key="PolygonsConverter" />
+            <Style TargetType="Shape">
+                <Setter Property="Fill" Value="LightBlue" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Fill" Value="LightSkyBlue" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -24,10 +33,17 @@
             </Button>
         </StackPanel>
         <Canvas x:Name="MyCanvas" MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown">
+            <ItemsControl ItemsSource="{Binding Obstacles, Converter={StaticResource PolygonsConverter}}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <Polygon x:Name="CurrentPolygon" Stroke="Black" StrokeThickness="1" Fill="Transparent"/>
             <Canvas.Background>
                 <ImageBrush ImageSource="{Binding ContentImage, Converter={StaticResource ByteToImageConverter}}" Stretch="UniformToFill" />
             </Canvas.Background>
-            <Polygon x:Name="MyPolygon" Stroke="Black" StrokeThickness="1" Fill="Transparent"/>
         </Canvas>
     </Grid>
 </UserControl>

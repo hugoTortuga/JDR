@@ -47,6 +47,7 @@ namespace JDR.Vue.ViewModels
             {
                 _CurrentScene = value;
                 _MapEditorViewModel.ContentImage = _CurrentScene?.Background?.Content ?? new byte[] { };
+                _MapEditorViewModel.Obstacles = _CurrentScene?.Obstacles ?? new ObservableCollection<Obstacle>();
                 OnPropertyChanged(nameof(CurrentScene));
             }
         }
@@ -78,15 +79,13 @@ namespace JDR.Vue.ViewModels
             }
         }
 
-        private IImageUploader _ImageManager;
 
-        public GameCreationViewModel(GameCore gameCore, IImageUploader imageUploader)
+        public GameCreationViewModel(GameCore gameCore)
         {
             _GameCore = gameCore;
             _CurrentGame = new Game();
-            Scenes = new ObservableCollection<Scene>(_CurrentGame.Scenes);
-            MapEditorViewModel = new MapEditorViewModel();
-            _ImageManager = imageUploader;
+            _Scenes = new ObservableCollection<Scene>(_CurrentGame.Scenes);
+            _MapEditorViewModel = new MapEditorViewModel();
         }
 
         public void SaveGame()
@@ -112,7 +111,6 @@ namespace JDR.Vue.ViewModels
                 CurrentScene.Background = illustration;
                 CurrentScene.Obstacles = MapEditorViewModel?.Obstacles ?? new List<Obstacle>();
             }
-
         }
 
         public void AddAScene()

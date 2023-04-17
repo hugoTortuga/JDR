@@ -21,7 +21,8 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Height="50">
             <Button Click="BackToMenu" Content="Retour au menu" Height="35" Margin="5" Padding="5 0"/>
-            <ComboBox ItemsSource="{Binding Scenes, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="35" SelectionChanged="SceneChanged"
+            <ComboBox ItemsSource="{Binding Scenes, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="35" 
+                      SelectionChanged="SceneChanged" VerticalContentAlignment="Center"
                       HorizontalAlignment="Left" Margin="5 0" SelectedItem="{Binding CurrentScene, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
@@ -69,7 +70,7 @@
 
             <Viewbox Grid.Column="1">
                 <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseRightButtonDown="GameCanvas_MouseRightButtonDown">
-                    <ItemsControl ItemsSource="{Binding CurrentScene, Converter={StaticResource PolygonsConverter}}">
+                    <ItemsControl ItemsSource="{Binding CurrentScene.Obstacles, Converter={StaticResource PolygonsConverter}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <Canvas IsItemsHost="True" />

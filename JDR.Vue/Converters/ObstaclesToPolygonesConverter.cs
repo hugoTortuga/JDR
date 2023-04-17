@@ -16,9 +16,9 @@ namespace JDR.Vue.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var polygons = new List<Polygon>();
-            if (value != null && value is Scene scene && scene.Obstacles != null)
+            if (value != null && value is IList<Obstacle> obstacles)
             {
-                foreach(var obstacle in scene.Obstacles)
+                foreach(var obstacle in obstacles)
                 {
                     polygons.Add(new Polygon
                     {

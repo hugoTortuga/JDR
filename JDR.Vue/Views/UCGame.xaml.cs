@@ -14,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -26,7 +27,7 @@ namespace JDR.Vue.Views {
 		private bool _IsPlayerSelected;
 		private Ellipse? _SelectionForm;
 		private int _SelectionFormSize = 16;
-		private int _FOV = 450;
+		private int _FOV = 300;
 		private double _BackgroundWidth;
 		private double _BackgroundHeight;
 		private TranslateTransform _TranslateTransformBackgroundMap;
@@ -42,12 +43,13 @@ namespace JDR.Vue.Views {
 
             InitializeComponent();
 			SetMapProperties();
-			DrawFieldOfVision();
+			//DrawFieldOfVision();
 		}
 
 		private void SetObstacles() {
 			_Obstacles = new List<Polygon>(GetObsctacles().Select(TransformObstacle));
-		}
+			DrawFieldOfVision();
+        }
 
 		private IList<Obstacle> GetObsctacles()
 		{
@@ -232,7 +234,7 @@ namespace JDR.Vue.Views {
 			var endPoint = new Point(x, y);
 			var ray = new LineSegment(endPoint, true);
 
-			var playerToEndpoint = new Line(playerPosition, endPoint);
+			var playerToEndpoint = new Utils.Line(playerPosition, endPoint);
 			Point? nearestIntersection = null;
 			double nearestIntersectionDistance = double.MaxValue;
 
