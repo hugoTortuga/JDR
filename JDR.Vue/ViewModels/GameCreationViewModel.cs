@@ -111,12 +111,12 @@ namespace JDR.Vue.ViewModels
                 CurrentScene.Background = illustration;
                 CurrentScene.Obstacles = MapEditorViewModel?.Obstacles ?? new List<Obstacle>();
             }
+            SaveCurrentSceneIfNeeded();
         }
 
         public void AddAScene()
         {
             AddCurrentSceneToGameScenes();
-            SaveCurrentSceneIfNeeded();
             CurrentScene = new Scene("Scène sans titre");
             CurrentGame.Scenes.Add(CurrentScene);
             Scenes.Add(CurrentScene);
