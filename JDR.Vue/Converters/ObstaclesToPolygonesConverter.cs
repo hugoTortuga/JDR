@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace JDR.Vue.Converters
@@ -21,9 +22,10 @@ namespace JDR.Vue.Converters
                 {
                     polygons.Add(new Polygon
                     {
-                        Points = new System.Windows.Media.PointCollection(
+                        Points = new PointCollection(
                             obstacle.Lines.Select(l => new System.Windows.Point(l.Start.X, l.Start.Y))
-                        )
+                        ),
+                        Fill = new SolidColorBrush(Colors.Black)
                     });
                 }
             }

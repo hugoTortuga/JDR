@@ -11,6 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:ByteToImageConverter x:Key="ByteToImage" />
+            <converters:ObstaclesToPolygonesConverter x:Key="PolygonsConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -20,7 +21,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Height="50">
             <Button Click="BackToMenu" Content="Retour au menu" Height="35" Margin="5" Padding="5 0"/>
-            <ComboBox ItemsSource="{Binding Scenes, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="35" 
+            <ComboBox ItemsSource="{Binding Scenes, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="35" SelectionChanged="SceneChanged"
                       HorizontalAlignment="Left" Margin="5 0" SelectedItem="{Binding CurrentScene, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
@@ -68,9 +69,19 @@
 
             <Viewbox Grid.Column="1">
                 <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseRightButtonDown="GameCanvas_MouseRightButtonDown">
-                    <Canvas.Background>
-                        <ImageBrush x:Name="BackgroundImageBrush" ImageSource="{Binding CurrentScene.Background.Content, Converter={StaticResource ByteToImage}}" Stretch="UniformToFill" />
-                    </Canvas.Background>
+                    <ItemsControl ItemsSource="{Binding CurrentScene, Converter={StaticResource PolygonsConverter}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas IsItemsHost="True" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <!--<ItemsControl.ItemContainerStyle>
+                            <Style TargetType="ContentPresenter">
+                                <Setter Property="Canvas.Left" Value="{Binding Path=ActualWidth, ElementName=GameCanvas, Converter={StaticResource HalfWidthConverter}}" />
+                                <Setter Property="Canvas.Top" Value="{Binding Path=ActualHeight, ElementName=GameCanvas, Converter={StaticResource HalfHeightConverter}}" />
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>-->
+                    </ItemsControl>
                     <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" MouseMove="ImageMouseMove" >
                         <Image.ContextMenu>
                             <ContextMenu>
@@ -78,6 +89,9 @@
                             </ContextMenu>
                         </Image.ContextMenu>
                     </Image>
+                    <Canvas.Background>
+                        <ImageBrush x:Name="BackgroundImageBrush" ImageSource="{Binding CurrentScene.Background.Content, Converter={StaticResource ByteToImage}}" Stretch="UniformToFill" />
+                    </Canvas.Background>
                 </Canvas>
             </Viewbox>
         </Grid>

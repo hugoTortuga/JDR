@@ -15,15 +15,15 @@ namespace JDR.Vue.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null && value is byte[] rawContent) {
-                
+            if (value != null && value is byte[] rawContent && rawContent.Length > 0) 
+            {
                 var image = new BitmapImage();
                 image.BeginInit();
                 image.StreamSource = new MemoryStream(rawContent);
                 image.EndInit();
                 return image;
             }
-            return null;
+            return Binding.DoNothing;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

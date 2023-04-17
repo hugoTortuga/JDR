@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace JDR.Vue.Views {
 
@@ -17,7 +18,7 @@ namespace JDR.Vue.Views {
 			End = end;
 		}
 
-		public IList<Point> Intersects(Geometry geometry) {
+		public IList<Point> Intersects(Polygon geometry) {
 			var intersectionPoints = new List<Point>();
 			foreach (var line in GetLinesFromGeometry(geometry)) {
 				var point = TryGetIntersectionWith(line);
@@ -26,91 +27,15 @@ namespace JDR.Vue.Views {
 			return intersectionPoints;
 		}
 
-		private List<Line> GetLinesFromGeometry(Geometry geometry) {
-			switch (geometry) {
-				case RectangleGeometry rectangleGeometry:
-					return GetLinesFromRectangle(rectangleGeometry);
-				case EllipseGeometry ellipseGeometry:
-					//IterateEllipsePoints(ellipseGeometry);
-					break;
-				case LineGeometry lineGeometry:
-					//IterateLinePoints(lineGeometry);
-					break;
-				case PathGeometry pathGeometry:
-					return GetLinesFromPathGeometry(pathGeometry);
-			}
-			return new List<Line>();
-		}
-
-		private List<Line> GetLinesFromPathGeometry(PathGeometry pathGeometry) {
+		private List<Line> GetLinesFromGeometry(Polygon geometry) {
 			var lines = new List<Line>();
-			foreach (PathFigure figure in pathGeometry.Figures) {
-				Console.WriteLine("PathFigure:");
-
-				Point startPoint = figure.StartPoint;
-				Console.WriteLine($"  Start point: ({startPoint.X}, {startPoint.Y})");
-
-				foreach (PathSegment segment in figure.Segments) {
-					Console.WriteLine($" PathSegment type: {segment.GetType().Name}");
-					if (segment is PolyLineSegment polyLineSegment) {
-						Point? previousPoint = null;
-						foreach (Point point in polyLineSegment.Points) {
-							if (previousPoint != null)
-								lines.Add(new Line(previousPoint.Value, point));
-							previousPoint = point;
-						}
-						lines.Add(new Line(polyLineSegment.Points[0], polyLineSegment.Points[polyLineSegment.Points.Count - 1]));
-					}
-					else if (segment is LineSegment lineSegment) {
-						Point point = lineSegment.Point;
-						Console.WriteLine($"    Point: ({point.X}, {point.Y})");
-					}
-					else if (segment is ArcSegment arcSegment) {
-						Point point = arcSegment.Point;
-						Console.WriteLine($"    Point: ({point.X}, {point.Y})");
-						Console.WriteLine($"    Size: ({arcSegment.Size.Width}, {arcSegment.Size.Height})");
-						Console.WriteLine($"    Rotation Angle: {arcSegment.RotationAngle}");
-						Console.WriteLine($"    IsLargeArc: {arcSegment.IsLargeArc}");
-						Console.WriteLine($"    SweepDirection: {arcSegment.SweepDirection}");
-					}
-					else if (segment is BezierSegment bezierSegment) {
-						Point point1 = bezierSegment.Point1;
-						Point point2 = bezierSegment.Point2;
-						Point point3 = bezierSegment.Point3;
-
-						Console.WriteLine($"    Point1: ({point1.X}, {point1.Y})");
-						Console.WriteLine($"    Point2: ({point2.X}, {point2.Y})");
-						Console.WriteLine($"    Point3: ({point3.X}, {point3.Y})");
-					}
-					else if (segment is QuadraticBezierSegment quadraticBezierSegment) {
-						Point point1 = quadraticBezierSegment.Point1;
-						Point point2 = quadraticBezierSegment.Point2;
-
-						Console.WriteLine($"    Point1: ({point1.X}, {point1.Y})");
-						Console.WriteLine($"    Point2: ({point2.X}, {point2.Y})");
-					}
-					else {
-						Console.WriteLine("    Unsupported PathSegment type.");
-					}
-				}
+			for (int i = 0; i < geometry.Points.Count - 1; i++)
+			{
+				lines.Add(new Line(geometry.Points[i], geometry.Points[i + 1]));
 			}
-
-			return lines;
+            lines.Add(new Line(geometry.Points[geometry.Points.Count - 1], geometry.Points[0]));
+            return lines;
 		}
-
-		private List<Line> GetLinesFromRectangle(RectangleGeometry rectangleGeometry) {
-
-			var rectangle = rectangleGeometry.Rect;
-			var lines = new List<Line>() {
-				new Line(rectangle.TopLeft, rectangle.TopRight),
-				new Line(rectangle.TopRight, rectangle.BottomRight),
-				new Line(rectangle.BottomRight, rectangle.BottomLeft),
-				new Line(rectangle.BottomLeft, rectangle.TopLeft)
-			};
-			return lines;
-		}
-
-
 		public Point? TryGetIntersectionWith(Line other) {
 			var intersection = new Point();
 

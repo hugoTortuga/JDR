@@ -30,39 +30,40 @@ namespace JDR.Vue.Views {
 		private double _BackgroundWidth;
 		private double _BackgroundHeight;
 		private TranslateTransform _TranslateTransformBackgroundMap;
-		private IList<Geometry> _Obstacles;
 		private MainWindow _MainWindow;
+		private IList<Polygon> _Obstacles;
 
 		public UCGame(MainWindow window, Game selectedGame) {
 			_MainWindow = window;
 			var tableTopViewModel = ((App)Application.Current).ServiceProvider.GetRequiredService<TableTopViewModel>();
 			tableTopViewModel.CurrentGame = selectedGame;
             DataContext = tableTopViewModel;
-			InitializeComponent();
-			InitObstacles();
+            _Obstacles = new List<Polygon>();
+
+            InitializeComponent();
 			SetMapProperties();
 			DrawFieldOfVision();
 		}
 
-		private void InitObstacles() {
-			_Obstacles = new List<Geometry> {
-				new RectangleGeometry(new Rect {
-					Width = 60,
-					Height = 100,
-					Location = new Point(220, 250)
-				}),
-				new RectangleGeometry(new Rect {
-					Width = 180,
-					Height = 60,
-					Location = new Point(420, 250)
-				}),
-				new RectangleGeometry(new Rect {
-					Width = 40,
-					Height = 60,
-					Location = new Point(600, 500)
-				})
-			};
+		private void SetObstacles() {
+			_Obstacles = new List<Polygon>(GetObsctacles().Select(TransformObstacle));
 		}
+
+		private IList<Obstacle> GetObsctacles()
+		{
+			return ((TableTopViewModel)DataContext).CurrentScene.Obstacles;
+		}
+
+		private Polygon TransformObstacle(Obstacle obs)
+		{
+            return new Polygon
+            {
+                Points = new PointCollection(
+                            obs.Lines.Select(l => new Point(l.Start.X, l.Start.Y))
+                        ),
+                Fill = new SolidColorBrush(Colors.Black)
+            };
+        }
 
 		private void SetMapProperties() {
 			//_BackgroundWidth = BackgroundImageBrush.ImageSource.Width;
@@ -257,5 +258,9 @@ namespace JDR.Vue.Views {
 			return new Point(Canvas.GetLeft(Player1) + Player1.Width / 2, Canvas.GetTop(Player1) + Player1.Height / 2);
 		}
 
-	}
+        private void SceneChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetObstacles();
+        }
+    }
 }
