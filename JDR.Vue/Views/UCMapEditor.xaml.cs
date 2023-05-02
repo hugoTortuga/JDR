@@ -35,9 +35,12 @@ namespace JDR.Vue.Views {
 
 		public Scene GetScene() {
 			var scene = new Scene("gameCreationHack ça code sale") {
-				Obstacles = new List<Obstacle>() { 
-					
-				}
+				Obstacles = new List<Obstacle>(_AllPolygons.Select(p => new Obstacle {
+					Points = p.Points.Select(e => new System.Drawing.Point((int)e.X, (int)e.Y)).ToList()
+				})),
+				ZoomValue = _ZoomFactor,
+				XMapTranslation = CurrentXTranslation,
+				YMapTranslation = CurrentYTranslation
 			};
 			return scene;
 		}
@@ -230,9 +233,13 @@ namespace JDR.Vue.Views {
 
 		#region MoveBackground
 
+		private int CurrentXTranslation = 0;
+		private int CurrentYTranslation = 0;
 		private int taillePas = 10;
 
-		private void MoveImageAndPolygons(double deltaX, double deltaY) {
+		private void MoveImageAndPolygons(int deltaX, int deltaY) {
+			CurrentXTranslation += deltaX;
+			CurrentYTranslation += deltaY;
 			double left = Canvas.GetLeft(backgroundImage);
 			if (double.IsNaN(left)) left = 0;
 			double top = Canvas.GetTop(backgroundImage);
