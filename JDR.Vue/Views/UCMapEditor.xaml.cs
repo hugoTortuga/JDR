@@ -14,6 +14,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -24,6 +25,8 @@ namespace JDR.Vue.Views {
 	public partial class UCMapEditor : UserControl {
 
 		private IList<Polygon> _AllPolygons;
+		private IList<Ellipse> _AllEllipses;
+		private IList<TextBlock> _AllTextBlocks;
 
 		private double _ZoomFactor = 1.0;
 		private const double ZoomIncrement = 0.1;
@@ -34,6 +37,10 @@ namespace JDR.Vue.Views {
 		public UCMapEditor() {
 			InitializeComponent();
 			_AllPolygons = new List<Polygon>();
+			_AllEllipses = new List<Ellipse>(); // Ajoutez cette ligne
+			_AllTextBlocks = new List<TextBlock>();
+
+
 			MouseWheel += MainWindow_MouseWheel;
 			KeyDown += MainWindow_KeyDown;
 
@@ -55,17 +62,31 @@ namespace JDR.Vue.Views {
 
 			Point clickPosition = e.GetPosition(MyCanvas);
 
-			//var pointEllipse = new Ellipse {
-			//	Width = 5,
-			//	Height = 5,
-			//	Fill = Brushes.Black
-			//};
+			var pointEllipse = new Ellipse {
+				Width = 5,
+				Height = 5,
+				Fill = Brushes.Black
+			};
 
-			//Canvas.SetLeft(pointEllipse, clickPosition.X - pointEllipse.Width / 2);
-			//Canvas.SetTop(pointEllipse, clickPosition.Y - pointEllipse.Height / 2);
+			Canvas.SetLeft(pointEllipse, clickPosition.X - pointEllipse.Width / 2);
+			Canvas.SetTop(pointEllipse, clickPosition.Y - pointEllipse.Height / 2);
 
-			//MyCanvas.Children.Add(pointEllipse);
+			MyCanvas.Children.Add(pointEllipse);
+			_AllEllipses.Add(pointEllipse); // Ajoutez cette ligne
 			CurrentPolygon.Points.Add(clickPosition);
+
+			// Ajoutez un TextBlock pour afficher les coordonnées X et Y du point
+			var pointText = new TextBlock {
+				Text = $"({clickPosition.X:N0}, {clickPosition.Y:N0})",
+				FontWeight = FontWeights.Bold,
+				Foreground = Brushes.Red,
+				FontSize = 12
+			};
+
+			Canvas.SetLeft(pointText, clickPosition.X + 2);
+			Canvas.SetTop(pointText, clickPosition.Y + 2);
+			MyCanvas.Children.Add(pointText);
+			_AllTextBlocks.Add(pointText);
 		}
 
 		private void MainWindow_KeyDown(object sender, KeyEventArgs e) {
@@ -135,13 +156,16 @@ namespace JDR.Vue.Views {
 
 		private void MainWindow_MouseWheel(object sender, MouseWheelEventArgs e) {
 			if (Keyboard.Modifiers == ModifierKeys.Control) {
+
 				if (e.Delta > 0)
 					_ZoomFactor += ZoomIncrement;
 				else
 					_ZoomFactor -= ZoomIncrement;
 
 				_ZoomFactor = Math.Max(_ZoomFactor, 0.1); // Limite le dézoomage
-				backgroundImage.LayoutTransform = new ScaleTransform(_ZoomFactor, _ZoomFactor);
+
+				var scaleTransform = new ScaleTransform(_ZoomFactor, _ZoomFactor);
+				backgroundImage.LayoutTransform = scaleTransform;
 			}
 		}
 
@@ -176,8 +200,8 @@ namespace JDR.Vue.Views {
 
 		#region CurrentPolygonSelectionSuppression
 		private void CurrentPolygon_MouseEnter(object sender, MouseEventArgs e) {
-			if (sender is Polygon polygon) {
-				polygon.Stroke = Brushes.Red;
+			if (sender is Polygon polygon && _selectedPolygon != polygon) {
+				polygon.Stroke = Brushes.Gray;
 			}
 		}
 
@@ -199,11 +223,63 @@ namespace JDR.Vue.Views {
 				}
 				else {
 					_selectedPolygon = null;
+					polygon.Stroke = Brushes.Gray;
 				}
 
 			}
 		}
 		#endregion
 
+		#region MoveBackground
+
+		private int taillePas = 10;
+
+		private void MoveImageAndPolygons(double deltaX, double deltaY) {
+			double left = Canvas.GetLeft(backgroundImage);
+			if (double.IsNaN(left)) left = 0;
+			double top = Canvas.GetTop(backgroundImage);
+			if (double.IsNaN(top)) top = 0;
+
+			Canvas.SetLeft(backgroundImage, left + deltaX);
+			Canvas.SetTop(backgroundImage, top + deltaY);
+
+			for (int i = 0; i < _AllPolygons.Count; i++) {
+				var polygon = _AllPolygons[i];
+				for (int j = 0; j < polygon.Points.Count; j++) {
+					polygon.Points[j] = new Point(polygon.Points[j].X + deltaX, polygon.Points[j].Y + deltaY);
+
+					if (_AllEllipses.Count > j) {
+						// Déplacez les Ellipse
+						Ellipse pointEllipse = _AllEllipses[i * polygon.Points.Count + j];
+						Canvas.SetLeft(pointEllipse, Canvas.GetLeft(pointEllipse) + deltaX);
+						Canvas.SetTop(pointEllipse, Canvas.GetTop(pointEllipse) + deltaY);
+
+						// Mettez à jour les TextBlock
+						TextBlock pointText = _AllTextBlocks[i * polygon.Points.Count + j];
+						pointText.Text = $"({polygon.Points[j].X:N0}, {polygon.Points[j].Y:N0})";
+						Canvas.SetLeft(pointText, Canvas.GetLeft(pointText) + deltaX);
+						Canvas.SetTop(pointText, Canvas.GetTop(pointText) + deltaY);
+					}
+				}
+			}
+		}
+
+		private void MoveImageUp_Click(object sender, RoutedEventArgs e) {
+			MoveImageAndPolygons(0, -taillePas);
+		}
+
+		private void MoveImageDown_Click(object sender, RoutedEventArgs e) {
+			MoveImageAndPolygons(0, taillePas);
+		}
+
+		private void MoveImageLeft_Click(object sender, RoutedEventArgs e) {
+			MoveImageAndPolygons(-taillePas, 0);
+		}
+
+		private void MoveImageRight_Click(object sender, RoutedEventArgs e) {
+			MoveImageAndPolygons(taillePas, 0);
+		}
+
+		#endregion
 	}
 }
