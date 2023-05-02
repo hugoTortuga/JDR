@@ -23,7 +23,7 @@ namespace JDR.Vue.Converters
                     polygons.Add(new Polygon
                     {
                         Points = new PointCollection(
-                            obstacle.Lines.Select(l => new System.Windows.Point(l.Start.X, l.Start.Y))
+                            obstacle.Points.Select(p => new System.Windows.Point(p.X, p.Y))
                         ),
                         Fill = new SolidColorBrush(Colors.Black)
                     });

@@ -3,24 +3,12 @@
 namespace JDR.Model {
 	public class Obstacle {
 
-        public List<Line> Lines { get; set; }
+        public List<Point> Points { get; set; }
 
         public Obstacle()
         {
-            Lines = new List<Line>();
+			Points = new List<Point>();
         }
     }
 
-    public class Line {
-
-        public Point Start { get; set; }
-        public Point End { get; set; }
-
-        public Line(Point start, Point end)
-        {
-            Start = start;
-            End = end;
-        }
-
-    }
 }

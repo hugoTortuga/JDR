@@ -61,7 +61,7 @@ namespace JDR.Vue.Views {
             return new Polygon
             {
                 Points = new PointCollection(
-                            obs.Lines.Select(l => new Point(l.Start.X, l.Start.Y))
+                            obs.Points.Select(l => new Point(l.X, l.Y))
                         ),
                 Fill = new SolidColorBrush(Colors.Black)
             };
