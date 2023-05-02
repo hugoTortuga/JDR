@@ -14,8 +14,11 @@ namespace JDR.Infra.Entities {
 
 		public Guid Id { get; set; }
 		public string? Name { get; set; }
+        public double ZoomValue { get; set; }
+        public int XMapTranslation { get; set; }
+        public int YMapTranslation { get; set; }
 
-		public IList<Obstacle> Obstacles { get; set; }
+        public IList<Obstacle> Obstacles { get; set; }
 		public string? BackgroundImage { get; set; }
 
 		public SceneEntity() { 
@@ -27,8 +30,11 @@ namespace JDR.Infra.Entities {
 			return new Scene(Name)
 			{
 				Obstacles = Obstacles,
-				Background = imageUploader.Get(BackgroundImage)
-			};
+				Background = imageUploader.Get(BackgroundImage),
+                ZoomValue = ZoomValue, 
+				XMapTranslation = XMapTranslation, 
+				YMapTranslation = YMapTranslation
+            };
         }
     }
 }

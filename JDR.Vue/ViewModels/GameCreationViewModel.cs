@@ -124,6 +124,10 @@ namespace JDR.Vue.ViewModels
 
         private void SaveCurrentSceneIfNeeded()
         {
+            CurrentScene.Obstacles = _MapEditorViewModel.CurrentScene.Obstacles;
+            CurrentScene.ZoomValue = _MapEditorViewModel.CurrentScene.ZoomValue;
+            CurrentScene.XMapTranslation = _MapEditorViewModel.CurrentScene.XMapTranslation;
+            CurrentScene.YMapTranslation = _MapEditorViewModel.CurrentScene.YMapTranslation;
             _GameCore.SaveScene(CurrentScene);
         }
     }

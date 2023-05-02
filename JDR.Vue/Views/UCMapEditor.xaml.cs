@@ -33,8 +33,8 @@ namespace JDR.Vue.Views {
 		private bool _isDragging;
 		private Polygon _selectedPolygon;
 
-		public Scene GetScene() {
-			var scene = new Scene("gameCreationHack ça code sale") {
+		public void SetScene() {
+			var scene = new Scene {
 				Obstacles = new List<Obstacle>(_AllPolygons.Select(p => new Obstacle {
 					Points = p.Points.Select(e => new System.Drawing.Point((int)e.X, (int)e.Y)).ToList()
 				})),
@@ -42,7 +42,7 @@ namespace JDR.Vue.Views {
 				XMapTranslation = CurrentXTranslation,
 				YMapTranslation = CurrentYTranslation
 			};
-			return scene;
+            ((MapEditorViewModel)DataContext).CurrentScene = scene;
 		}
 
 		public UCMapEditor() {
@@ -101,7 +101,9 @@ namespace JDR.Vue.Views {
 						}
 
 						_AllPolygons.RemoveAt(selectedIndex);
-					}
+						SetScene();
+
+                    }
 					// Supprimez le polygone du canvas
 					MyCanvas.Children.Remove(_selectedPolygon);
 
@@ -132,7 +134,9 @@ namespace JDR.Vue.Views {
 				_AllPolygons.Add(CurrentPolygon);
 				UpdateObstacles(CurrentPolygon);
 
-				CurrentPolygon = new Polygon {
+				SetScene();
+
+                CurrentPolygon = new Polygon {
 					Stroke = Brushes.Black,
 					StrokeThickness = 2,
 					Fill = Brushes.Transparent,
@@ -165,7 +169,9 @@ namespace JDR.Vue.Views {
 
 				_ZoomFactor = Math.Max(_ZoomFactor, 0.1); // Limite le dézoomage
 
-				var scaleTransform = new ScaleTransform(_ZoomFactor, _ZoomFactor);
+				SetScene();
+
+                var scaleTransform = new ScaleTransform(_ZoomFactor, _ZoomFactor);
 				backgroundImage.LayoutTransform = scaleTransform;
 			}
 		}
@@ -240,7 +246,9 @@ namespace JDR.Vue.Views {
 		private void MoveImageAndPolygons(int deltaX, int deltaY) {
 			CurrentXTranslation += deltaX;
 			CurrentYTranslation += deltaY;
-			double left = Canvas.GetLeft(backgroundImage);
+			SetScene();
+
+            double left = Canvas.GetLeft(backgroundImage);
 			if (double.IsNaN(left)) left = 0;
 			double top = Canvas.GetTop(backgroundImage);
 			if (double.IsNaN(top)) top = 0;
