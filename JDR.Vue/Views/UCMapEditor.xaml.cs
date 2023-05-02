@@ -39,6 +39,7 @@ namespace JDR.Vue.Views {
 					
 				}
 			};
+			return scene;
 		}
 
 		public UCMapEditor() {
@@ -145,15 +146,8 @@ namespace JDR.Vue.Views {
 		private void UpdateObstacles(Polygon currentPolygon) {
 			var obstacles = ((MapEditorViewModel)DataContext).Obstacles;
 			var obstacle = new Obstacle();
-			for (int i = 0; i < currentPolygon.Points.Count - 1; i++) {
-				Point startPoint = currentPolygon.Points[i];
-				Point endPoint = currentPolygon.Points[(i + 1) % currentPolygon.Points.Count];
-
-				var li = new Model.Line(
-					new System.Drawing.Point((int)startPoint.X, (int)startPoint.Y),
-					new System.Drawing.Point((int)endPoint.X, (int)endPoint.Y)
-				);
-				obstacle.Lines.Add(li);
+			foreach (var point in currentPolygon.Points) {
+				obstacle.Points.Add(new System.Drawing.Point((int)point.X, (int)point.Y));
 			}
 			obstacles.Add(obstacle);
 		}
