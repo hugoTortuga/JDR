@@ -12,10 +12,13 @@ namespace JDR.Model
         public IList<Music> Musics { get; set; }
         public Illustration? Background { get; set; }
         public IList<NPC> Characters { get; set; }
-
         public IList<Obstacle> Obstacles { get; set; }
+        public decimal ZoomValue { get; set; }
 
-        public Scene(string name) {
+        public int XMapTranslation { get; set; }
+		public int YMapTranslation { get; set; }
+
+		public Scene(string name) {
             Name = name;
 			Musics = new List<Music>();
 			Characters = new List<NPC>();

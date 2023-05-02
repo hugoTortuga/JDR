@@ -26,7 +26,6 @@ namespace JDR.Vue.Views {
 
 		private IList<Polygon> _AllPolygons;
 		private IList<Ellipse> _AllEllipses;
-		private IList<TextBlock> _AllTextBlocks;
 
 		private double _ZoomFactor = 1.0;
 		private const double ZoomIncrement = 0.1;
@@ -34,11 +33,18 @@ namespace JDR.Vue.Views {
 		private bool _isDragging;
 		private Polygon _selectedPolygon;
 
+		public Scene GetScene() {
+			var scene = new Scene("gameCreationHack ça code sale") {
+				Obstacles = new List<Obstacle>() { 
+					
+				}
+			};
+		}
+
 		public UCMapEditor() {
 			InitializeComponent();
 			_AllPolygons = new List<Polygon>();
-			_AllEllipses = new List<Ellipse>(); // Ajoutez cette ligne
-			_AllTextBlocks = new List<TextBlock>();
+			_AllEllipses = new List<Ellipse>();
 
 
 			MouseWheel += MainWindow_MouseWheel;
@@ -74,40 +80,38 @@ namespace JDR.Vue.Views {
 			MyCanvas.Children.Add(pointEllipse);
 			_AllEllipses.Add(pointEllipse); // Ajoutez cette ligne
 			CurrentPolygon.Points.Add(clickPosition);
-
-			// Ajoutez un TextBlock pour afficher les coordonnées X et Y du point
-			var pointText = new TextBlock {
-				Text = $"({clickPosition.X:N0}, {clickPosition.Y:N0})",
-				FontWeight = FontWeights.Bold,
-				Foreground = Brushes.Red,
-				FontSize = 12
-			};
-
-			Canvas.SetLeft(pointText, clickPosition.X + 2);
-			Canvas.SetTop(pointText, clickPosition.Y + 2);
-			MyCanvas.Children.Add(pointText);
-			_AllTextBlocks.Add(pointText);
 		}
 
 		private void MainWindow_KeyDown(object sender, KeyEventArgs e) {
 			if (e.Key == Key.Delete) {
 				if (_selectedPolygon != null) {
-					// Trouvez l'index du polygone sélectionné dans _AllPolygons
-					int selectedIndex = _AllPolygons.IndexOf(_selectedPolygon);
 
-					// Supprimez le polygone de la liste des obstacles et de _AllPolygons
+					int selectedIndex = _AllPolygons.IndexOf(_selectedPolygon);
 					if (selectedIndex >= 0 && selectedIndex < _AllPolygons.Count) {
 						var obstacles = ((MapEditorViewModel)DataContext).Obstacles;
 						obstacles.RemoveAt(selectedIndex);
+
+						if (_AllPolygons.Count > 0) {
+							int pointCount = _AllPolygons[selectedIndex].Points.Count - 1;
+							RemoveEllipsesAndTextBlocks(selectedIndex * pointCount, pointCount);
+						}
+
 						_AllPolygons.RemoveAt(selectedIndex);
 					}
-
 					// Supprimez le polygone du canvas
 					MyCanvas.Children.Remove(_selectedPolygon);
 
 					// Réinitialisez le polygone sélectionné
 					_selectedPolygon = null;
 				}
+			}
+		}
+
+		private void RemoveEllipsesAndTextBlocks(int startIndex, int count) {
+			for (int i = startIndex + count - 1; i >= startIndex; i--) {
+				// Supprimez les Ellipse du canvas et de la liste _AllEllipses
+				MyCanvas.Children.Remove(_AllEllipses[i]);
+				_AllEllipses.RemoveAt(i);
 			}
 		}
 
@@ -248,17 +252,12 @@ namespace JDR.Vue.Views {
 				for (int j = 0; j < polygon.Points.Count; j++) {
 					polygon.Points[j] = new Point(polygon.Points[j].X + deltaX, polygon.Points[j].Y + deltaY);
 
-					if (_AllEllipses.Count > j) {
+					if (_AllEllipses.Count > i * polygon.Points.Count + j) 
+					{
 						// Déplacez les Ellipse
 						Ellipse pointEllipse = _AllEllipses[i * polygon.Points.Count + j];
 						Canvas.SetLeft(pointEllipse, Canvas.GetLeft(pointEllipse) + deltaX);
 						Canvas.SetTop(pointEllipse, Canvas.GetTop(pointEllipse) + deltaY);
-
-						// Mettez à jour les TextBlock
-						TextBlock pointText = _AllTextBlocks[i * polygon.Points.Count + j];
-						pointText.Text = $"({polygon.Points[j].X:N0}, {polygon.Points[j].Y:N0})";
-						Canvas.SetLeft(pointText, Canvas.GetLeft(pointText) + deltaX);
-						Canvas.SetTop(pointText, Canvas.GetTop(pointText) + deltaY);
 					}
 				}
 			}
