@@ -27,7 +27,7 @@
             <TextBlock Text="Mana:"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding Player.ManaMax}" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
         </StackPanel>
-        <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Source="{Binding Player.Illustration.Uri}" Margin="5"/>
+        <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Source="{Binding Player.Illustration.Content}" Margin="5"/>
         <GroupBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Caractéristiques" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5">
             <Grid>
                 <Grid.RowDefinitions>

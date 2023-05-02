@@ -3,6 +3,7 @@ using JDR.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,10 +65,8 @@ namespace JDR.Vue.ViewModels {
         {
 			_GameCore = gameCore;
             Players = new ObservableCollection<Player> {
-				CreateBengala(),
-				CreateBiscuit(),
-				CreateAilurus()
-			};
+                CreateJulio()
+            };
         }
 
 		public void SceneSelected()
@@ -186,5 +185,56 @@ namespace JDR.Vue.ViewModels {
 				}
 			};
 		}
-	}
+
+        private Player CreateJulio()
+        {
+            var sdfdf = new FileInfo("C:\\Users\\hugom\\Pictures\\jdr\\julio.png");
+            return new Player("Julio",
+						Race.Human,
+						new Skills
+						{
+							Agility = 35,
+							Force = 40,
+							Intelligence = 50,
+							Courage = 40,
+							Discretion = 25,
+							Persuasion = 50,
+							Observation = 20
+						}
+					)
+			{
+				
+                Illustration = new Illustration
+				{
+					Content = File.ReadAllBytes(sdfdf.FullName),
+					Name = sdfdf.FullName,
+                },
+                HP = 14,
+                HPMax = 14,
+                Mana = 10,
+                ManaMax = 10,
+                Level = 1,
+                Spells = new List<Spell> {
+                                new Spell {
+                                    Category = MagicCategory.Heal,
+                                    Level = 1
+                                },
+                                new Spell {
+                                    Category = MagicCategory.Nature,
+                                    Level = 1
+                                }
+                            },
+                Inventory = new Inventory
+                {
+                    Objects = new List<InventoryItem> {
+                                new InventoryItem("Epée courte"),
+                                new InventoryItem("Bouclier"),
+                                new InventoryItem("Arc court (8 flèches)"),
+								new InventoryItem("Calice"),
+								new InventoryItem("Fiole")
+                            }
+                }
+            };
+        }
+    }
 }
