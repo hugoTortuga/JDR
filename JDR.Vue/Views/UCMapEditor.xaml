@@ -33,17 +33,15 @@
             </Button>
         </StackPanel>
         <Canvas x:Name="MyCanvas" MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown">
-            <ItemsControl ItemsSource="{Binding Obstacles, Converter={StaticResource PolygonsConverter}}">
+            <ItemsControl Name="ItemsControlObstacles" ItemsSource="{Binding Obstacles, Converter={StaticResource PolygonsConverter}}" Panel.ZIndex="5">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas IsItemsHost="True" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Polygon x:Name="CurrentPolygon" Stroke="Black" StrokeThickness="1" Fill="Transparent"/>
-            <Canvas.Background>
-                <ImageBrush ImageSource="{Binding ContentImage, Converter={StaticResource ByteToImageConverter}}" Stretch="UniformToFill" />
-            </Canvas.Background>
+            <Polygon x:Name="CurrentPolygon" Stroke="Black" StrokeThickness="2" Fill="Transparent" Panel.ZIndex="5"/>
+            <Image Name="backgroundImage" Source="{Binding ContentImage, Converter={StaticResource ByteToImageConverter}}" Stretch="UniformToFill"/>
         </Canvas>
     </Grid>
 </UserControl>
