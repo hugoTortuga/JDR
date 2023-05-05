@@ -16,7 +16,6 @@ namespace JDR.Infra
         public ImageUploader(string basePath)
         {
             _BasePath = basePath;
-
         }
 
         public Illustration Get(string? backgroundImage)

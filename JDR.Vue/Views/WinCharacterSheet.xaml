@@ -21,11 +21,18 @@
         </Grid.RowDefinitions>
         <Image Source="/Assets/old-paper.jpg" Stretch="UniformToFill" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
         <TextBlock Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20 20 20 10" FontSize="24" FontFamily="Gentium Book Basic" Text="{Binding Player}"/>
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="5 0 0 10" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <TextBlock Text="PV:"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Player.HPMax}" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
-            <TextBlock Text="Mana:"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Player.ManaMax}" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
+
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,-1,27" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <TextBlock Text="PV Max :"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Player.HPMax}" Width="40" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
+            <TextBlock Text="Mana Max :"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Player.ManaMax}" Width="40" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,0,1"  VerticalAlignment="Bottom" Orientation="Horizontal">
+            <TextBlock Text="PV :"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Player.HP}" Width="72" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
+            <TextBlock Text="Mana :"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Player.Mana}" Width="40" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
         </StackPanel>
         <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Source="{Binding Player.Illustration.Uri}" Margin="5"/>
         <GroupBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Caractéristiques" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5">
@@ -77,7 +84,7 @@
         </GroupBox>
         <GroupBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Inventaire" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5 0 5 5">
             <StackPanel Margin="5">
-                <TextBlock Text="{Binding Player.Inventory}" TextWrapping="Wrap" />
+                <!--<TextBlock Text="{Binding Player.Inventory}" TextWrapping="Wrap" />-->
             </StackPanel>
         </GroupBox>
     </Grid>
