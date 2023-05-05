@@ -54,7 +54,10 @@ namespace JDR.Infra {
 				Scenes = game.Scenes.Select(s => new SceneEntity {
 					BackgroundImage = s.Background?.Name + s.Background?.Extension,
 					Name = s.Name,
-					Obstacles = s.Obstacles
+					Obstacles = s.Obstacles,
+					XMapTranslation = s.XMapTranslation,
+					YMapTranslation = s.YMapTranslation,
+					ZoomValue = s.ZoomValue
 				}).ToList()
 			});
 			await _DbContext.SaveChangesAsync();

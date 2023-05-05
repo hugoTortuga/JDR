@@ -9,29 +9,29 @@ using System.Windows.Media;
 
 namespace JDR.Vue.Utils
 {
-    public class CustomPolygon : ViewModelBase
-    {
-        private PointCollection _Points;
-        private bool _IsSelected;
+    //public class CustomPolygon : ViewModelBase
+    //{
+    //    private PointCollection _Points;
+    //    private bool _IsSelected;
 
-        public PointCollection Points
-        {
-            get { return _Points; }
-            set
-            {
-                _Points = value;
-                OnPropertyChanged(nameof(Points));
-            }
-        }
+    //    public PointCollection Points
+    //    {
+    //        get { return _Points; }
+    //        set
+    //        {
+    //            _Points = value;
+    //            OnPropertyChanged(nameof(Points));
+    //        }
+    //    }
 
-        public bool IsSelected
-        {
-            get { return _IsSelected; }
-            set
-            {
-                _IsSelected = value;
-                OnPropertyChanged(nameof(IsSelected));
-            }
-        }
-    }
+    //    public bool IsSelected
+    //    {
+    //        get { return _IsSelected; }
+    //        set
+    //        {
+    //            _IsSelected = value;
+    //            OnPropertyChanged(nameof(IsSelected));
+    //        }
+    //    }
+    //}
 }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace JDR.Model
 {
     public class Scene
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public IList<Music> Musics { get; set; }
         public Illustration? Background { get; set; }
         public IList<NPC> Characters { get; set; }
@@ -18,7 +19,13 @@ namespace JDR.Model
         public int XMapTranslation { get; set; }
 		public int YMapTranslation { get; set; }
 
-		public Scene(string name) {
+        public Scene()
+        {
+            Musics = new List<Music>();
+            Characters = new List<NPC>();
+            Obstacles = new List<Obstacle>();
+        }
+        public Scene(string name) {
             Name = name;
 			Musics = new List<Music>();
 			Characters = new List<NPC>();
@@ -26,7 +33,7 @@ namespace JDR.Model
 		}
 
 		public override string ToString() {
-            return Name;
+            return Name ?? "Sans titre";
 		}
 
 	}

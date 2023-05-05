@@ -16,20 +16,6 @@ namespace JDR.Vue.ViewModels
     public class MapEditorViewModel : ViewModelBase
     {
 
-        private string? _BackgroundPath;
-        public string? BackgroundPath
-        {
-            get
-            {
-                return (_BackgroundPath);
-            }
-            set
-            {
-                _BackgroundPath = value;
-                OnPropertyChanged(nameof(BackgroundPath));
-            }
-        }
-
         private IList<Obstacle> _Obstacles;
         public IList<Obstacle> Obstacles
         {
@@ -56,6 +42,7 @@ namespace JDR.Vue.ViewModels
         }
 
         public FileInfo? FileInfoBackground { get; set; }
+        public Scene CurrentScene { get; set; }
 
         public MapEditorViewModel()
         {
@@ -65,19 +52,17 @@ namespace JDR.Vue.ViewModels
 
         public void ChangeBackground()
         {
-            BackgroundPath = GetImageURL();
+            SetImageProperties();
         }
 
-        private string GetImageURL()
+        private void SetImageProperties()
         {
             var dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == true)
             {
                 FileInfoBackground = new FileInfo(dialog.FileName);
                 ContentImage = File.ReadAllBytes(dialog.FileName);
-                return dialog.FileName;
             }
-            throw new ApplicationException("Aucune image sélectionnée");
         }
 
     }
