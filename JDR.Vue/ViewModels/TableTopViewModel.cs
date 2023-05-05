@@ -65,8 +65,11 @@ namespace JDR.Vue.ViewModels {
         {
 			_GameCore = gameCore;
             Players = new ObservableCollection<Player> {
-                CreateJulio()
-            };
+				CreateAilurus(),
+				CreateBengala(),
+				CreateBiscuit(),
+				CreateLahir(),
+			};
         }
 
 		public void SceneSelected()
@@ -74,12 +77,14 @@ namespace JDR.Vue.ViewModels {
 			var test = CurrentScene.Background?.Name + " " + CurrentScene.Background?.Extension;
         }
 
+		private string baseCharacterPath = "C:\\Users\\Hugo\\Desktop\\jdr\\ArthosV2\\joueurs\\";
+
         private Player CreateBengala() {
 			return new Player("Bengala",
 						Race.Dwarf,
 						new Skills {
-							Agility = 50,
 							Force = 60,
+							Agility = 50,
 							Intelligence = 20,
 							Courage = 60,
 							Discretion = 20,
@@ -87,7 +92,9 @@ namespace JDR.Vue.ViewModels {
 							Observation = 40
 						}
 					) {
-						//Illustration = new Illustration("joueurs\\bengala.png"),
+						Illustration = new Illustration() {
+							Content = File.ReadAllBytes(baseCharacterPath + "bengala.png")
+						},
 						HP = 14,
 						HPMax = 14,
 						Mana = 6,
@@ -114,10 +121,10 @@ namespace JDR.Vue.ViewModels {
 
 		private Player CreateBiscuit() {
 			return new Player("Biscuit",
-						Race.Dwarf,
+						Race.Human,
 						new Skills {
-							Agility = 50,
-							Force = 60,
+							Agility = 60,
+							Force = 50,
 							Intelligence = 20,
 							Courage = 20,
 							Discretion = 60,
@@ -125,7 +132,9 @@ namespace JDR.Vue.ViewModels {
 							Observation = 40
 						}
 					) {
-				//Illustration = new Illustration("joueurs\\biscuit.png"),
+				Illustration = new Illustration() { 
+					Content = File.ReadAllBytes(baseCharacterPath + "biscuit2.png")
+				},
 				HP = 12,
 				HPMax = 12,
 				Mana = 8,
@@ -149,6 +158,46 @@ namespace JDR.Vue.ViewModels {
 			};
 		}
 
+		private Player CreateLahir() {
+			return new Player("Lahir",
+						Race.Elve,
+						new Skills {
+							Agility = 50,
+							Force = 20,
+							Intelligence = 60,
+							Courage = 40,
+							Discretion = 50,
+							Persuasion = 30,
+							Observation = 40
+						}
+					) {
+				Illustration = new Illustration() {
+					Content = File.ReadAllBytes(baseCharacterPath + "lahir.png")
+				},
+				HP = 13,
+				HPMax = 13,
+				Mana = 7,
+				ManaMax = 7,
+				Level = 1,
+				Spells = new List<Spell> {
+								new Spell {
+									Category = MagicCategory.Animal,
+									Level = 1
+								},
+								new Spell {
+									Category = MagicCategory.Enchantement,
+									Level = 1
+								}
+							},
+				Inventory = new Inventory {
+					Objects = new List<InventoryItem> {
+								new InventoryItem("Arc court"),
+								new InventoryItem("Dague")
+							}
+				}
+			};
+		}
+
 		private Player CreateAilurus() {
 			return new Player("Ailurus",
 						Race.DwarfElve,
@@ -162,7 +211,9 @@ namespace JDR.Vue.ViewModels {
 							Observation = 50
 						}
 					) {
-				//Illustration = new Illustration("joueurs\\ailurus.png"),
+				Illustration = new Illustration() {
+					Content = File.ReadAllBytes(baseCharacterPath + "ailurus.png")
+				},
 				HP = 11,
 				HPMax = 11,
 				Mana = 9,
@@ -188,7 +239,7 @@ namespace JDR.Vue.ViewModels {
 
         private Player CreateJulio()
         {
-            var sdfdf = new FileInfo("C:\\Users\\hugom\\Pictures\\jdr\\julio.png");
+            var sdfdf = new FileInfo(baseCharacterPath + "julio.png");
             return new Player("Julio",
 						Race.Human,
 						new Skills
