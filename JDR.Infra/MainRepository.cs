@@ -57,7 +57,8 @@ namespace JDR.Infra {
 					Obstacles = s.Obstacles,
 					XMapTranslation = s.XMapTranslation,
 					YMapTranslation = s.YMapTranslation,
-					ZoomValue = s.ZoomValue
+					ZoomValue = s.ZoomValue,
+					HasFogOfWarEnable = s.HasFogOfWarEnable
 				}).ToList()
 			});
 			await _DbContext.SaveChangesAsync();

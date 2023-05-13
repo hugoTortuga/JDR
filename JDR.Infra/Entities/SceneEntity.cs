@@ -17,6 +17,7 @@ namespace JDR.Infra.Entities {
         public double ZoomValue { get; set; }
         public int XMapTranslation { get; set; }
         public int YMapTranslation { get; set; }
+        public bool HasFogOfWarEnable { get; set; }
 
         public IList<Obstacle> Obstacles { get; set; }
 		public string? BackgroundImage { get; set; }
@@ -33,7 +34,8 @@ namespace JDR.Infra.Entities {
 				Background = imageUploader.Get(BackgroundImage),
                 ZoomValue = ZoomValue, 
 				XMapTranslation = XMapTranslation, 
-				YMapTranslation = YMapTranslation
+				YMapTranslation = YMapTranslation,
+				HasFogOfWarEnable = HasFogOfWarEnable
             };
         }
     }

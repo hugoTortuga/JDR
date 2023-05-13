@@ -199,6 +199,13 @@ namespace JDR.Vue.Views {
 		private Path CurrentFOVPath;
 
 		public void DrawFieldOfVision() {
+
+			if (!((TableTopViewModel)DataContext).CurrentScene.HasFogOfWarEnable) {
+				if (GameCanvas.Children.Contains(CurrentFOVPath))
+					GameCanvas.Children.Remove(CurrentFOVPath);
+				return;
+			}
+
 			var playerPosition = GetPlayerCenterPostition();
 			GameCanvas.Children.Remove(CurrentFOVPath);
 			var pathGeometry = new PathGeometry();

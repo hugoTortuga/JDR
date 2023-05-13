@@ -75,6 +75,7 @@
                         <Button Content="Gestion des NPC" Height="30" Margin="5" Padding="5 0"/>
                         <TextBlock Text="Choix des musiques" VerticalAlignment="Center" />
                         <Button Content="Gestion des musiques" Height="30" Margin="5" Padding="5 0"/>
+                        <ToggleButton IsChecked="{Binding CurrentScene.HasFogOfWarEnable, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="150" Content="Activer FOW" ToolTip="Activer le brouillard de guerre"/>
                     </StackPanel>
                     <local:UCMapEditor Grid.Row="1" DataContext="{Binding MapEditorViewModel, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>

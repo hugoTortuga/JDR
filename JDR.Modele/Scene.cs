@@ -14,6 +14,7 @@ namespace JDR.Model
         public Illustration? Background { get; set; }
         public IList<NPC> Characters { get; set; }
         public IList<Obstacle> Obstacles { get; set; }
+        public bool HasFogOfWarEnable { get; set; }
         public double ZoomValue { get; set; }
 
         public int XMapTranslation { get; set; }
