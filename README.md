@@ -1,12 +1,18 @@
-### In development
+### In development 
+Current state : Barely playable, about **40%** of the first version is made
 
 # JDR - Dungeon Master's Assistant
 JDR (short for "Jeu de Rôle" in French, meaning "Role-Playing Game") is a comprehensive C# software designed to assist dungeon masters in creating and 
 managing tabletop role-playing games, such as Dungeons & Dragons.
 
-## Key features
-- Opening a scene (background image and obstacles), with a dynamic lightening
-- Creating a game (wich is basically a list of scenes) (in developement, about 20% done)
+## Current implemented features
+- Creating a game, with a list of scene
+- Add and remove obstacle (polygons) to a scene, enable or disable fog of war on the scene
+- Open a game, select the scene you want
+- Ping on the map
+- Print the list of players on the side menu
+- Open a character's sheet
+- Player can move on the map, with dynamic lightening
 
 ## Architecture
 I'm using the ports and adapters architecture, which allows me to easely create my unit tests
