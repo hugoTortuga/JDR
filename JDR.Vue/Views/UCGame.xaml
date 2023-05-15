@@ -12,6 +12,20 @@
         <ResourceDictionary>
             <converters:ByteToImageConverter x:Key="ByteToImage" />
             <converters:ObstaclesToPolygonesConverter x:Key="PolygonsConverter" />
+            <Storyboard x:Key="PingAnimation">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                           Duration="0:0:0.5">
+                    <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                    <LinearDoubleKeyFrame KeyTime="0:0:0.5" Value="2" />
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                           Duration="0:0:0.5">
+                    <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                    <LinearDoubleKeyFrame KeyTime="0:0:0.5" Value="2" />
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)"
+                             From="1" To="0" Duration="0:0:0.7" BeginTime="0:0:0"/>
+            </Storyboard>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -69,19 +83,19 @@
             </Grid>
 
             <Viewbox Grid.Column="1">
-                <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseRightButtonDown="GameCanvas_MouseRightButtonDown">
+                <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseLeftButtonDown="ClickOnCanvas">
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
                     <ItemsControl ItemsSource="{Binding CurrentScene.Obstacles, Converter={StaticResource PolygonsConverter}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <Canvas IsItemsHost="True" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
-                        <!--<ItemsControl.ItemContainerStyle>
-                            <Style TargetType="ContentPresenter">
-                                <Setter Property="Canvas.Left" Value="{Binding Path=ActualWidth, ElementName=GameCanvas, Converter={StaticResource HalfWidthConverter}}" />
-                                <Setter Property="Canvas.Top" Value="{Binding Path=ActualHeight, ElementName=GameCanvas, Converter={StaticResource HalfHeightConverter}}" />
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>-->
                     </ItemsControl>
                     <Image Source="/Assets/mob-lizard.png" Canvas.Left="870" Canvas.Top="335" Name="Player1" Height="50" Width="50" MouseLeftButtonDown="PlayerClicked" MouseMove="ImageMouseMove" >
                         <Image.ContextMenu>
