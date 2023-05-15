@@ -51,15 +51,7 @@ namespace JDR.Infra {
 			await _DbContext.Games.AddAsync(new GameEntity {
 				Name = game.Name,
 				MaxPlayer = game.MaxPlayer,
-				Scenes = game.Scenes.Select(s => new SceneEntity {
-					BackgroundImage = s.Background?.Name + s.Background?.Extension,
-					Name = s.Name,
-					Obstacles = s.Obstacles,
-					XMapTranslation = s.XMapTranslation,
-					YMapTranslation = s.YMapTranslation,
-					ZoomValue = s.ZoomValue,
-					HasFogOfWarEnable = s.HasFogOfWarEnable
-				}).ToList()
+				Scenes = game.Scenes.Select(s => SceneEntity.ToSceneEntity(s)).ToList()
 			});
 			await _DbContext.SaveChangesAsync();
 		}

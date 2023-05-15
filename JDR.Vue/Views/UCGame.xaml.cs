@@ -46,10 +46,7 @@ namespace JDR.Vue.Views
             tableTopViewModel.CurrentGame = selectedGame;
             DataContext = tableTopViewModel;
             _Obstacles = new List<Polygon>();
-
             InitializeComponent();
-            SetMapProperties();
-            //DrawFieldOfVision();
         }
 
         private void SetObstacles()
@@ -72,15 +69,6 @@ namespace JDR.Vue.Views
                         ),
                 Fill = new SolidColorBrush(Colors.Black)
             };
-        }
-
-        private void SetMapProperties()
-        {
-            //_BackgroundWidth = BackgroundImageBrush.ImageSource.Width;
-            /*_BackgroundHeight = BackgroundImageBrush.ImageSource.Height;
-			_TranslateTransformBackgroundMap = new TranslateTransform();
-			BackgroundImageBrush.Transform = _TranslateTransformBackgroundMap;
-			GameCanvas.Background = BackgroundImageBrush;*/
         }
 
         private void OpenCharacterSheet(object sender, RoutedEventArgs e)
@@ -127,22 +115,6 @@ namespace JDR.Vue.Views
             AfficherPingOnMap(position, (Canvas)sender);
         }
 
-        private void ChangeMap(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var imagePath = GetImageURL();
-                var image = new ImageBrush(new BitmapImage(new Uri(imagePath)));
-                image.Stretch = Stretch.UniformToFill;
-                BackgroundImageBrush = image;
-                SetMapProperties();
-            }
-            catch
-            {
-
-            }
-        }
-
         private void ImageMouseMove(object sender, MouseEventArgs e)
         {
             if (Player1.IsMouseCaptured)
@@ -177,9 +149,9 @@ namespace JDR.Vue.Views
 
             double newHeight = newWidth * aspectRatio;
 
-            BackgroundImageBrush.Viewport = new Rect(0, 0, newWidth, newHeight);
-            BackgroundImageBrush.ViewportUnits = BrushMappingMode.Absolute;
-            BackgroundImageBrush.Stretch = Stretch.UniformToFill;
+            //BackgroundImageBrush.Viewport = new Rect(0, 0, newWidth, newHeight);
+            //BackgroundImageBrush.ViewportUnits = BrushMappingMode.Absolute;
+            //BackgroundImageBrush.Stretch = Stretch.UniformToFill;
         }
 
         private void UpButton_Click(object sender, RoutedEventArgs e)
@@ -315,6 +287,22 @@ namespace JDR.Vue.Views
         private void SceneChanged(object sender, SelectionChangedEventArgs e)
         {
             SetObstacles();
+            ResizeMap();
+        }
+
+        private void ResizeMap()
+        {
+            //var imageBackground = GameCanvas.Background;
+            //var scene = ((TableTopViewModel)DataContext).CurrentScene;
+
+            //GameCanvas.Background = imageBackground;
+
+            //Canvas.SetLeft(GameCanvas, scene.XMapTranslation);
+            //Canvas.SetTop(GameCanvas, scene.YMapTranslation);
+
+            //GameCanvas.Width = scene.Width;
+            //GameCanvas.Height = scene.Height;
+
         }
 
         private void AfficherPingOnMap(Point position, Canvas canvas)

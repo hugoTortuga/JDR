@@ -31,7 +31,7 @@ namespace JDR.Infra
                     Extension = fileInfo.Extension,
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }

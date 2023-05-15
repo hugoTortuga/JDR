@@ -25,7 +25,7 @@ namespace JDR.Vue.Converters
                         Points = new PointCollection(
                             obstacle.Points.Select(p => new System.Windows.Point(p.X, p.Y))
                         ),
-                        Fill = new SolidColorBrush(Colors.Black)
+                        Fill = new SolidColorBrush(Colors.Black),
                     });
                 }
             }

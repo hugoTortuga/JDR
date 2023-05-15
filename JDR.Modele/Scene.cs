@@ -17,6 +17,9 @@ namespace JDR.Model
         public bool HasFogOfWarEnable { get; set; }
         public double ZoomValue { get; set; }
 
+        public int Height { get; set; }
+        public int Width { get; set; }
+
         public int XMapTranslation { get; set; }
 		public int YMapTranslation { get; set; }
 

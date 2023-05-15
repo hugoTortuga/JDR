@@ -83,13 +83,16 @@
             </Grid>
 
             <Viewbox Grid.Column="1">
-                <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseLeftButtonDown="ClickOnCanvas">
+                <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseLeftButtonDown="ClickOnCanvas" Background="Black">
                     <Canvas.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform />
                             <TranslateTransform />
                         </TransformGroup>
                     </Canvas.RenderTransform>
+                    <Image Source="{Binding CurrentScene.Background.Content, Converter={StaticResource ByteToImage}}" 
+                           Width="{Binding CurrentScene.Width}" Height="{Binding CurrentScene.Height}" 
+                           Canvas.Left="{Binding CurrentScene.XMapTranslation}" Canvas.Top="{Binding CurrentScene.YMapTranslation}" />
                     <ItemsControl ItemsSource="{Binding CurrentScene.Obstacles, Converter={StaticResource PolygonsConverter}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -104,9 +107,6 @@
                             </ContextMenu>
                         </Image.ContextMenu>
                     </Image>
-                    <Canvas.Background>
-                        <ImageBrush x:Name="BackgroundImageBrush" ImageSource="{Binding CurrentScene.Background.Content, Converter={StaticResource ByteToImage}}" Stretch="UniformToFill" />
-                    </Canvas.Background>
                 </Canvas>
             </Viewbox>
         </Grid>

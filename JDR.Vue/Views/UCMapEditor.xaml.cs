@@ -27,6 +27,9 @@ namespace JDR.Vue.Views {
 		private IList<Polygon> _AllPolygons;
 		private IList<Ellipse> _AllEllipses;
 
+		private double ActualImageWidth;
+		private double ActualImageHeight;
+
 		private double _ZoomFactor = 1.0;
 		private const double ZoomIncrement = 0.1;
 		private Point _previousMousePosition;
@@ -40,8 +43,10 @@ namespace JDR.Vue.Views {
 				})),
 				ZoomValue = _ZoomFactor,
 				XMapTranslation = CurrentXTranslation,
-				YMapTranslation = CurrentYTranslation
-			};
+				YMapTranslation = CurrentYTranslation,
+				Height = (int)(ActualImageHeight * _ZoomFactor),
+				Width = (int)(ActualImageWidth * _ZoomFactor)
+            };
             ((MapEditorViewModel)DataContext).CurrentScene = scene;
 		}
 
@@ -171,9 +176,12 @@ namespace JDR.Vue.Views {
 
 				SetScene();
 
+
                 var scaleTransform = new ScaleTransform(_ZoomFactor, _ZoomFactor);
 				backgroundImage.LayoutTransform = scaleTransform;
-			}
+				ActualImageWidth = backgroundImage.ActualWidth;
+				ActualImageHeight = backgroundImage.ActualHeight;
+            }
 		}
 
 		private void BackgroundImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {

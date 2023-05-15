@@ -128,6 +128,8 @@ namespace JDR.Vue.ViewModels
             CurrentScene.ZoomValue = _MapEditorViewModel.CurrentScene.ZoomValue;
             CurrentScene.XMapTranslation = _MapEditorViewModel.CurrentScene.XMapTranslation;
             CurrentScene.YMapTranslation = _MapEditorViewModel.CurrentScene.YMapTranslation;
+            CurrentScene.Width = _MapEditorViewModel.CurrentScene.Width;
+            CurrentScene.Height = _MapEditorViewModel.CurrentScene.Height;
             _GameCore.SaveScene(CurrentScene);
         }
     }

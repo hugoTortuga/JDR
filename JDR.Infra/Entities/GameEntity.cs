@@ -24,12 +24,13 @@ namespace JDR.Infra.Entities {
 
         public Game ToGame(IImageUploader imageUploader)
         {
-            return new Game
+            var game = new Game
             {
                 MaxPlayer = MaxPlayer,
                 Name = Name,
                 Scenes = Scenes.Select(s => s.ToScene(imageUploader)).ToList(),
             };
+            return game;
         }
 
     }

@@ -19,6 +19,9 @@ namespace JDR.Infra.Entities {
         public int YMapTranslation { get; set; }
         public bool HasFogOfWarEnable { get; set; }
 
+        public int Width { get; set; }
+        public int Height { get; set; }
+
         public IList<Obstacle> Obstacles { get; set; }
 		public string? BackgroundImage { get; set; }
 
@@ -35,7 +38,25 @@ namespace JDR.Infra.Entities {
                 ZoomValue = ZoomValue, 
 				XMapTranslation = XMapTranslation, 
 				YMapTranslation = YMapTranslation,
-				HasFogOfWarEnable = HasFogOfWarEnable
+				HasFogOfWarEnable = HasFogOfWarEnable,
+				Height = Height,
+				Width = Width
+            };
+        }
+
+		public static SceneEntity ToSceneEntity(Scene scene)
+		{
+            return new SceneEntity
+            {
+                BackgroundImage = scene.Background?.Name + scene.Background?.Extension,
+                Name = scene.Name,
+                Obstacles = scene.Obstacles,
+                XMapTranslation = scene.XMapTranslation,
+                YMapTranslation = scene.YMapTranslation,
+                ZoomValue = scene.ZoomValue,
+                HasFogOfWarEnable = scene.HasFogOfWarEnable,
+                Height = scene.Height,
+                Width = scene.Width
             };
         }
     }
