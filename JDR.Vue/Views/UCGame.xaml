@@ -81,9 +81,11 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
-
-            <Viewbox Grid.Column="1">
-                <Canvas Name="GameCanvas" Height="1080" Width="1800" MouseLeftButtonDown="ClickOnCanvas" Background="Black">
+            <Grid Grid.Column="1" Width="3000" >
+                <Grid.Clip>
+                    <RectangleGeometry Rect="0,0,3000,3000" />
+                </Grid.Clip>
+                <Canvas Name="GameCanvas" Height="3000" Width="3000" MouseLeftButtonDown="ClickOnCanvas" Background="Black">
                     <Canvas.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform />
@@ -108,7 +110,7 @@
                         </Image.ContextMenu>
                     </Image>
                 </Canvas>
-            </Viewbox>
+            </Grid>
         </Grid>
 
     </Grid>

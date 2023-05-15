@@ -122,8 +122,19 @@ namespace JDR.Vue.ViewModels
             Scenes.Add(CurrentScene);
         }
 
+        public void OpenMusicSelection()
+        {
+            var windowSelectionMusic = new WinMusicSelection(CurrentScene.Musics);
+            windowSelectionMusic.ShowDialog();
+            var musicsVM = (MusicSelectionViewModel)windowSelectionMusic.DataContext;
+            if (musicsVM != null && musicsVM.WasValidated) { 
+                CurrentScene.Musics = musicsVM.Musics;
+            }
+        }
+
         private void SaveCurrentSceneIfNeeded()
         {
+            if (_MapEditorViewModel.CurrentScene == null) return;
             CurrentScene.Obstacles = _MapEditorViewModel.CurrentScene.Obstacles;
             CurrentScene.ZoomValue = _MapEditorViewModel.CurrentScene.ZoomValue;
             CurrentScene.XMapTranslation = _MapEditorViewModel.CurrentScene.XMapTranslation;

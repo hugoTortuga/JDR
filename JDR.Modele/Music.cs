@@ -9,10 +9,19 @@ namespace JDR.Model
     public class Music
     {
 
-        public string URL { get; set; }
-        public Music(string uRL)
+        public int DurationInSecond;
+        public byte[]? Content { get; set; }
+        public string? Name { get; set; }
+
+        public Music()
         {
-            URL = uRL;
+        }
+
+        public override string ToString()
+        {
+            var name = Name ?? "Pas de musique";
+            var duration = DurationInSecond == 0 ? "0min" : (DurationInSecond / 60 + "min" + DurationInSecond % 60);
+            return $"{name} - {duration}";
         }
 
     }

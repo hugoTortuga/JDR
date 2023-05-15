@@ -36,16 +36,21 @@
             <Button Content="←" Click="MoveImageLeft_Click" Width="30" Height="30" Margin="0,0,10,0"/>
             <Button Content="→" Click="MoveImageRight_Click" Width="30" Height="30"/>
         </StackPanel>
-        <Canvas x:Name="MyCanvas" MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown">
-            <ItemsControl Name="ItemsControlObstacles" ItemsSource="{Binding Obstacles, Converter={StaticResource PolygonsConverter}}" Panel.ZIndex="5">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas IsItemsHost="True" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-            <Polygon x:Name="CurrentPolygon" Stroke="Black" StrokeThickness="2" Fill="Transparent" Panel.ZIndex="5"/>
-            <Image Name="backgroundImage" Source="{Binding ContentImage, Converter={StaticResource ByteToImageConverter}}" Stretch="UniformToFill"/>
-        </Canvas>
+        <Grid Grid.Column="1" Width="3000">
+            <Grid.Clip>
+                <RectangleGeometry Rect="0,0,3000,3000" />
+            </Grid.Clip>
+            <Canvas x:Name="MyCanvas" MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown">
+                <ItemsControl Name="ItemsControlObstacles" ItemsSource="{Binding Obstacles, Converter={StaticResource PolygonsConverter}}" Panel.ZIndex="5">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <Polygon x:Name="CurrentPolygon" Stroke="Black" StrokeThickness="2" Fill="Transparent" Panel.ZIndex="5"/>
+                <Image Name="backgroundImage" Source="{Binding ContentImage, Converter={StaticResource ByteToImageConverter}}" Stretch="UniformToFill"/>
+            </Canvas>
+        </Grid>
     </Grid>
 </UserControl>

@@ -207,7 +207,7 @@ namespace JDR.Vue.Views
 
         public void DrawFieldOfVision()
         {
-
+            if (((TableTopViewModel)DataContext).CurrentScene == null) return;
             if (!((TableTopViewModel)DataContext).CurrentScene.HasFogOfWarEnable)
             {
                 if (GameCanvas.Children.Contains(CurrentFOVPath))

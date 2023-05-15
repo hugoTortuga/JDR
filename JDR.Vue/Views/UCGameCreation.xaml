@@ -73,9 +73,14 @@
                                  VerticalContentAlignment="Center"/>
                         <TextBlock Text="Choix des NPC" VerticalAlignment="Center" />
                         <Button Content="Gestion des NPC" Height="30" Margin="5" Padding="5 0"/>
-                        <TextBlock Text="Choix des musiques" VerticalAlignment="Center" />
-                        <Button Content="Gestion des musiques" Height="30" Margin="5" Padding="5 0"/>
-                        <ToggleButton IsChecked="{Binding CurrentScene.HasFogOfWarEnable, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="150" Content="Activer FOW" ToolTip="Activer le brouillard de guerre"/>
+                        <Button Content="Choisir les musiques" Height="30" Margin="5" Padding="5 0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:CallMethodAction TargetObject="{Binding}" MethodName="OpenMusicSelection"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <ToggleButton IsChecked="{Binding CurrentScene.HasFogOfWarEnable, UpdateSourceTrigger=PropertyChanged}" Margin="5" Height="30" Width="150" Content="Activer FOW" ToolTip="Activer le brouillard de guerre"/>
                     </StackPanel>
                     <local:UCMapEditor Grid.Row="1" DataContext="{Binding MapEditorViewModel, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
