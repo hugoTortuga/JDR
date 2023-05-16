@@ -23,17 +23,21 @@ namespace JDR.Infra.Entities {
         public int Height { get; set; }
 
         public IList<Obstacle> Obstacles { get; set; }
-		public string? BackgroundImage { get; set; }
+        public IList<MusicEntity> Musics { get; set; }
+        public string? BackgroundImage { get; set; }
 
-		public SceneEntity() { 
-			Obstacles = new List<Obstacle>();
-		}	
+        public SceneEntity()
+        {
+            Obstacles = new List<Obstacle>();
+            Musics = new List<MusicEntity>();
+        }
 
-		public Scene ToScene(IImageUploader imageUploader)
+		public Scene ToScene(IImageStorage imageUploader, IMusicStorage musicStorage)
 		{
-			return new Scene(Name)
+			return new Scene(Name ?? "")
 			{
 				Obstacles = Obstacles,
+                Musics = Musics.Select(m => m.ToMusic(musicStorage)).ToList(),
 				Background = imageUploader.Get(BackgroundImage),
                 ZoomValue = ZoomValue, 
 				XMapTranslation = XMapTranslation, 
@@ -51,6 +55,7 @@ namespace JDR.Infra.Entities {
                 BackgroundImage = scene.Background?.Name + scene.Background?.Extension,
                 Name = scene.Name,
                 Obstacles = scene.Obstacles,
+                Musics = scene.Musics.Select(m => MusicEntity.ToMusicEntity(m)).ToList(),
                 XMapTranslation = scene.XMapTranslation,
                 YMapTranslation = scene.YMapTranslation,
                 ZoomValue = scene.ZoomValue,

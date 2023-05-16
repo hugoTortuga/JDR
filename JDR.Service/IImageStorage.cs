@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JDR.Core {
-	public interface IImageUploader {
+	public interface IImageStorage {
         Illustration Get(string? backgroundImage);
         Task Upload(byte[] fileContent, string nameImage);
 	}

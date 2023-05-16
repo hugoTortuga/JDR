@@ -23,18 +23,22 @@ namespace JDR.Vue {
 
 			string connectionString = configuration.GetConnectionString("MySqlConnection") ?? throw new ApplicationException("Aucune connexion string");
 			string basePathImageDB = configuration.GetSection("Paths")["ImageDBPath"] ?? throw new ApplicationException("Aucune base de données d'images accessible");
+            string basePathMusicDB = configuration.GetSection("Paths")["MusicDBPath"] ?? throw new ApplicationException("Aucune base de données de musiques accessible");
 
-			var services = new ServiceCollection();
+            var services = new ServiceCollection();
 
 			services.AddDbContext<AppDbContext>(options =>
 				options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 			);
 
 			services.AddScoped<IMainRepository, MainRepository>();
-			services.AddScoped<IImageUploader, ImageUploader>(basePathParameter => {
-				return new ImageUploader(basePathImageDB);
+			services.AddScoped<IImageStorage, ImageStorage>(basePathParameter => {
+				return new ImageStorage(basePathImageDB);
 			});
-			services.AddScoped<InventoryCore>();
+            services.AddScoped<IMusicStorage, MusicStorage>(basePathParameter => {
+                return new MusicStorage(basePathMusicDB);
+            });
+            services.AddScoped<InventoryCore>();
 			services.AddScoped<GameCore>();
 
 			services.AddTransient<MainViewModel>();

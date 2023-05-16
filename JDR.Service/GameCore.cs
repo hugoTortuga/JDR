@@ -11,9 +11,9 @@ namespace JDR.Core {
 	public class GameCore {
 
 		private IMainRepository _Repository;
-		private IImageUploader _ImageUploader;
+		private IImageStorage _ImageUploader;
 
-		public GameCore(IMainRepository repo, IImageUploader imageUploader) {
+		public GameCore(IMainRepository repo, IImageStorage imageUploader) {
 			_Repository = repo;
 			_ImageUploader = imageUploader;
 		}

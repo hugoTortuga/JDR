@@ -22,13 +22,13 @@ namespace JDR.Infra.Entities {
             Scenes = new List<SceneEntity>();
         }
 
-        public Game ToGame(IImageUploader imageUploader)
+        public Game ToGame(IImageStorage imageUploader, IMusicStorage musicStorage)
         {
             var game = new Game
             {
                 MaxPlayer = MaxPlayer,
                 Name = Name,
-                Scenes = Scenes.Select(s => s.ToScene(imageUploader)).ToList(),
+                Scenes = Scenes.Select(s => s.ToScene(imageUploader, musicStorage)).ToList(),
             };
             return game;
         }

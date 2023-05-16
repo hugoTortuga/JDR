@@ -1,4 +1,5 @@
-﻿using JDR.Model;
+﻿using JDR.Core;
+using JDR.Model;
 using JDR.Vue.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,9 @@ namespace JDR.Vue.Views
     /// </summary>
     public partial class WinMusicSelection : Window
     {
-        public WinMusicSelection(IList<Music> musics)
+        public WinMusicSelection(IMusicStorage musicStorage, IList<Music> musics)
         {
-            DataContext = new MusicSelectionViewModel(musics, new Action(Close));
+            DataContext = new MusicSelectionViewModel(musicStorage, musics, new Action(Close));
             InitializeComponent();
         }
     }

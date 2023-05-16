@@ -17,6 +17,7 @@ namespace JDR.Infra {
 		public DbSet<SceneEntity> Scenes { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
 			modelBuilder.Entity<SceneEntity>(scene => {
 				scene.Property(p => p.Obstacles)
 				.HasConversion(
@@ -24,8 +25,15 @@ namespace JDR.Infra {
 					v => JsonConvert.DeserializeObject<List<Obstacle>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }))
 				.HasColumnType("obstacles");
 			});
+
+            modelBuilder.Entity<SceneEntity>()
+			.HasMany(s => s.Musics)
+			.WithOne()
+			.HasForeignKey("idScene");
+
             modelBuilder.Entity<SceneEntity>()
 			.Property<Guid>("idGame");
+
             modelBuilder.Entity<GameEntity>()
 			.HasMany(g => g.Scenes)
 			.WithOne()

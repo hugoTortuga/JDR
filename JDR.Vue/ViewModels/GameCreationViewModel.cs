@@ -1,4 +1,5 @@
 ﻿using JDR.Core;
+using JDR.Infra;
 using JDR.Model;
 using JDR.Service;
 using JDR.Vue.Views;
@@ -14,7 +15,6 @@ namespace JDR.Vue.ViewModels
 {
     public class GameCreationViewModel : ViewModelBase
     {
-
 
         private Game _CurrentGame;
         public Game CurrentGame
@@ -79,9 +79,12 @@ namespace JDR.Vue.ViewModels
             }
         }
 
+        private IMusicStorage _MusicStorage;
 
-        public GameCreationViewModel(GameCore gameCore)
+
+        public GameCreationViewModel(GameCore gameCore, IMusicStorage musicStorage)
         {
+            _MusicStorage = musicStorage;
             _GameCore = gameCore;
             _CurrentGame = new Game();
             _Scenes = new ObservableCollection<Scene>(_CurrentGame.Scenes);
@@ -99,14 +102,14 @@ namespace JDR.Vue.ViewModels
         {
             if (CurrentScene == null) return;
 
-            var fileinfo = MapEditorViewModel?.FileInfoBackground;
-            if (fileinfo != null)
+            var imageFileInfo = MapEditorViewModel?.FileInfoBackground;
+            if (imageFileInfo != null)
             {
                 var illustration = new Illustration
                 {
-                    Content = File.ReadAllBytes(fileinfo.FullName),
-                    Extension = fileinfo.Extension,
-                    Name = fileinfo.Name.Substring(0, fileinfo.Name.Length - fileinfo.Extension.Length)                
+                    Content = File.ReadAllBytes(imageFileInfo.FullName),
+                    Extension = imageFileInfo.Extension,
+                    Name = imageFileInfo.Name.Substring(0, imageFileInfo.Name.Length - imageFileInfo.Extension.Length)
                 };
                 CurrentScene.Background = illustration;
                 CurrentScene.Obstacles = MapEditorViewModel?.Obstacles ?? new List<Obstacle>();
@@ -124,11 +127,17 @@ namespace JDR.Vue.ViewModels
 
         public void OpenMusicSelection()
         {
-            var windowSelectionMusic = new WinMusicSelection(CurrentScene.Musics);
+            if (CurrentScene == null) return;
+
+            var windowSelectionMusic = new WinMusicSelection(_MusicStorage, CurrentScene.Musics);
             windowSelectionMusic.ShowDialog();
             var musicsVM = (MusicSelectionViewModel)windowSelectionMusic.DataContext;
-            if (musicsVM != null && musicsVM.WasValidated) { 
-                CurrentScene.Musics = musicsVM.Musics;
+
+            if (musicsVM != null && musicsVM.WasValidated && musicsVM.Musics != null && musicsVM.Musics.Count > 0)
+            {
+                var validMusics = musicsVM.Musics.Where(m => m.Content != null && m.Path != null).ToList();
+                CurrentScene.Musics = validMusics;
+                Task.WaitAll(validMusics.Select(m => _MusicStorage.Upload(m.Content, m.Path)).ToArray());
             }
         }
 

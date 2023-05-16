@@ -1,4 +1,5 @@
-﻿using JDR.Model;
+﻿using JDR.Core;
+using JDR.Model;
 using Microsoft.Win32;
 using NAudio.Wave;
 using System;
@@ -61,9 +62,11 @@ namespace JDR.Vue.ViewModels
 
         private Action ClosingAction;
         public bool WasValidated = false;
+        private IMusicStorage _MusicStorage;
 
-        public MusicSelectionViewModel(IList<Music> musics, Action action)
+        public MusicSelectionViewModel(IMusicStorage musicStorage, IList<Music> musics, Action action)
         {
+            _MusicStorage = musicStorage;
             ClosingAction = action;
             if (musics != null)
                 _Musics = new ObservableCollection<Music>(musics);
@@ -102,8 +105,7 @@ namespace JDR.Vue.ViewModels
 
         private int GetMusicLength(string fileName)
         {
-            using var audioFile = new AudioFileReader(fileName);
-            return (int)audioFile.TotalTime.TotalSeconds;
+            return _MusicStorage.GetDurationInSeconds(fileName);
         }
 
         public void AddMusic()
@@ -113,7 +115,8 @@ namespace JDR.Vue.ViewModels
             {
                 Name = Path.GetFileNameWithoutExtension(MusicName),
                 DurationInSecond = GetMusicLength(SelectedFileLabel),
-                Content = File.ReadAllBytes(SelectedFileLabel)
+                Content = File.ReadAllBytes(SelectedFileLabel),
+                Path = Path.GetFileName(SelectedFileLabel)
             };
             Musics.Add(music);
             SelectedFileLabel = null;

@@ -15,10 +15,12 @@ namespace JDR.Infra {
 	public class MainRepository : IMainRepository {
 
 		private readonly AppDbContext _DbContext;
-		private readonly IImageUploader _ImageManager;
-		public MainRepository(AppDbContext dbContext, IImageUploader imageUploader) {
+		private readonly IImageStorage _ImageManager;
+		private readonly IMusicStorage _MusicManager;
+		public MainRepository(AppDbContext dbContext, IImageStorage imageUploader, IMusicStorage musicStorage) {
 			_DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 			_ImageManager = imageUploader;
+            _MusicManager = musicStorage;
 
         }
 
@@ -34,7 +36,7 @@ namespace JDR.Infra {
         public Game GetLastGame() {
 			var lastGame = _DbContext.Games.OrderBy(g => g.Name).Last();
 			if (lastGame == null) return new Game();
-			return lastGame.ToGame(_ImageManager);
+			return lastGame.ToGame(_ImageManager, _MusicManager);
 		}
 
         public IList<Game> GetYourGames()
@@ -44,7 +46,7 @@ namespace JDR.Infra {
 				.ToList();
 			if (gameEntities == null) return new List<Game>();
 
-			return gameEntities.Select(g => g.ToGame(_ImageManager)).ToList();
+			return gameEntities.Select(g => g.ToGame(_ImageManager, _MusicManager)).ToList();
         }
 
         public async Task SaveGame(Game game) {

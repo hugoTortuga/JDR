@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace JDR.Infra
 {
-    public class ImageUploader : IImageUploader
+    public class ImageStorage : IImageStorage
     {
 
         private string _BasePath;
 
-        public ImageUploader(string basePath)
+        public ImageStorage(string basePath)
         {
             _BasePath = basePath;
         }
@@ -40,7 +40,7 @@ namespace JDR.Infra
 
         public async Task Upload(byte[] fileContent, string nameImage)
         {
-            File.WriteAllBytes(_BasePath + nameImage, fileContent);
+            await File.WriteAllBytesAsync(_BasePath + nameImage, fileContent);
         }
     }
 }
