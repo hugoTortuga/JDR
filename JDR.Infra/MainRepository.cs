@@ -21,7 +21,6 @@ namespace JDR.Infra {
 			_DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 			_ImageManager = imageUploader;
             _MusicManager = musicStorage;
-
         }
 
         public List<Scene> GetAllScenes()
@@ -43,7 +42,8 @@ namespace JDR.Infra {
         {
 			var gameEntities = _DbContext.Games
 				.Include(g => g.Scenes)
-				.ToList();
+				.ThenInclude(s => s.Musics)
+                .ToList();
 			if (gameEntities == null) return new List<Game>();
 
 			return gameEntities.Select(g => g.ToGame(_ImageManager, _MusicManager)).ToList();

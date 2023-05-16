@@ -1,4 +1,5 @@
 ﻿using JDR.Core;
+using JDR.Infra;
 using JDR.Model;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,7 @@ namespace JDR.Vue.ViewModels {
 				OnPropertyChanged(nameof(CurrentScene));
 			}
 		}
+
 		private Game _CurrentGame;
         public Game CurrentGame { 
 			get { return  (_CurrentGame); }
@@ -59,20 +61,99 @@ namespace JDR.Vue.ViewModels {
 			}
 		}
 
-		private GameCore _GameCore;
 
-        public TableTopViewModel(GameCore gameCore)
+		private Music _SelectedMusic;
+		public Music SelectedMusic
+		{
+			get
+			{
+				return (_SelectedMusic);
+			}
+			set
+			{
+				_SelectedMusic = value;
+				OnPropertyChanged(nameof(SelectedMusic));
+			}
+		}
+
+
+
+		private bool _IsMusicPlaying;
+		public bool IsMusicPlaying
+		{
+			get
+			{
+				return (_IsMusicPlaying);
+			}
+			set
+			{
+				_IsMusicPlaying = value;
+				OnPropertyChanged(nameof(IsMusicPlaying));
+			}
+		}
+
+
+		private int _CurrentVolume;
+		public int CurrentVolume
+		{
+			get
+			{
+				return (_CurrentVolume);
+			}
+			set
+			{
+				_CurrentVolume = value;
+				OnPropertyChanged(nameof(CurrentVolume));
+				_MusicPlayer?.SetVolume((float)CurrentVolume / 100);
+
+            }
+		}
+
+
+
+		private GameCore _GameCore;
+		private IMusicPlayer _MusicPlayer;
+
+        public TableTopViewModel(GameCore gameCore, IMusicPlayer musicPlayer)
         {
+			CurrentVolume = 20;
+			_MusicPlayer = musicPlayer;
 			_GameCore = gameCore;
             Players = new ObservableCollection<Player> {
 				CreateAilurus(),
 				CreateBengala(),
 				CreateBiscuit(),
-				CreateLahir(),
+				CreateLahir()
 			};
         }
 
-		public void SceneSelected()
+		public void MusicSelection()
+		{
+            if (SelectedMusic == null) return;
+            _MusicPlayer.Stop();
+			IsMusicPlaying = false;
+            _MusicPlayer.SetMusic(SelectedMusic);
+            _MusicPlayer.SetVolume((float)CurrentVolume / 100);
+        }
+
+		public void PlayOrPauseMusic()
+		{
+			if (SelectedMusic == null) return;
+
+            if (_IsMusicPlaying)
+			{
+                _MusicPlayer.Pause();
+				IsMusicPlaying = false;
+            }
+			else
+			{
+                _MusicPlayer.Play();
+                IsMusicPlaying = true;
+            }
+		}
+
+
+        public void SceneSelected()
 		{
 			var test = CurrentScene.Background?.Name + " " + CurrentScene.Background?.Extension;
         }

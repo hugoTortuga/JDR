@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              xmlns:converters="clr-namespace:JDR.Vue.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="850" d:DesignWidth="1080">
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:ByteToImageConverter x:Key="ByteToImage" />
@@ -44,7 +44,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>
-            <Slider x:Name="ResizeSlider" Grid.Row="1" Margin="10" Minimum="100" Maximum="2000" Value="1000" Width="300" 
+            <!--<Slider x:Name="ResizeSlider" Grid.Row="1" Margin="10" Minimum="100" Maximum="2000" Value="1000" Width="300" 
                     ValueChanged="ResizeSlider_ValueChanged" VerticalAlignment="Center" />
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="&#x2190;" FontSize="12" Width="25" Height="25" Click="LeftButton_Click" />
@@ -53,7 +53,34 @@
                     <Button Content="&#x2193;" FontSize="12" Width="25" Height="25" Click="DownButton_Click" />
                 </StackPanel>
                 <Button Content="&#x2192;" FontSize="12" Width="25" Height="25" Click="RightButton_Click" />
-            </StackPanel>
+            </StackPanel>-->
+            <ComboBox Margin="10 0 0 0" ItemsSource="{Binding CurrentScene.Musics, UpdateSourceTrigger=PropertyChanged}" Height="35" Width="150" 
+                          SelectedItem="{Binding SelectedMusic, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:CallMethodAction TargetObject="{Binding}" MethodName="MusicSelection"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <Button Height="35" Margin="10 0 0 0" VerticalAlignment="Center" VerticalContentAlignment="Center" Width="70">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Content" Value="Play"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMusicPlaying}" Value="true">
+                                <Setter Property="Content" Value="Pause"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:CallMethodAction TargetObject="{Binding}" MethodName="PlayOrPauseMusic" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Slider Minimum="0" Maximum="100" Width="150" VerticalAlignment="Center" Margin="10 0 0 0"
+                    Value="{Binding CurrentVolume, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
         </StackPanel>
 
         <Grid Grid.Row="1">

@@ -38,6 +38,8 @@ namespace JDR.Vue {
             services.AddScoped<IMusicStorage, MusicStorage>(basePathParameter => {
                 return new MusicStorage(basePathMusicDB);
             });
+
+            services.AddScoped<IMusicPlayer, MusicPlayer>();
             services.AddScoped<InventoryCore>();
 			services.AddScoped<GameCore>();
 
