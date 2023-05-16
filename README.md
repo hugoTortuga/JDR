@@ -9,6 +9,7 @@ managing tabletop role-playing games, such as Dungeons & Dragons.
 - Creating a game, with a list of scene
 - Add and remove obstacle (polygons) to a scene, enable or disable fog of war on the scene
 - Open a game, select the scene you want
+- Select musics for your scenes, play them, change volume
 - Ping on the map
 - Print the list of players on the side menu
 - Open a character's sheet
