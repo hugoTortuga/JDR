@@ -76,8 +76,6 @@ namespace JDR.Vue.ViewModels {
 			}
 		}
 
-
-
 		private bool _IsMusicPlaying;
 		public bool IsMusicPlaying
 		{
@@ -108,8 +106,6 @@ namespace JDR.Vue.ViewModels {
 
             }
 		}
-
-
 
 		private GameCore _GameCore;
 		private IMusicPlayer _MusicPlayer;

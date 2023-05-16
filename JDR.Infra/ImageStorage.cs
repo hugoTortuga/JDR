@@ -40,7 +40,7 @@ namespace JDR.Infra
 
         public async Task Upload(byte[] fileContent, string nameImage)
         {
-            await File.WriteAllBytesAsync(_BasePath + nameImage, fileContent);
+            File.WriteAllBytes(_BasePath + nameImage, fileContent);
         }
     }
 }
