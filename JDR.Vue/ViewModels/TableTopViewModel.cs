@@ -132,7 +132,13 @@ namespace JDR.Vue.ViewModels {
             _MusicPlayer.SetVolume((float)CurrentVolume / 100);
         }
 
-		public void PlayOrPauseMusic()
+		public void OpenPlayerCreation()
+		{
+
+		}
+
+
+        public void PlayOrPauseMusic()
 		{
 			if (SelectedMusic == null) return;
 

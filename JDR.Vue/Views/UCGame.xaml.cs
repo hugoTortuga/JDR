@@ -32,10 +32,7 @@ namespace JDR.Vue.Views
         private bool _IsPlayerSelected;
         private Ellipse? _SelectionForm;
         private int _SelectionFormSize = 16;
-        private int _FOV = 300;
-        private double _BackgroundWidth;
-        private double _BackgroundHeight;
-        private TranslateTransform _TranslateTransformBackgroundMap;
+        private double _FOV => SliderFOV.Value;
         private MainWindow _MainWindow;
         private IList<Polygon> _Obstacles;
 
@@ -47,6 +44,7 @@ namespace JDR.Vue.Views
             DataContext = tableTopViewModel;
             _Obstacles = new List<Polygon>();
             InitializeComponent();
+            SliderFOV.Value = 300;
         }
 
         private void SetObstacles()
@@ -139,39 +137,6 @@ namespace JDR.Vue.Views
         {
             Player1.ReleaseMouseCapture();
             base.OnMouseUp(e);
-        }
-
-        private void ResizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (GameCanvas?.Background == null) return;
-            double newWidth = e.NewValue;
-            double aspectRatio = _BackgroundHeight / _BackgroundWidth;
-
-            double newHeight = newWidth * aspectRatio;
-
-            //BackgroundImageBrush.Viewport = new Rect(0, 0, newWidth, newHeight);
-            //BackgroundImageBrush.ViewportUnits = BrushMappingMode.Absolute;
-            //BackgroundImageBrush.Stretch = Stretch.UniformToFill;
-        }
-
-        private void UpButton_Click(object sender, RoutedEventArgs e)
-        {
-            _TranslateTransformBackgroundMap.Y -= 10;
-        }
-
-        private void DownButton_Click(object sender, RoutedEventArgs e)
-        {
-            _TranslateTransformBackgroundMap.Y += 10;
-        }
-
-        private void LeftButton_Click(object sender, RoutedEventArgs e)
-        {
-            _TranslateTransformBackgroundMap.X -= 10;
-        }
-
-        private void RightButton_Click(object sender, RoutedEventArgs e)
-        {
-            _TranslateTransformBackgroundMap.X += 10;
         }
 
         private void ChangeToken(object sender, RoutedEventArgs e)
@@ -337,6 +302,11 @@ namespace JDR.Vue.Views
             {
                 canvas.Children.Remove(pingCircle);
             };
+        }
+
+        private void SliderFOV_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            DrawFieldOfVision();
         }
     }
 }

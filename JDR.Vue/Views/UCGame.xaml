@@ -44,16 +44,22 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>
-            <!--<Slider x:Name="ResizeSlider" Grid.Row="1" Margin="10" Minimum="100" Maximum="2000" Value="1000" Width="300" 
-                    ValueChanged="ResizeSlider_ValueChanged" VerticalAlignment="Center" />
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="&#x2190;" FontSize="12" Width="25" Height="25" Click="LeftButton_Click" />
-                <StackPanel Orientation="Vertical">
-                    <Button Content="&#x2191;" FontSize="12" Width="25" Height="25" Click="UpButton_Click" />
-                    <Button Content="&#x2193;" FontSize="12" Width="25" Height="25" Click="DownButton_Click" />
-                </StackPanel>
-                <Button Content="&#x2192;" FontSize="12" Width="25" Height="25" Click="RightButton_Click" />
-            </StackPanel>-->
+            <StackPanel  Margin="10 0 0 0">
+                <TextBlock Text="Taille du champ de vision" VerticalAlignment="Center"/>
+                <Slider Minimum="0" Maximum="1000" x:Name="SliderFOV" ValueChanged="SliderFOV_ValueChanged"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel.Style>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CurrentScene.Musics.Count}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
             <ComboBox Margin="10 0 0 0" ItemsSource="{Binding CurrentScene.Musics, UpdateSourceTrigger=PropertyChanged}" Height="35" Width="150" 
                           SelectedItem="{Binding SelectedMusic, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center">
                 <i:Interaction.Triggers>
@@ -91,7 +97,8 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="35"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Joueurs présents" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <ListBox Grid.Row="1" ItemsSource="{Binding Players, UpdateSourceTrigger=PropertyChanged}">
@@ -107,6 +114,13 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                <Button Content="Ajouter un joueur" Grid.Row="2">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:CallMethodAction TargetObject="{Binding}" MethodName="OpenPlayerCreation"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
             </Grid>
             <Grid Grid.Column="1" Width="3000" >
                 <Grid.Clip>
