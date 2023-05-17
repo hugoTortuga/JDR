@@ -71,7 +71,7 @@ namespace JDR.Vue.Views
 
         private void OpenCharacterSheet(object sender, RoutedEventArgs e)
         {
-            var selectedPlayer = (Player)((MenuItem)sender).DataContext;
+            var selectedPlayer = (Character)((MenuItem)sender).DataContext;
             if (selectedPlayer != null)
                 new WinCharacterSheet(selectedPlayer).Show();
         }

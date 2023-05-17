@@ -14,8 +14,8 @@ namespace JDR.Vue.ViewModels {
 	public class TableTopViewModel : ViewModelBase {
 
 
-        private ObservableCollection<Player> _Players;
-        public ObservableCollection<Player> Players {
+        private ObservableCollection<Character> _Players;
+        public ObservableCollection<Character> Players {
             get {
                 return (_Players);
             }
@@ -61,7 +61,6 @@ namespace JDR.Vue.ViewModels {
 				OnPropertyChanged(nameof(CurrentGame));
 			}
 		}
-
 
 		private Music _SelectedMusic;
 		public Music SelectedMusic
@@ -116,7 +115,7 @@ namespace JDR.Vue.ViewModels {
 			CurrentVolume = 20;
 			_MusicPlayer = musicPlayer;
 			_GameCore = gameCore;
-            Players = new ObservableCollection<Player> {
+            Players = new ObservableCollection<Character> {
 				CreateAilurus(),
 				CreateBengala(),
 				CreateBiscuit(),
@@ -135,12 +134,12 @@ namespace JDR.Vue.ViewModels {
 
 		public void OpenPlayerCreation()
 		{
-			var winPlayerCreation = new WinPlayerCreation();
+			var winPlayerCreation = new WinCharacterCreation(_GameCore);
 			winPlayerCreation.ShowDialog();
-			var playerVM = (PlayerCreationViewModel)winPlayerCreation.DataContext;
+			var playerVM = (CharacterCreationViewModel)winPlayerCreation.DataContext;
 
-            if (playerVM.WasValidated && playerVM.Player != null)
-                _GameCore.AddPlayerToGame(playerVM.Player);
+            if (playerVM.WasValidated && playerVM.Character != null)
+                _GameCore.AddCharacterToGame(playerVM.Character);
         }
 
 
@@ -160,7 +159,6 @@ namespace JDR.Vue.ViewModels {
             }
 		}
 
-
         public void SceneSelected()
 		{
 			var test = CurrentScene.Background?.Name + " " + CurrentScene.Background?.Extension;
@@ -168,8 +166,8 @@ namespace JDR.Vue.ViewModels {
 
 		private string baseCharacterPath = "C:\\Users\\Hugo\\Desktop\\jdr\\ArthosV2\\joueurs\\";
 
-        private Player CreateBengala() {
-			return new Player("Bengala",
+        private Character CreateBengala() {
+			return new Character("Bengala",
 						Race.Dwarf,
 						new Skills {
 							Force = 60,
@@ -208,8 +206,8 @@ namespace JDR.Vue.ViewModels {
 			};
 		}
 
-		private Player CreateBiscuit() {
-			return new Player("Biscuit",
+		private Character CreateBiscuit() {
+			return new Character("Biscuit",
 						Race.Human,
 						new Skills {
 							Agility = 60,
@@ -247,8 +245,8 @@ namespace JDR.Vue.ViewModels {
 			};
 		}
 
-		private Player CreateLahir() {
-			return new Player("Lahir",
+		private Character CreateLahir() {
+			return new Character("Lahir",
 						Race.Elve,
 						new Skills {
 							Agility = 50,
@@ -287,8 +285,8 @@ namespace JDR.Vue.ViewModels {
 			};
 		}
 
-		private Player CreateAilurus() {
-			return new Player("Ailurus",
+		private Character CreateAilurus() {
+			return new Character("Ailurus",
 						Race.DwarfElve,
 						new Skills {
 							Agility = 50,
@@ -326,10 +324,10 @@ namespace JDR.Vue.ViewModels {
 			};
 		}
 
-        private Player CreateJulio()
+        private Character CreateJulio()
         {
             var sdfdf = new FileInfo(baseCharacterPath + "julio.png");
-            return new Player("Julio",
+            return new Character("Julio",
 						Race.Human,
 						new Skills
 						{

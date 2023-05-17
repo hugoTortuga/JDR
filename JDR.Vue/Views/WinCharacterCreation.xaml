@@ -1,4 +1,4 @@
-﻿<Window x:Class="JDR.Vue.Views.WinPlayerCreation"
+﻿<Window x:Class="JDR.Vue.Views.WinCharacterCreation"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:JDR.Vue.Views"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:vm="clr-namespace:JDR.Vue.ViewModels"
-        d:DataContext="{d:DesignInstance vm:PlayerCreationViewModel, IsDesignTimeCreatable=True}"
+        xmlns:converters="clr-namespace:JDR.Vue.Converters"
+        d:DataContext="{d:DesignInstance vm:CharacterCreationViewModel, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
         Title="Création de joueur" Height="650" Width="750">
     <Window.Resources>
@@ -15,6 +16,7 @@
             <Setter Property="FontFamily" Value="Inter"/>
             <Setter Property="Padding" Value="5 0"/>
         </Style>
+        <converters:ByteToImageConverter x:Key="ByteToImage" />
     </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -51,17 +53,17 @@
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Mana" HorizontalAlignment="Right"/>
             <TextBlock Grid.Row="3" Grid.Column="4" Text="Discrétion" HorizontalAlignment="Right"/>
 
-            <TextBox Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Player.Name}"/>
-            <TextBox Grid.Row="0" Grid.Column="3" VerticalContentAlignment="Center" Text="{Binding Player.Skills.Force}"/>
-            <TextBox Grid.Row="0" Grid.Column="5" VerticalContentAlignment="Center" Text="{Binding Player.Skills.Observation}"/>
-            <ComboBox Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" ItemsSource="{Binding Races}" SelectedItem="{Binding Player.Race}"/>
-            <TextBox Grid.Row="1" Grid.Column="3" VerticalContentAlignment="Center" Text="{Binding Player.Skills.Agility}"/>
-            <TextBox Grid.Row="1" Grid.Column="5" VerticalContentAlignment="Center" Text="{Binding Player.Skills.Persuasion}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Player.HPMax}"/>
-            <TextBox Grid.Row="2" Grid.Column="3" VerticalContentAlignment="Center" Text="{Binding Player.Skills.Intelligence}"/>
-            <TextBox Grid.Row="2" Grid.Column="5" VerticalContentAlignment="Center" Text="{Binding Player.Skills.Courage}"/>
-            <TextBox Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Player.ManaMax}"/>
-            <TextBox Grid.Row="3" Grid.Column="5" VerticalContentAlignment="Center" Text="{Binding Player.Skills.Discretion}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Character.Name}"/>
+            <TextBox Grid.Row="0" Grid.Column="3" VerticalContentAlignment="Center" Text="{Binding Character.Skills.Force}"/>
+            <TextBox Grid.Row="0" Grid.Column="5" VerticalContentAlignment="Center" Text="{Binding Character.Skills.Observation}"/>
+            <ComboBox Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" ItemsSource="{Binding Races}" SelectedItem="{Binding Character.Race}"/>
+            <TextBox Grid.Row="1" Grid.Column="3" VerticalContentAlignment="Center" Text="{Binding Character.Skills.Agility}"/>
+            <TextBox Grid.Row="1" Grid.Column="5" VerticalContentAlignment="Center" Text="{Binding Character.Skills.Persuasion}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Character.HPMax}"/>
+            <TextBox Grid.Row="2" Grid.Column="3" VerticalContentAlignment="Center" Text="{Binding Character.Skills.Intelligence}"/>
+            <TextBox Grid.Row="2" Grid.Column="5" VerticalContentAlignment="Center" Text="{Binding Character.Skills.Courage}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Character.ManaMax}"/>
+            <TextBox Grid.Row="3" Grid.Column="5" VerticalContentAlignment="Center" Text="{Binding Character.Skills.Discretion}"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -75,8 +77,9 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Inventaire"/>
             <StackPanel Orientation="Horizontal" Grid.Row="1">
-                <ComboBox Width="200" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <Button Content="Ajouter un item">
+                <ComboBox Width="200" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                          VerticalContentAlignment="Center"/>
+                <Button Content="Ajouter un item" Padding="10 ">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:CallMethodAction TargetObject="{Binding}" MethodName="AddItem"/>
@@ -84,14 +87,19 @@
                     </i:Interaction.Triggers>
                 </Button>
             </StackPanel>
-            <ItemsControl Grid.Row="2" ItemsSource="{Binding Player.Inventory.Objects}">
-                
+            <ItemsControl Grid.Row="2" ItemsSource="{Binding CharacterItems, UpdateSourceTrigger=PropertyChanged}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ItemsControl>
             
             <TextBlock Text="Magie" Grid.Column="1"/>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <ComboBox Width="200" ItemsSource="{Binding Spells}" SelectedItem="{Binding SelectedSpell, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <Button Content="Ajouter un sort">
+                <ComboBox Width="200" ItemsSource="{Binding Spells}" SelectedItem="{Binding SelectedSpell, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                          VerticalContentAlignment="Center" />
+                <Button Content="Ajouter un sort" Padding="10 0">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:CallMethodAction TargetObject="{Binding}" MethodName="AddSpell"/>
@@ -99,8 +107,12 @@
                     </i:Interaction.Triggers>
                 </Button>
             </StackPanel>
-            <ItemsControl Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Player.Spells}">
-                
+            <ItemsControl Grid.Row="2" Grid.Column="1" ItemsSource="{Binding CharacterSpells, UpdateSourceTrigger=PropertyChanged}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Category}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
         <Grid Grid.Row="2">
@@ -122,7 +134,7 @@
                     </i:Interaction.Triggers>
                 </Button>
             </StackPanel>
-            <Image Grid.Row="1" Grid.Column="0" Source="{Binding Player.Illustration.Content}"/>
+            <Image Grid.Row="1" Grid.Column="0" Source="{Binding PortraitData, Converter={StaticResource ByteToImage}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
                 <TextBlock Text="Token" />
                 <Button Margin="20 0 0 0" Content="Choisir un fichier" Width="150">
@@ -133,7 +145,7 @@
                     </i:Interaction.Triggers>
                 </Button>
             </StackPanel>
-            <Image Grid.Row="1" Grid.Column="1" Source="{Binding Player.Token.Content}"/>
+            <Image Grid.Row="1" Grid.Column="1" Source="{Binding TokenData, Converter={StaticResource ByteToImage}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
         </Grid>
         <Button Content="Valider" Grid.Row="3" HorizontalAlignment="Right" Width="200" Height="35">
             <i:Interaction.Triggers>

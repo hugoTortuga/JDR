@@ -11,8 +11,8 @@ namespace JDR.Vue.ViewModels
     {
 
 
-        private Player _Player;
-        public Player Player {
+        private Character _Player;
+        public Character Player {
             get {
                 return (_Player);
             }
@@ -22,7 +22,7 @@ namespace JDR.Vue.ViewModels
             }
         }
 
-        public CharacterSheetViewModel(Player player)
+        public CharacterSheetViewModel(Character player)
         {
             Player = player;
         }

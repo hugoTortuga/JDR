@@ -1,4 +1,5 @@
-﻿using JDR.Vue.ViewModels;
+﻿using JDR.Core;
+using JDR.Vue.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,11 @@ namespace JDR.Vue.Views
     /// <summary>
     /// Logique d'interaction pour WinPlayerCreation.xaml
     /// </summary>
-    public partial class WinPlayerCreation : Window
+    public partial class WinCharacterCreation : Window
     {
-        public WinPlayerCreation()
+        public WinCharacterCreation(GameCore gameCore)
         {
-            DataContext = new PlayerCreationViewModel();
+            DataContext = new CharacterCreationViewModel(gameCore, new Action(Close));
             InitializeComponent();
         }
     }

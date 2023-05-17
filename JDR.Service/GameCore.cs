@@ -18,9 +18,29 @@ namespace JDR.Core {
 			_ImageUploader = imageUploader;
 		}
 
-        public void AddPlayerToGame(Player player)
+        public void AddCharacterToGame(Character character)
         {
-            throw new NotImplementedException();
+			ArgumentNullException.ThrowIfNull(character);
+			ArgumentNullException.ThrowIfNullOrEmpty(character.Name);
+			_Repository.SaveCharacter(character);
+        }
+
+        public IEnumerable<InventoryItem> GetAllItems()
+        {
+			return _Repository.GetAllItems();
+        }
+
+        public IEnumerable<Race> GetAllRaces()
+        {
+			return new List<Race> 
+			{ 
+				Race.Human,
+				Race.Elve,
+				Race.Dwarf,
+				Race.HumanElve,
+				Race.HumanDwarf,
+				Race.DwarfElve
+			};
         }
 
         public IList<Game> GetAvailableGames()

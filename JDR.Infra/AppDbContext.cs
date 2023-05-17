@@ -15,8 +15,9 @@ namespace JDR.Infra {
 		public DbSet<InventoryItemEntity> InventoryItems { get; set; }
 		public DbSet<GameEntity> Games { get; set; }
 		public DbSet<SceneEntity> Scenes { get; set; }
+        public DbSet<CharacterEntity> Characters { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder) {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
 			modelBuilder.Entity<SceneEntity>(scene => {
 				scene.Property(p => p.Obstacles)
@@ -33,6 +34,11 @@ namespace JDR.Infra {
 
             modelBuilder.Entity<SceneEntity>()
 			.Property<Guid>("idGame");
+
+			modelBuilder.Entity<InventoryItemEntity>()
+            .HasOne(i => i.IllustrationEntity)
+            .WithMany()
+            .HasForeignKey("idIllustration"); ;
 
             modelBuilder.Entity<GameEntity>()
 			.HasMany(g => g.Scenes)

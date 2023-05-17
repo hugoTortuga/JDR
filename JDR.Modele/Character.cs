@@ -1,6 +1,6 @@
 ﻿namespace JDR.Model
 {
-    public class Player : Entity
+    public class Character : Entity
     {
         private string _Name;
         public string Name { get => _Name; set
@@ -21,12 +21,14 @@
         public Inventory Inventory { get; set; }
         public IList<Spell> Spells { get; set; }
 
-        public Player()
+        public Character()
         {
-
+            Spells = new List<Spell>();
+            Inventory = new Inventory();
+            Skills = new Skills();
         }
 
-        public Player(string name, Race race, Skills skills)
+        public Character(string name, Race race, Skills skills)
         {
             Name = name;
             Skills = skills;

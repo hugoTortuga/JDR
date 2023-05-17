@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace JDR.Service {
 	public interface IMainRepository {
+        IEnumerable<InventoryItem> GetAllItems();
         List<Scene> GetAllScenes();
         Game GetLastGame();
         IList<Game> GetYourGames();
+        void SaveCharacter(Character character);
         Task SaveGame(Game game);
 		Task SaveItem(InventoryItem item);
 

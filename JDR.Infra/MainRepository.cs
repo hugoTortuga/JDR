@@ -23,6 +23,11 @@ namespace JDR.Infra {
             _MusicManager = musicStorage;
         }
 
+        public IEnumerable<InventoryItem> GetAllItems()
+        {
+            return _DbContext.InventoryItems.Select(i => i.ToInventoryItem()).ToList();
+        }
+
         public List<Scene> GetAllScenes()
         {
 			return _DbContext.Scenes.Select(s => new Scene(s.Name)
@@ -47,6 +52,12 @@ namespace JDR.Infra {
 			if (gameEntities == null) return new List<Game>();
 
 			return gameEntities.Select(g => g.ToGame(_ImageManager, _MusicManager)).ToList();
+        }
+
+        public async void SaveCharacter(Character character)
+        {
+			await _DbContext.Characters.AddAsync(CharacterEntity.ToCharacterEntity(character));
+            await _DbContext.SaveChangesAsync();
         }
 
         public async Task SaveGame(Game game) {
