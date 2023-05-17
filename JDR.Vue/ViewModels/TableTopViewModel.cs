@@ -1,6 +1,7 @@
 ﻿using JDR.Core;
 using JDR.Infra;
 using JDR.Model;
+using JDR.Vue.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -134,8 +135,13 @@ namespace JDR.Vue.ViewModels {
 
 		public void OpenPlayerCreation()
 		{
+			var winPlayerCreation = new WinPlayerCreation();
+			winPlayerCreation.ShowDialog();
+			var playerVM = (PlayerCreationViewModel)winPlayerCreation.DataContext;
 
-		}
+            if (playerVM.WasValidated && playerVM.Player != null)
+                _GameCore.AddPlayerToGame(playerVM.Player);
+        }
 
 
         public void PlayOrPauseMusic()

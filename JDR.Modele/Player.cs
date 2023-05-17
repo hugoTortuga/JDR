@@ -13,12 +13,18 @@
         }
 
         public Illustration Illustration { get; set; }
+        public Illustration Token { get; set; }
         public string? Description { get; set; }
         public int Level { get; set; }
         public Race Race { get; set; }
         public Skills Skills { get; set; }
         public Inventory Inventory { get; set; }
         public IList<Spell> Spells { get; set; }
+
+        public Player()
+        {
+
+        }
 
         public Player(string name, Race race, Skills skills)
         {

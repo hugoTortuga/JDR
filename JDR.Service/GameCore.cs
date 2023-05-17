@@ -18,6 +18,11 @@ namespace JDR.Core {
 			_ImageUploader = imageUploader;
 		}
 
+        public void AddPlayerToGame(Player player)
+        {
+            throw new NotImplementedException();
+        }
+
         public IList<Game> GetAvailableGames()
         {
 			return _Repository.GetYourGames();
