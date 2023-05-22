@@ -27,6 +27,32 @@ namespace JDR.Infra {
 				.HasColumnType("obstacles");
 			});
 
+            modelBuilder.Entity<CharacterEntity>(charac => {
+                charac.Property(c => c.Skills)
+                .HasConversion(
+                     v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
+                    v => JsonConvert.DeserializeObject<Skills>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }))
+                .HasColumnType("skills");
+                charac.Property(c => c.Inventory)
+                .HasConversion(
+                     v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
+                    v => JsonConvert.DeserializeObject<Inventory>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }))
+                .HasColumnType("inventory");
+                charac.Property(c => c.Spells)
+                .HasConversion(
+                     v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
+                    v => JsonConvert.DeserializeObject<IList<Spell>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }))
+                .HasColumnType("spells");
+            });
+            modelBuilder.Entity<CharacterEntity>()
+            .HasOne(i => i.IllustrationTokenEntity)
+            .WithMany()
+            .HasForeignKey("idIllustrationToken");
+            modelBuilder.Entity<CharacterEntity>()
+            .HasOne(i => i.IllustationEntity)
+            .WithMany()
+            .HasForeignKey("idIllustrationCharacter");
+
             modelBuilder.Entity<SceneEntity>()
 			.HasMany(s => s.Musics)
 			.WithOne()
@@ -38,7 +64,7 @@ namespace JDR.Infra {
 			modelBuilder.Entity<InventoryItemEntity>()
             .HasOne(i => i.IllustrationEntity)
             .WithMany()
-            .HasForeignKey("idIllustration"); ;
+            .HasForeignKey("idIllustration");
 
             modelBuilder.Entity<GameEntity>()
 			.HasMany(g => g.Scenes)

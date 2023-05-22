@@ -2,8 +2,8 @@
 {
     public class Character : Entity
     {
-        private string _Name;
-        public string Name { get => _Name; set
+        private string? _Name;
+        public string? Name { get => _Name; set
             {
                 if (value == null || (value != null && value.Length <= 50))
                 {
@@ -20,6 +20,7 @@
         public Skills Skills { get; set; }
         public Inventory Inventory { get; set; }
         public IList<Spell> Spells { get; set; }
+        public int CurrentXP { get; set; }
 
         public Character()
         {

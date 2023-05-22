@@ -29,5 +29,14 @@ namespace JDR.Infra.Entities
                 
             };
         }
+
+        public static IllustrationEntity ToIllustrationEntity(Illustration illustration)
+        {
+            return new IllustrationEntity()
+            {
+                Name = illustration.Name,
+                Path = illustration.Name + illustration.Extension
+            };
+        }
     }
 }
