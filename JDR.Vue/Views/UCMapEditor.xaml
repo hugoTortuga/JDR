@@ -7,7 +7,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              xmlns:conv="clr-namespace:JDR.Vue.Converters"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1080">
     <UserControl.Resources>
         <ResourceDictionary>
             <conv:ByteToImageConverter x:Key="ByteToImageConverter" />
@@ -34,7 +34,11 @@
             <Button Content="↑" Click="MoveImageUp_Click" Width="30" Height="30" Margin="20,0,10,0"/>
             <Button Content="↓" Click="MoveImageDown_Click" Width="30" Height="30" Margin="0,0,10,0"/>
             <Button Content="←" Click="MoveImageLeft_Click" Width="30" Height="30" Margin="0,0,10,0"/>
-            <Button Content="→" Click="MoveImageRight_Click" Width="30" Height="30"/>
+            <Button Content="→" Click="MoveImageRight_Click" Width="30" Height="30" Margin="0,0,20,0"/>
+
+            <ToggleButton Content="Placer obstacles" Click="" Width="150" Height="30" Margin="0,0,10,0"/>
+            <ToggleButton Content="Placer joueurs" Click="" Width="150" Height="30" Margin="0,0,10,0"/>
+            <ToggleButton Content="Placer liens inter-scènes" Click="" Width="150" Height="30"/>
         </StackPanel>
         <Grid Grid.Column="1" Width="3000">
             <Grid.Clip>
