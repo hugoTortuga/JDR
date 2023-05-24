@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace JDR.Service {
 	public interface IMainRepository {
         IEnumerable<InventoryItem> GetAllItems();
+        IEnumerable<Character> GetAllCharacters();
         List<Scene> GetAllScenes();
         Game GetLastGame();
         IList<Game> GetYourGames();

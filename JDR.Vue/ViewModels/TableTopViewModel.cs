@@ -115,6 +115,7 @@ namespace JDR.Vue.ViewModels {
 			CurrentVolume = 20;
 			_MusicPlayer = musicPlayer;
 			_GameCore = gameCore;
+            var characters = gameCore.GetCharacters();
             Players = new ObservableCollection<Character> {
 				CreateAilurus(),
 				CreateBengala(),

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using JDR.Core;
 using JDR.Infra.Entities;
 using JDR.Model;
@@ -17,11 +16,19 @@ namespace JDR.Infra {
 		private readonly AppDbContext _DbContext;
 		private readonly IImageStorage _ImageManager;
 		private readonly IMusicStorage _MusicManager;
-		public MainRepository(AppDbContext dbContext, IImageStorage imageUploader, IMusicStorage musicStorage) {
+		private readonly IMapper _Mapper;
+
+		public MainRepository(AppDbContext dbContext, IImageStorage imageUploader, IMusicStorage musicStorage, IMapper mapper) {
 			_DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 			_ImageManager = imageUploader;
             _MusicManager = musicStorage;
+            _Mapper = mapper;
         }
+
+		public IEnumerable<Character> GetAllCharacters()
+		{
+			return _DbContext.Characters.Select(c => c.ToCharacter(_Mapper)).ToList();
+		}
 
         public IEnumerable<InventoryItem> GetAllItems()
         {

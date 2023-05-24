@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
-using AutoMapper;
 using JDR.Service;
 using JDR.Core;
 using System;
+using AutoMapper;
 
 namespace JDR.Vue {
 	public class AppInjections {
@@ -27,9 +27,11 @@ namespace JDR.Vue {
 
             var services = new ServiceCollection();
 
-			services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
 				options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 			);
+
+			services.AddAutoMapper(typeof(MappingProfile));
 
 			services.AddScoped<IMainRepository, MainRepository>();
 			services.AddScoped<IImageStorage, ImageStorage>(basePathParameter => {

@@ -1,4 +1,5 @@
-﻿using JDR.Model;
+﻿using AutoMapper;
+using JDR.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,7 +12,7 @@ namespace JDR.Infra.Entities
     [Table("character")]
     public class CharacterEntity
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         
         private string? _Name;
         public string? Name
@@ -46,10 +47,16 @@ namespace JDR.Infra.Entities
             Spells = new List<Spell>();
         }
 
+        public Character ToCharacter(IMapper mapper)
+        {
+            return mapper.Map<Character>(this);
+        }
+
         public static CharacterEntity ToCharacterEntity(Character character)
         {
             return new CharacterEntity
             {
+                Id = character.Id,
                 Name = character.Name,
                 IdRace = (int)character.Race,
                 Description = character.Description,

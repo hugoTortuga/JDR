@@ -25,6 +25,12 @@ namespace JDR.Core {
 			_Repository.SaveCharacter(character);
         }
 
+		public IEnumerable<Character> GetCharacters()
+		{
+			return _Repository.GetAllCharacters();
+
+        }
+
         public IEnumerable<InventoryItem> GetAllItems()
         {
 			return _Repository.GetAllItems();

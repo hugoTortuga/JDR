@@ -36,9 +36,9 @@
             <Button Content="←" Click="MoveImageLeft_Click" Width="30" Height="30" Margin="0,0,10,0"/>
             <Button Content="→" Click="MoveImageRight_Click" Width="30" Height="30" Margin="0,0,20,0"/>
 
-            <ToggleButton Content="Placer obstacles" Click="" Width="150" Height="30" Margin="0,0,10,0"/>
-            <ToggleButton Content="Placer joueurs" Click="" Width="150" Height="30" Margin="0,0,10,0"/>
-            <ToggleButton Content="Placer liens inter-scènes" Click="" Width="150" Height="30"/>
+            <ToggleButton Content="Placer obstacles" Click="PlaceObstacle" Width="150" Height="30" Margin="0,0,10,0"/>
+            <ToggleButton Content="Placer joueurs" Click="PlacePlayer" Width="150" Height="30" Margin="0,0,10,0"/>
+            <ToggleButton Content="Placer liens inter-scènes" Click="PlaceLinks" Width="150" Height="30"/>
         </StackPanel>
         <Grid Grid.Column="1" Width="3000">
             <Grid.Clip>

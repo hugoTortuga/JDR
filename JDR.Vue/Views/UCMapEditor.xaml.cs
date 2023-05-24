@@ -213,8 +213,27 @@ namespace JDR.Vue.Views {
 			}
 		}
 
-		#region CurrentPolygonSelectionSuppression
-		private void CurrentPolygon_MouseEnter(object sender, MouseEventArgs e) {
+        #region SelectionMode
+		
+		public void PlaceObstacle(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		public void PlacePlayer(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		public void PlaceLinks(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+        #endregion
+
+        #region CurrentPolygonSelectionSuppression
+        private void CurrentPolygon_MouseEnter(object sender, MouseEventArgs e) {
 			if (sender is Polygon polygon && _selectedPolygon != polygon) {
 				polygon.Stroke = Brushes.Gray;
 			}

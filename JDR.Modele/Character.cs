@@ -2,6 +2,8 @@
 {
     public class Character : Entity
     {
+        public readonly Guid? Id;
+
         private string? _Name;
         public string? Name { get => _Name; set
             {
@@ -12,8 +14,8 @@
             }
         }
 
-        public Illustration Illustration { get; set; }
-        public Illustration Token { get; set; }
+        public Illustration? Illustration { get; set; }
+        public Illustration? Token { get; set; }
         public string? Description { get; set; }
         public int Level { get; set; }
         public Race Race { get; set; }
@@ -24,18 +26,23 @@
 
         public Character()
         {
-            Spells = new List<Spell>();
             Inventory = new Inventory();
+            Spells = new List<Spell>();
             Skills = new Skills();
+        }
+
+        public Character(Guid id) : this()
+        {
+            Id = id;
         }
 
         public Character(string name, Race race, Skills skills)
         {
             Name = name;
-            Skills = skills;
-            Race = race;
-            Spells = new List<Spell>();
+            Skills = skills; 
             Inventory = new Inventory();
+            Spells = new List<Spell>();
+            Race = race;
         }
 
         public override string ToString() {
