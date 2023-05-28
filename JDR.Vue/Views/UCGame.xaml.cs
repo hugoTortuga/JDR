@@ -73,7 +73,7 @@ namespace JDR.Vue.Views
         {
             var selectedPlayer = (Character)((MenuItem)sender).DataContext;
             if (selectedPlayer != null)
-                new WinCharacterSheet(selectedPlayer).Show();
+                new WinCharacterSheet(selectedPlayer, ((TableTopViewModel)DataContext).GameCore).Show();
         }
 
         private void PlayerClicked(object sender, MouseButtonEventArgs e)

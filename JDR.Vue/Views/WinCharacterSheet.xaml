@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:JDR.Vue.Views" 
              xmlns:viewmodels="clr-namespace:JDR.Vue.ViewModels" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         d:DataContext="{d:DesignInstance Type=viewmodels:CharacterSheetViewModel}"
-             mc:Ignorable="d" Height="450" Width="730" ResizeMode="NoResize"
-             d:DesignHeight="450" Title="{Binding Player.Name}" d:DesignWidth="730">
+             mc:Ignorable="d" Height="450" Width="750" ResizeMode="NoResize"
+             d:DesignHeight="450" Title="{Binding Player.Name}" d:DesignWidth="750">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="9*"/>
@@ -20,9 +20,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Image Source="/Assets/old-paper.jpg" Stretch="UniformToFill" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
-        <TextBlock Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20 20 20 10" FontSize="24" FontFamily="Gentium Book Basic" Text="{Binding Player}"/>
+        <TextBlock Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20 20 20 10" FontSize="24" Text="{Binding Player}"/>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1">
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" Margin="5 5 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="50"/>
@@ -34,17 +34,17 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="PV Max :"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-            <TextBox Text="{Binding Player.HPMax}" Width="40" FontSize="24" FontFamily="Gentium Book Basic" Grid.Row="0" Grid.Column="1"/>
-            <TextBlock Text="Mana Max :"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
-            <TextBlock Text="{Binding Player.ManaMax}" Width="40" FontSize="24" FontFamily="Gentium Book Basic" Grid.Row="0" Grid.Column="3"/>
+            <TextBlock Text="PV Max :"  FontSize="16" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding Player.HPMax}" Width="40" FontSize="24" Grid.Row="0" Grid.Column="1" Background="#2FFFFFFF"/>
+            <TextBlock Text="Mana Max :"  FontSize="16" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+            <TextBox Text="{Binding Player.ManaMax}" Width="40" FontSize="24" Grid.Row="0" Grid.Column="3" Background="#2FFFFFFF"/>
 
-            <TextBlock Text="PV :"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-            <TextBox Width="40" FontSize="24" FontFamily="Gentium Book Basic"  Grid.Row="1" Grid.Column="1"/>
-            <TextBlock Text="Mana :"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
-            <TextBlock  Width="40" FontSize="24" FontFamily="Gentium Book Basic"  Grid.Row="1" Grid.Column="3"/>
+            <TextBlock Text="PV :"  FontSize="16"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Width="40" Text="{Binding Player.HP}" FontSize="24"  Grid.Row="1" Grid.Column="1" Background="#2FFFFFFF"/>
+            <TextBlock Text="Mana :"  FontSize="16" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+            <TextBox  Width="40" Text="{Binding Player.Mana}" FontSize="24"  Grid.Row="1" Grid.Column="3" Background="#2FFFFFFF"/>
 
-            <Button Height="35" Grid.Column="4" Grid.RowSpan="2" Width="150" Content="Valider" FontFamily="Gentium Book Basic">
+            <Button Height="35" Grid.Column="4" Grid.RowSpan="2" Width="150" Content="Valider">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <i:CallMethodAction TargetObject="{Binding}" MethodName="Save"/>
@@ -62,27 +62,27 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition Width="80"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition Width="80"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Force" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Player.Skills.Force}" FontSize="24" VerticalAlignment="Center" />
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Player.Skills.Force}" FontSize="24" VerticalAlignment="Center" Background="#2FFFFFFF"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Agilité" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Player.Skills.Agility}" FontSize="24" VerticalAlignment="Center" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Player.Skills.Agility}" FontSize="24" VerticalAlignment="Center" Background="#2FFFFFFF"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Intelligence" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Player.Skills.Intelligence}" FontSize="24" VerticalAlignment="Center" />
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Player.Skills.Intelligence}" FontSize="24" VerticalAlignment="Center" Background="#2FFFFFFF"/>
 
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="Observation" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding Player.Skills.Observation}" FontSize="24" VerticalAlignment="Center" />
+                <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Player.Skills.Observation}" FontSize="24" VerticalAlignment="Center" Background="#2FFFFFFF"/>
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="Persuasion" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Player.Skills.Persuasion}" FontSize="24" VerticalAlignment="Center" />
+                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Player.Skills.Persuasion}" FontSize="24" VerticalAlignment="Center" Background="#2FFFFFFF"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Text="Courage" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding Player.Skills.Courage}" FontSize="24" VerticalAlignment="Center" />
+                <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Player.Skills.Courage}" FontSize="24" VerticalAlignment="Center" Background="#2FFFFFFF"/>
                 <TextBlock Grid.Row="3" Grid.Column="2" Text="Discrétion" TextAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0"/>
-                <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding Player.Skills.Discretion}" FontSize="24" VerticalAlignment="Center" />
+                <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Player.Skills.Discretion}" FontSize="24" VerticalAlignment="Center" Background="#2FFFFFFF"/>
                 <Grid Grid.Column="4" Grid.RowSpan="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="110"/>
@@ -102,7 +102,7 @@
         </GroupBox>
         <GroupBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Inventaire" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5 0 5 5">
             <StackPanel Margin="5">
-                <!--<TextBlock Text="{Binding Player.Inventory}" TextWrapping="Wrap" />-->
+                <TextBlock Text="{Binding Player.Inventory}" TextWrapping="Wrap" />
             </StackPanel>
         </GroupBox>
     </Grid>

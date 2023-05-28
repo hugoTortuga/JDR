@@ -1,4 +1,5 @@
-﻿using JDR.Model;
+﻿using JDR.Core;
+using JDR.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,17 @@ namespace JDR.Vue.ViewModels
             }
         }
 
-        public CharacterSheetViewModel(Character player)
+        private GameCore _GameCore;
+
+        public CharacterSheetViewModel(Character player, GameCore gameCore)
         {
             Player = player;
+            _GameCore = gameCore;
+        }
+
+        public void Save()
+        {
+            _GameCore.SaveCharacter(Player);
         }
 
     }

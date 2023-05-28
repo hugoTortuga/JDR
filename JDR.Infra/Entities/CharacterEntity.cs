@@ -52,6 +52,24 @@ namespace JDR.Infra.Entities
             return mapper.Map<Character>(this);
         }
 
+        public void UpdateAttributesFrom(Character character)
+        {
+            Name = character.Name;
+            IdRace = (int)character.Race;
+            Description = character.Description;
+            HP = character.HP;
+            HPMax = character.HPMax;
+            IllustationEntity = character.Illustration == null ? null : IllustrationEntity.ToIllustrationEntity(character.Illustration);
+            IllustrationTokenEntity = character.Token == null ? null : IllustrationEntity.ToIllustrationEntity(character.Token);
+            Inventory = character.Inventory;
+            Level = character.Level;
+            CurrentXP = character.CurrentXP;
+            Mana = character.Mana;
+            ManaMax = character.ManaMax;
+            Skills = character.Skills;
+            Spells = character.Spells;
+        }
+
         public static CharacterEntity ToCharacterEntity(Character character)
         {
             return new CharacterEntity

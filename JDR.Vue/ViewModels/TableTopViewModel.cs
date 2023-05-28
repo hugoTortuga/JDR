@@ -107,14 +107,14 @@ namespace JDR.Vue.ViewModels {
             }
 		}
 
-		private GameCore _GameCore;
+        public GameCore GameCore { get; set; }
 		private IMusicPlayer _MusicPlayer;
 
         public TableTopViewModel(GameCore gameCore, IMusicPlayer musicPlayer)
         {
 			CurrentVolume = 20;
 			_MusicPlayer = musicPlayer;
-			_GameCore = gameCore;
+			GameCore = gameCore;
             var characters = gameCore.GetCharacters();
             Players = new ObservableCollection<Character> {
 				CreateAilurus(),
@@ -136,14 +136,13 @@ namespace JDR.Vue.ViewModels {
 
 		public void OpenPlayerCreation()
 		{
-			var winPlayerCreation = new WinCharacterCreation(_GameCore);
+			var winPlayerCreation = new WinCharacterCreation(GameCore);
 			winPlayerCreation.ShowDialog();
 			var playerVM = (CharacterCreationViewModel)winPlayerCreation.DataContext;
 
             if (playerVM.WasValidated && playerVM.Character != null)
-                _GameCore.AddCharacterToGame(playerVM.Character);
+                GameCore.AddCharacterToGame(playerVM.Character);
         }
-
 
         public void PlayOrPauseMusic()
 		{

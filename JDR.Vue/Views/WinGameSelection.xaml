@@ -20,6 +20,11 @@
                     <i:CallMethodAction TargetObject="{Binding}" MethodName="GameSelected" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Padding="3"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         <Button Content="Annuler" Click="CancelClicked" Grid.Row="1" Margin="4"/>
     </Grid>
