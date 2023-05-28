@@ -99,6 +99,7 @@
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="35"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Joueurs présents" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <ListBox Grid.Row="1" ItemsSource="{Binding Players, UpdateSourceTrigger=PropertyChanged}">
@@ -121,6 +122,27 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
+                <Grid Grid.Row="3" Height="90" Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBox Text="{Binding NumberOfDice, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="35" Width="35" HorizontalContentAlignment="Center"/>
+                    <ComboBox ItemsSource="{Binding Dices}" SelectedItem="{Binding SelectedDice}" Grid.Column="1" />
+                    <Button Grid.Column="2" Width="35" Content="🎲" FontSize="20">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:CallMethodAction TargetObject="{Binding}" MethodName="RollTheDice"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding ResultDice,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0 0 5 0"/>
+                </Grid>
             </Grid>
             <Grid Grid.Column="1" Width="3000" >
                 <Grid.Clip>

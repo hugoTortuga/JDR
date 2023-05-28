@@ -20,5 +20,10 @@ namespace JDR.Model
         {
             return new Random().Next(NumberFaces) + 1;
         }
+
+        public override string ToString()
+        {
+            return "d" + NumberFaces;
+        }
     }
 }

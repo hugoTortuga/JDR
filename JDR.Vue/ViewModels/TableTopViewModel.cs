@@ -107,12 +107,81 @@ namespace JDR.Vue.ViewModels {
             }
 		}
 
-        public GameCore GameCore { get; set; }
+		private int _NumberOfDice;
+		public int NumberOfDice
+		{
+			get
+			{
+				return (_NumberOfDice);
+			}
+			set
+			{
+				_NumberOfDice = value;
+				OnPropertyChanged(nameof(NumberOfDice));
+			}
+		}
+
+		private ObservableCollection<Dice> _Dices;
+		public ObservableCollection<Dice> Dices
+		{
+			get
+			{
+				return (_Dices);
+			}
+			set
+			{
+				_Dices = value;
+				OnPropertyChanged(nameof(Dice));
+			}
+		}
+
+		private Dice _SelectedDice;
+		public Dice SelectedDice
+		{
+			get
+			{
+				return (_SelectedDice);
+			}
+			set
+			{
+				_SelectedDice = value;
+				OnPropertyChanged(nameof(SelectedDice));
+			}
+		}
+
+		private string _ResultDice;
+		public string ResultDice
+		{
+			get
+			{
+				return (_ResultDice);
+			}
+			set
+			{
+				_ResultDice = value;
+				OnPropertyChanged(nameof(ResultDice));
+			}
+		}
+
+		public GameCore GameCore { get; set; }
 		private IMusicPlayer _MusicPlayer;
 
         public TableTopViewModel(GameCore gameCore, IMusicPlayer musicPlayer)
         {
-			CurrentVolume = 20;
+			NumberOfDice = 1;
+			Dices = new ObservableCollection<Dice>
+			{
+				new Dice(100),
+				new Dice(20),
+                new Dice(10),
+                new Dice(8),
+                new Dice(6),
+                new Dice(4),
+                new Dice(3),
+                new Dice(2)
+            };
+			SelectedDice = Dices[0];
+            CurrentVolume = 20;
 			_MusicPlayer = musicPlayer;
 			GameCore = gameCore;
             var characters = gameCore.GetCharacters();
@@ -143,6 +212,12 @@ namespace JDR.Vue.ViewModels {
             if (playerVM.WasValidated && playerVM.Character != null)
                 GameCore.AddCharacterToGame(playerVM.Character);
         }
+
+		public void RollTheDice()
+		{
+			if (SelectedDice == null) return;
+			ResultDice = "Résultat : " + new Dices($"{NumberOfDice}d{SelectedDice.NumberFaces}").RollTheDice();
+		}
 
         public void PlayOrPauseMusic()
 		{
