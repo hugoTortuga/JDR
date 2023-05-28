@@ -120,7 +120,8 @@ namespace JDR.Vue.ViewModels {
 				CreateAilurus(),
 				CreateBengala(),
 				CreateBiscuit(),
-				CreateLahir()
+				CreateLahir(),
+				characters.ToList()[0]
 			};
         }
 

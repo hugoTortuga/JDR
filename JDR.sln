@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDR.Test", "JDR.Test\JDR.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDR.Vue", "JDR.Vue\JDR.Vue.csproj", "{85747243-BC3D-46A4-B5A3-4CB1879E1040}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JDR.TestIntegration", "JDR.TestIntegration\JDR.TestIntegration.csproj", "{C4E4563B-742C-46C7-B2AD-F69EFF8A9A36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{85747243-BC3D-46A4-B5A3-4CB1879E1040}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85747243-BC3D-46A4-B5A3-4CB1879E1040}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85747243-BC3D-46A4-B5A3-4CB1879E1040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E4563B-742C-46C7-B2AD-F69EFF8A9A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E4563B-742C-46C7-B2AD-F69EFF8A9A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E4563B-742C-46C7-B2AD-F69EFF8A9A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E4563B-742C-46C7-B2AD-F69EFF8A9A36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

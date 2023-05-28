@@ -63,7 +63,8 @@ namespace JDR.Infra {
 
         public async void SaveCharacter(Character character)
         {
-			await _DbContext.Characters.AddAsync(CharacterEntity.ToCharacterEntity(character));
+			if (character.Id == Guid.Empty || character.Id == null)
+				await _DbContext.Characters.AddAsync(CharacterEntity.ToCharacterEntity(character));
             await _DbContext.SaveChangesAsync();
         }
 

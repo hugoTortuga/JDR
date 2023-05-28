@@ -7,21 +7,14 @@
              mc:Ignorable="d" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="35"/>
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Margin" Value="10"/>
-        </Style>
-    </UserControl.Resources>
     <StackPanel VerticalAlignment="Center">
-        <Button Click="OpenGame">
+        <Button Click="OpenGame" Width="200">
             Démarrer la partie
         </Button>
-        <Button Click="EditGame">
+        <Button Click="EditGame" Width="200">
             Editer une partie
         </Button>
-        <Button Click="OpenGameCreation">
+        <Button Click="OpenGameCreation" Width="200">
             Créer une partie
         </Button>
     </StackPanel>

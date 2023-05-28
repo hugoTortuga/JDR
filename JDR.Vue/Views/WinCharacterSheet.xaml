@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JDR.Vue.Views" 
-             xmlns:viewmodels="clr-namespace:JDR.Vue.ViewModels"
-             d:DataContext="{d:DesignInstance Type=viewmodels:CharacterSheetViewModel}"
+             xmlns:viewmodels="clr-namespace:JDR.Vue.ViewModels" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        d:DataContext="{d:DesignInstance Type=viewmodels:CharacterSheetViewModel}"
              mc:Ignorable="d" Height="450" Width="730" ResizeMode="NoResize"
              d:DesignHeight="450" Title="{Binding Player.Name}" d:DesignWidth="730">
     <Grid>
@@ -22,18 +22,36 @@
         <Image Source="/Assets/old-paper.jpg" Stretch="UniformToFill" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
         <TextBlock Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20 20 20 10" FontSize="24" FontFamily="Gentium Book Basic" Text="{Binding Player}"/>
 
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,-1,27" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <TextBlock Text="PV Max :"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Player.HPMax}" Width="40" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
-            <TextBlock Text="Mana Max :"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding Player.ManaMax}" Width="40" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
-        </StackPanel>
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,0,1"  VerticalAlignment="Bottom" Orientation="Horizontal">
-            <TextBlock Text="PV :"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center"/>
-            <TextBlock  Width="72" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
-            <TextBlock Text="Mana :"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center"/>
-            <TextBlock  Width="40" FontSize="24" FontFamily="Gentium Book Basic" Margin="5 0 10 0"/>
-        </StackPanel>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="PV Max :"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding Player.HPMax}" Width="40" FontSize="24" FontFamily="Gentium Book Basic" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock Text="Mana Max :"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+            <TextBlock Text="{Binding Player.ManaMax}" Width="40" FontSize="24" FontFamily="Gentium Book Basic" Grid.Row="0" Grid.Column="3"/>
+
+            <TextBlock Text="PV :"  FontSize="16" FontFamily="Gentium Book Basic"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Width="40" FontSize="24" FontFamily="Gentium Book Basic"  Grid.Row="1" Grid.Column="1"/>
+            <TextBlock Text="Mana :"  FontSize="16" FontFamily="Gentium Book Basic" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+            <TextBlock  Width="40" FontSize="24" FontFamily="Gentium Book Basic"  Grid.Row="1" Grid.Column="3"/>
+
+            <Button Height="35" Grid.Column="4" Grid.RowSpan="2" Width="150" Content="Valider" FontFamily="Gentium Book Basic">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:CallMethodAction TargetObject="{Binding}" MethodName="Save"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </Grid>
         <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Source="{Binding Player.Illustration.Content}" Margin="5"/>
         <GroupBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Header="Caractéristiques" FontFamily="Gentium Book Basic" BorderThickness="1" Margin="5">
             <Grid>
