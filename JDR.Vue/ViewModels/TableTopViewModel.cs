@@ -160,6 +160,12 @@ namespace JDR.Vue.ViewModels {
             }
 		}
 
+		public void StopMusic()
+		{
+            if (SelectedMusic == null) return;
+			_MusicPlayer.Stop();
+        }
+
         public void SceneSelected()
 		{
 			var test = CurrentScene.Background?.Name + " " + CurrentScene.Background?.Extension;

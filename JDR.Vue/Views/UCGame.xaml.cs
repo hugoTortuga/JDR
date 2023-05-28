@@ -153,8 +153,8 @@ namespace JDR.Vue.Views
 
         private void BackToMenu(object sender, RoutedEventArgs e)
         {
+            ((TableTopViewModel)DataContext).StopMusic();
             _MainWindow.BackToMenu();
-
         }
 
         private string GetImageURL()
