@@ -8,13 +8,13 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel VerticalAlignment="Center">
-        <Button Click="OpenGame" Width="200">
+        <Button Click="OpenGame" Width="200" Margin="10 0 10 10">
             Démarrer la partie
         </Button>
-        <Button Click="EditGame" Width="200">
+        <Button Click="EditGame" Width="200" Margin="10 0 10 10">
             Editer une partie
         </Button>
-        <Button Click="OpenGameCreation" Width="200">
+        <Button Click="OpenGameCreation" Width="200" Margin="10 0">
             Créer une partie
         </Button>
     </StackPanel>
