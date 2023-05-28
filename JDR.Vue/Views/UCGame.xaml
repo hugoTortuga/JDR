@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              xmlns:converters="clr-namespace:JDR.Vue.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             d:DesignHeight="850" d:DesignWidth="1080">
+             d:DesignHeight="850" d:DesignWidth="1080" Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:ByteToImageConverter x:Key="ByteToImage" />

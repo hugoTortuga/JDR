@@ -7,15 +7,30 @@
              mc:Ignorable="d" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel VerticalAlignment="Center">
-        <Button Click="OpenGame" Width="200" Margin="10 0 10 10">
-            Démarrer la partie
-        </Button>
-        <Button Click="EditGame" Width="200" Margin="10 0 10 10">
-            Editer une partie
-        </Button>
-        <Button Click="OpenGameCreation" Width="200" Margin="10 0">
-            Créer une partie
-        </Button>
-    </StackPanel>
+    <Grid>
+        <StackPanel VerticalAlignment="Center">
+            <Border Margin="20"  HorizontalAlignment="Center" Background="#99000000" CornerRadius="5">
+                <TextBlock Text="Fast Dungeon" FontSize="33" FontFamily="/Assets/#lovato-bold" Padding="10" Foreground="#DDffffff" />
+            </Border>
+            
+            <Button Click="OpenGame" Width="220" Margin="10 0 10 10">
+                <Button.Effect>
+                    <DropShadowEffect Color="Black" Direction="300" ShadowDepth="5" Opacity="0.3"/>
+                </Button.Effect>
+                Démarrer la partie
+            </Button>
+            <Button Click="EditGame" Width="220" Margin="10 0 10 10">
+                <Button.Effect>
+                    <DropShadowEffect Color="Black" Direction="300" ShadowDepth="5" Opacity="0.3"/>
+                </Button.Effect>
+                Editer une partie
+            </Button>
+            <Button Click="OpenGameCreation" Width="220" Margin="10 0">
+                <Button.Effect>
+                    <DropShadowEffect Color="Black" Direction="300" ShadowDepth="5" Opacity="0.3"/>
+                </Button.Effect>
+                Créer une partie
+            </Button>
+        </StackPanel>
+    </Grid>
 </UserControl>

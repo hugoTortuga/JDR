@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 namespace JDR.Vue.ViewModels {
 	public class MainMenuViewModel : ViewModelBase {
 
+
+
         public MainMenuViewModel()
         {
-            
         }
         
 	}

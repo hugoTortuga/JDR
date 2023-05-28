@@ -28,9 +28,7 @@ namespace JDR.Vue {
 		}
 
 		private void OpenGame(object sender, RoutedEventArgs e) {
-            var selectedGame = SelectGame();
-            if (selectedGame != null)
-                _MainWindow.OpenGame(selectedGame);
+            SelectGame();
         }
 
 		private void OpenGameCreation(object sender, RoutedEventArgs e) {
@@ -39,17 +37,15 @@ namespace JDR.Vue {
 
 		private void EditGame(object sender, RoutedEventArgs e)
 		{
-			var selectedGame = SelectGame();
-			if (selectedGame != null)
-				_MainWindow.OpenGameCreation(selectedGame);
+			//var selectedGame = SelectGame();
+			//if (selectedGame != null)
+			//	_MainWindow.OpenGameCreation(selectedGame);
         }
 
-		private Game SelectGame()
+		private void SelectGame()
 		{
             var availableGames = ((MainViewModel)_MainWindow.DataContext).AvailableGames;
-            var window = new WinGameSelection(availableGames);
-            window.ShowDialog();
-			return ((GameSelectionViewModel)window.DataContext).SelectedGame;
+            _MainWindow.OpenGameSelection(availableGames);
         } 
     }
 }

@@ -17,25 +17,38 @@ namespace JDR.Vue {
 
 		public MainWindow() {
 			InitializeComponent();
-			CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
+            BackToMenu();
 		}
 
 		public void BackToMenu() {
-			CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
+            CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
 		}
 
 		public void OpenGameCreation() {
-			CurrentControl.Content = new UCGameCreation(this);
+            CurrentControl.Width = ActualWidth;
+            CurrentControl.Height = ActualHeight;
+            CurrentControl.Content = new UCGameCreation(this);
 		}
 
         public void OpenGameCreation(Game existingGame)
         {
+            CurrentControl.Width = ActualWidth;
+            CurrentControl.Height = ActualHeight;
             CurrentControl.Content = new UCGameCreation(this, existingGame);
         }
 
         public void OpenGame(Game selectedGame)
         {
+            CurrentControl.Width = ActualWidth;
+            CurrentControl.Height = ActualHeight;
             CurrentControl.Content = new UCGame(this, selectedGame);
+        }
+
+        public void OpenGameSelection(IList<Game> availableGames)
+        {
+            CurrentControl.Width = 400;
+            CurrentControl.Height = 600;
+            CurrentControl.Content = new UCGameSelection(this, availableGames);
         }
     }
 }

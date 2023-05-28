@@ -10,6 +10,7 @@ namespace JDR.Vue.ViewModels
 {
     public class GameSelectionViewModel : ViewModelBase
     {
+
         private ObservableCollection<Game> _Games;
         public ObservableCollection<Game> Games
         {
@@ -35,18 +36,22 @@ namespace JDR.Vue.ViewModels
             }
         }
 
-        private Action CloseWindow;
-
-        public GameSelectionViewModel(Action closeWindow, IList<Game> games)
+        private MainWindow _MainWindow;
+        public GameSelectionViewModel(MainWindow window, IList<Game> games)
         {
-            CloseWindow = closeWindow;
+            _MainWindow = window;
             Games = new ObservableCollection<Game>(games);
         }
 
         public void GameSelected()
         {
-            if (SelectedGame == null) return;
-            CloseWindow.Invoke();
+            _MainWindow.OpenGame(SelectedGame);
+        }
+
+
+        public void BackToMenu()
+        {
+            _MainWindow.BackToMenu();
         }
 
     }

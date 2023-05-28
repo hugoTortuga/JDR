@@ -9,6 +9,7 @@
         xmlns:vue="clr-namespace:JDR.Vue.Views"
         Title="JDR" Height="450" Width="800">
     <Grid>
-        <UserControl Name="CurrentControl" />
+        <Image Source="/Assets/aventurers.png" Stretch="UniformToFill" />
+        <UserControl Name="CurrentControl" Width="300" Height="400" />
     </Grid>
 </Window>

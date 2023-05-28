@@ -13,7 +13,9 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Assets\aventurers.png" />
     <None Remove="Assets\background.jpeg" />
+    <None Remove="Assets\Fonts\lovato_bold.otf" />
     <None Remove="Assets\mob-lizard.png" />
     <None Remove="Assets\old-paper.jpg" />
     <None Remove="Assets\rock.png" />
@@ -33,6 +35,9 @@
     <EmbeddedResource Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="Assets\aventurers.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\background.jpeg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -54,6 +59,15 @@
   <ItemGroup>
     <ProjectReference Include="..\JDR.Infra\JDR.Infra.csproj" />
     <ProjectReference Include="..\JDR.Modele\JDR.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Fonts\lovato_bold.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\lovato-bold.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

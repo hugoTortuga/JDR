@@ -19,17 +19,13 @@ namespace JDR.Vue.Views
     /// <summary>
     /// Logique d'interaction pour WinGameSelection.xaml
     /// </summary>
-    public partial class WinGameSelection : Window
+    public partial class UCGameSelection : UserControl
     {
-        public WinGameSelection(IList<Game> availableGames)
+        public UCGameSelection(MainWindow window, IList<Game> availableGames)
         {
-            DataContext = new GameSelectionViewModel(new Action(() => Close()), availableGames);
+            DataContext = new GameSelectionViewModel(window, availableGames);
             InitializeComponent();
         }
 
-        private void CancelClicked(object sender, EventArgs e)
-        {
-            Close();
-        }
     }
 }
