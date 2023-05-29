@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,12 @@ namespace JDR.Infra {
 					 v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
 					v => JsonConvert.DeserializeObject<List<Obstacle>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }))
 				.HasColumnType("obstacles");
-			});
+                scene.Property(p => p.PlayerSpawnPoint)
+                .HasConversion(
+                     v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
+                    v => JsonConvert.DeserializeObject<Point>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }))
+                .HasColumnType("playerSpawnPoint");
+            });
 
             modelBuilder.Entity<CharacterEntity>(charac => {
                 charac.Property(c => c.Skills)

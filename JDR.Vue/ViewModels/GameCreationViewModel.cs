@@ -150,6 +150,7 @@ namespace JDR.Vue.ViewModels
             CurrentScene.YMapTranslation = _MapEditorViewModel.CurrentScene.YMapTranslation;
             CurrentScene.Width = _MapEditorViewModel.CurrentScene.Width;
             CurrentScene.Height = _MapEditorViewModel.CurrentScene.Height;
+            CurrentScene.PlayerSpawnPoint = _MapEditorViewModel.CurrentScene.PlayerSpawnPoint;
             _GameCore.SaveScene(CurrentScene);
         }
     }

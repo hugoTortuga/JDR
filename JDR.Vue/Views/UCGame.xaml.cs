@@ -253,6 +253,9 @@ namespace JDR.Vue.Views
         {
             SetObstacles();
             ResizeMap();
+
+            var playerSpawnPoint = ((TableTopViewModel)DataContext).CurrentScene.PlayerSpawnPoint;
+            MovePlayerToNewPosition(new Point(playerSpawnPoint.X, playerSpawnPoint.Y));
         }
 
         private void ResizeMap()
