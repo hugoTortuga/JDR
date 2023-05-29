@@ -43,7 +43,8 @@ namespace JDR.Infra
             return _DbContext.Scenes.Select(s => new Scene(s.Name)
             {
                 Obstacles = s.Obstacles,
-                Background = _ImageManager.Get(s.BackgroundImage)
+                Background = _ImageManager.Get(s.BackgroundImage),
+                PlayerSpawnPoint = s.PlayerSpawnPoint
             }).ToList();
         }
 

@@ -3,6 +3,7 @@ using JDR.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace JDR.Infra.Entities {
         public IList<Obstacle> Obstacles { get; set; }
         public IList<MusicEntity> Musics { get; set; }
         public string? BackgroundImage { get; set; }
+        public Point PlayerSpawnPoint { get; set; }
 
         public SceneEntity()
         {
@@ -44,7 +46,8 @@ namespace JDR.Infra.Entities {
 				YMapTranslation = YMapTranslation,
 				HasFogOfWarEnable = HasFogOfWarEnable,
 				Height = Height,
-				Width = Width
+				Width = Width,
+                PlayerSpawnPoint = PlayerSpawnPoint
             };
         }
 
@@ -61,7 +64,8 @@ namespace JDR.Infra.Entities {
                 ZoomValue = scene.ZoomValue,
                 HasFogOfWarEnable = scene.HasFogOfWarEnable,
                 Height = scene.Height,
-                Width = scene.Width
+                Width = scene.Width,
+                PlayerSpawnPoint = scene.PlayerSpawnPoint
             };
         }
     }

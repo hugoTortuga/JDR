@@ -9,19 +9,19 @@
              d:DesignHeight="700" d:DesignWidth="1080">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" MaxWidth="300" MinWidth="200"/>
+            <ColumnDefinition Width="180"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <Button Content="Retour au menu" Click="BackToMenu" Margin="0 0 0 10"/>
-            <Button Content="Sauvegarder" Margin="0 0 0 10">
+            <Button Content="Retour au menu" Click="BackToMenu" Margin="10"/>
+            <Button Content="Sauvegarder" Margin="10 0 10 10">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <i:CallMethodAction TargetObject="{Binding}" MethodName="SaveGame"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-            <Button Content="Ajouter une scène" Margin="0 0 0 10">
+            <Button Content="Ajouter une scène" Margin="10 0 10 10">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <i:CallMethodAction MethodName="AddAScene" TargetObject="{Binding}" />

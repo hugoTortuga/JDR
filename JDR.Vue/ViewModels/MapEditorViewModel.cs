@@ -65,5 +65,9 @@ namespace JDR.Vue.ViewModels
             }
         }
 
+        public void SetApparitionJoueurs(System.Drawing.Point point)
+        {
+            CurrentScene.PlayerSpawnPoint = point;
+        }
     }
 }

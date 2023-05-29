@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace JDR.Model
 
         public int XMapTranslation { get; set; }
 		public int YMapTranslation { get; set; }
+        public Point PlayerSpawnPoint { get; set; }
 
         public Scene()
         {

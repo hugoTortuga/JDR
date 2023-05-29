@@ -72,6 +72,9 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="borderToggleButon" Property="Background" Value="DarkGray"/>
                         </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="#777777"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
