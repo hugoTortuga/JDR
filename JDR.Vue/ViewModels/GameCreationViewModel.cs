@@ -3,6 +3,7 @@ using JDR.Infra;
 using JDR.Model;
 using JDR.Service;
 using JDR.Vue.Views;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,8 +47,8 @@ namespace JDR.Vue.ViewModels
             set
             {
                 _CurrentScene = value;
-                _MapEditorViewModel.ContentImage = _CurrentScene?.Background?.Content ?? new byte[] { };
-                _MapEditorViewModel.Obstacles = _CurrentScene?.Obstacles ?? new ObservableCollection<Obstacle>();
+                ContentImage = _CurrentScene?.Background?.Content ?? new byte[] { };
+                Obstacles = _CurrentScene?.Obstacles ?? new ObservableCollection<Obstacle>();
                 OnPropertyChanged(nameof(CurrentScene));
             }
         }
@@ -65,19 +66,6 @@ namespace JDR.Vue.ViewModels
 
         private GameCore _GameCore;
 
-        private MapEditorViewModel _MapEditorViewModel;
-        public MapEditorViewModel MapEditorViewModel
-        {
-            get
-            {
-                return (_MapEditorViewModel);
-            }
-            set
-            {
-                _MapEditorViewModel = value;
-                OnPropertyChanged(nameof(MapEditorViewModel));
-            }
-        }
 
         private IMusicStorage _MusicStorage;
 
@@ -88,7 +76,6 @@ namespace JDR.Vue.ViewModels
             _GameCore = gameCore;
             _CurrentGame = new Game();
             _Scenes = new ObservableCollection<Scene>(_CurrentGame.Scenes);
-            _MapEditorViewModel = new MapEditorViewModel();
         }
 
         public void SaveGame()
@@ -102,7 +89,7 @@ namespace JDR.Vue.ViewModels
         {
             if (CurrentScene == null) return;
 
-            var imageFileInfo = MapEditorViewModel?.FileInfoBackground;
+            var imageFileInfo = FileInfoBackground;
             if (imageFileInfo != null)
             {
                 var illustration = new Illustration
@@ -112,13 +99,15 @@ namespace JDR.Vue.ViewModels
                     Name = imageFileInfo.Name.Substring(0, imageFileInfo.Name.Length - imageFileInfo.Extension.Length)
                 };
                 CurrentScene.Background = illustration;
-                CurrentScene.Obstacles = MapEditorViewModel?.Obstacles ?? new List<Obstacle>();
+                CurrentScene.Obstacles = Obstacles ?? new List<Obstacle>();
             }
             SaveCurrentSceneIfNeeded();
         }
 
         public void AddAScene()
         {
+            _Obstacles = new List<Obstacle>();
+            _ContentImage = new byte[0];
             AddCurrentSceneToGameScenes();
             CurrentScene = new Scene("Scène sans titre");
             CurrentGame.Scenes.Add(CurrentScene);
@@ -143,15 +132,58 @@ namespace JDR.Vue.ViewModels
 
         private void SaveCurrentSceneIfNeeded()
         {
-            if (_MapEditorViewModel.CurrentScene == null) return;
-            CurrentScene.Obstacles = _MapEditorViewModel.CurrentScene.Obstacles;
-            CurrentScene.ZoomValue = _MapEditorViewModel.CurrentScene.ZoomValue;
-            CurrentScene.XMapTranslation = _MapEditorViewModel.CurrentScene.XMapTranslation;
-            CurrentScene.YMapTranslation = _MapEditorViewModel.CurrentScene.YMapTranslation;
-            CurrentScene.Width = _MapEditorViewModel.CurrentScene.Width;
-            CurrentScene.Height = _MapEditorViewModel.CurrentScene.Height;
-            CurrentScene.PlayerSpawnPoint = _MapEditorViewModel.CurrentScene.PlayerSpawnPoint;
+            if (CurrentScene == null) return;
             _GameCore.SaveScene(CurrentScene);
+        }
+
+
+
+        private IList<Obstacle> _Obstacles;
+        public IList<Obstacle> Obstacles
+        {
+            get
+            {
+                return (_Obstacles);
+            }
+            set
+            {
+                _Obstacles = value;
+                OnPropertyChanged(nameof(Obstacles));
+            }
+        }
+
+        private byte[] _ContentImage;
+        public byte[] ContentImage
+        {
+            get { return _ContentImage; }
+            set
+            {
+                _ContentImage = value;
+                OnPropertyChanged(nameof(ContentImage));
+            }
+        }
+
+        public FileInfo? FileInfoBackground { get; set; }
+
+
+        public void ChangeBackground()
+        {
+            SetImageProperties();
+        }
+
+        private void SetImageProperties()
+        {
+            var dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                FileInfoBackground = new FileInfo(dialog.FileName);
+                ContentImage = File.ReadAllBytes(dialog.FileName);
+            }
+        }
+
+        public void SetApparitionJoueurs(System.Drawing.Point point)
+        {
+            CurrentScene.PlayerSpawnPoint = point;
         }
     }
 }

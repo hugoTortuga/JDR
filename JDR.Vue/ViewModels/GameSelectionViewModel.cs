@@ -51,7 +51,7 @@ namespace JDR.Vue.ViewModels
 
         public void BackToMenu()
         {
-            _MainWindow.BackToMenu();
+            _MainWindow.GoToMainMenu();
         }
 
     }

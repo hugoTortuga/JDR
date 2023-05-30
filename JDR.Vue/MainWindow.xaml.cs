@@ -17,10 +17,10 @@ namespace JDR.Vue {
 
 		public MainWindow() {
 			InitializeComponent();
-            BackToMenu();
+            GoToConnection();
 		}
 
-		public void BackToMenu() {
+		public void GoToMainMenu() {
             CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
 		}
 
@@ -49,6 +49,16 @@ namespace JDR.Vue {
             CurrentControl.Width = 400;
             CurrentControl.Height = 600;
             CurrentControl.Content = new UCGameSelection(this, availableGames);
+        }
+
+        public void GoToSubscribtion()
+        {
+            CurrentControl.Content = new UCSubscribtion(this);
+        }
+
+        public void GoToConnection()
+        {
+            CurrentControl.Content = new UCConnection(this);
         }
     }
 }
