@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:JDR.Vue.Views"
         mc:Ignorable="d"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        Height="300" Width="250">
+        Height="300" Width="220">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="45"/>

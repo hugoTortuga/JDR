@@ -256,6 +256,7 @@ namespace JDR.Vue.Views
 
             var playerSpawnPoint = ((TableTopViewModel)DataContext).CurrentScene.PlayerSpawnPoint;
             MovePlayerToNewPosition(new Point(playerSpawnPoint.X, playerSpawnPoint.Y));
+            DrawFieldOfVision();
         }
 
         private void ResizeMap()

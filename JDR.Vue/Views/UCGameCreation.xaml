@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:JDR.Vue.Views"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" Background="White"
-             xmlns:conv="clr-namespace:JDR.Vue.Converters"
-             d:DesignHeight="700" d:DesignWidth="1080">
+             xmlns:conv="clr-namespace:JDR.Vue.Converters">
     <UserControl.Resources>
         <ResourceDictionary>
             <conv:ByteToImageConverter x:Key="ByteToImageConverter" />

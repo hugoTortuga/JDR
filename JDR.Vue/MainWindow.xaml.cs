@@ -15,16 +15,19 @@ namespace JDR.Vue {
 
 	public partial class MainWindow : Window {
 
-		public MainWindow() {
+		public MainWindow() 
+        {
 			InitializeComponent();
             GoToConnection();
 		}
 
-		public void GoToMainMenu() {
+		public void GoToMainMenu() 
+        {
             CurrentControl.Content = new UCMainMenu(new MainMenuViewModel(), this);
 		}
 
-		public void OpenGameCreation() {
+		public void OpenGameCreation() 
+        {
             CurrentControl.Width = ActualWidth;
             CurrentControl.Height = ActualHeight;
             CurrentControl.Content = new UCGameCreation(this);
@@ -46,8 +49,6 @@ namespace JDR.Vue {
 
         public void OpenGameSelection(IList<Game> availableGames)
         {
-            CurrentControl.Width = 400;
-            CurrentControl.Height = 600;
             CurrentControl.Content = new UCGameSelection(this, availableGames);
         }
 

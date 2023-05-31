@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JDR.Vue.Views" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="220" Width="220" Height="300">
+             d:DesignHeight="260" d:DesignWidth="220" Width="220" Height="260">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -15,11 +15,17 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Inscription" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Margin="0 0 0 10" />
-        <TextBox Grid.Row="1" Margin="0 0 0 10" Text="Mail"/>
-        <TextBox Grid.Row="2" Margin="0 0 0 10" Text="Mot de passe"/>
-        <TextBox Grid.Row="3" Margin="0 0 0 10" Text="Confirmation du mot de passe"/>
-        <Button Grid.Row="4" Margin="0 0 0 10" Content="Inscription" Click="Subscribe"/>
-        <Button Grid.Row="5" Content="Déjà inscrit ? Connectez-vous" VerticalAlignment="Top" Background="Transparent" BorderThickness="2" Click="GoToConnection"/>
+        <Border Grid.Row="0" Height="35" CornerRadius="5">
+            <TextBlock Text="Inscription" FontSize="24" FontWeight="Bold" Foreground="White" Padding="13 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Border>
+        <TextBox Grid.Row="1" Text="Mail" Padding="10 0" Height="35"/>
+        <TextBox Grid.Row="2" Text="Mot de passe" Padding="10 0" Height="35"/>
+        <TextBox Grid.Row="3" Text="Confirmation du mot de passe" Padding="10 0" Height="35"/>
+        <Button Grid.Row="4" Content="Inscription" Click="Subscribe">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="5" Opacity="0.3"/>
+            </Button.Effect>
+        </Button>
+        <Button Grid.Row="5" Content="Déjà inscrit ? Connectez-vous" Background="#88ffffff" BorderThickness="2" Click="GoToConnection"/>
     </Grid>
 </UserControl>
