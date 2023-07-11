@@ -10,6 +10,7 @@ namespace JDR.Model
 {
     public class Scene
     {
+        public Guid Id { get; set; }
         public string? Name { get; set; }
         public IList<Music> Musics { get; set; }
         public Illustration? Background { get; set; }
@@ -24,6 +25,9 @@ namespace JDR.Model
         public int XMapTranslation { get; set; }
 		public int YMapTranslation { get; set; }
         public Point PlayerSpawnPoint { get; set; }
+
+        //TODO
+        public string? BackgroundImage { get; set; }
 
         public Scene()
         {

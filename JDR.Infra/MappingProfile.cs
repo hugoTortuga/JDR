@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using JDR.Infra.Entities;
 using JDR.Model;
 using System;
 using System.Collections.Generic;
@@ -12,8 +11,8 @@ namespace JDR.Infra
     public class MappingProfile : Profile
     {
         public MappingProfile() {
-            CreateMap<CharacterEntity, Character>();
-            CreateMap<Character, CharacterEntity>();
+            CreateMap<Character, Character>();
+            CreateMap<Character, Character>();
         }
     }
 }

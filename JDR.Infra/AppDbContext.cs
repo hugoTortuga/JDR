@@ -1,5 +1,4 @@
-﻿using JDR.Infra.Entities;
-using JDR.Model;
+﻿using JDR.Model;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -13,14 +12,15 @@ namespace JDR.Infra {
 	public class AppDbContext : DbContext {
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-		public DbSet<InventoryItemEntity> InventoryItems { get; set; }
-		public DbSet<GameEntity> Games { get; set; }
-		public DbSet<SceneEntity> Scenes { get; set; }
-        public DbSet<CharacterEntity> Characters { get; set; }
+		public DbSet<InventoryItem> InventoryItems { get; set; }
+		public DbSet<Game> Games { get; set; }
+		public DbSet<Scene> Scenes { get; set; }
+        public DbSet<Character> Characters { get; set; }
+        public DbSet<Race> Races { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
-			modelBuilder.Entity<SceneEntity>(scene => {
+			modelBuilder.Entity<Scene>(scene => {
 				scene.Property(p => p.Obstacles)
 				.HasConversion(
 					 v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
@@ -33,7 +33,8 @@ namespace JDR.Infra {
                 .HasColumnType("playerSpawnPoint");
             });
 
-            modelBuilder.Entity<CharacterEntity>(charac => {
+            modelBuilder.Entity<Character>(charac => {
+                charac.ToTable("character");
                 charac.Property(c => c.Skills)
                 .HasConversion(
                      v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
@@ -50,29 +51,42 @@ namespace JDR.Infra {
                     v => JsonConvert.DeserializeObject<IList<Spell>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }))
                 .HasColumnType("spells");
             });
-            modelBuilder.Entity<CharacterEntity>()
-            .HasOne(i => i.IllustrationTokenEntity)
-            .WithMany()
-            .HasForeignKey("idIllustrationToken");
-            modelBuilder.Entity<CharacterEntity>()
-            .HasOne(i => i.IllustationEntity)
+
+            modelBuilder.Entity<Character>()
+            .HasOne(i => i.Illustration)
             .WithMany()
             .HasForeignKey("idIllustrationCharacter");
+            modelBuilder.Entity<Character>()
+            .HasOne(i => i.Token)
+            .WithMany()
+            .HasForeignKey("idIllustrationToken");
+            modelBuilder.Entity<Character>()
+            .HasOne(i => i.Race)
+            .WithMany()
+            .HasForeignKey("idRace");
 
-            modelBuilder.Entity<SceneEntity>()
+            modelBuilder.Entity<Race>().ToTable("race");
+
+            modelBuilder.Entity<Music>().ToTable("music");
+            modelBuilder.Entity<Music>().Ignore(m => m.Content);
+
+            modelBuilder.Entity<Scene>().ToTable("scene");
+            modelBuilder.Entity<Scene>()
 			.HasMany(s => s.Musics)
 			.WithOne()
 			.HasForeignKey("idScene");
-
-            modelBuilder.Entity<SceneEntity>()
+            modelBuilder.Entity<Scene>()
 			.Property<Guid>("idGame");
+            modelBuilder.Entity<Scene>().Ignore(b => b.Background);
 
-			modelBuilder.Entity<InventoryItemEntity>()
-            .HasOne(i => i.IllustrationEntity)
+            modelBuilder.Entity<InventoryItem>().ToTable("inventory_item");
+            modelBuilder.Entity<InventoryItem>()
+            .HasOne(i => i.Illustration)
             .WithMany()
             .HasForeignKey("idIllustration");
 
-            modelBuilder.Entity<GameEntity>()
+            modelBuilder.Entity<Game>().ToTable("game");
+            modelBuilder.Entity<Game>()
 			.HasMany(g => g.Scenes)
 			.WithOne()
 			.HasForeignKey("idGame")

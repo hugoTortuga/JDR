@@ -186,10 +186,6 @@ namespace JDR.Vue.ViewModels {
 			GameCore = gameCore;
             var characters = gameCore.GetCharacters();
             Players = new ObservableCollection<Character> {
-				CreateAilurus(),
-				CreateBengala(),
-				CreateBiscuit(),
-				CreateLahir(),
 				characters.ToList()[0]
 			};
         }
@@ -248,169 +244,11 @@ namespace JDR.Vue.ViewModels {
 
 		private string baseCharacterPath = "C:\\Users\\Hugo\\Desktop\\jdr\\ArthosV2\\joueurs\\";
 
-        private Character CreateBengala() {
-			return new Character("Bengala",
-						Race.Dwarf,
-						new Skills {
-							Force = 60,
-							Agility = 50,
-							Intelligence = 20,
-							Courage = 60,
-							Discretion = 20,
-							Persuasion = 40,
-							Observation = 40
-						}
-					) {
-						Illustration = new Illustration() {
-							Content = File.ReadAllBytes(baseCharacterPath + "bengala.png")
-						},
-						HP = 14,
-						HPMax = 14,
-						Mana = 6,
-						ManaMax = 6,
-						Level = 1,
-						Spells = new List<Spell> {
-								new Spell {
-									Category = MagicCategory.Darkness,
-									Level = 1
-								},
-								new Spell {
-									Category = MagicCategory.Heal,
-									Level = 1
-								}
-							},
-						Inventory = new Inventory {
-							Objects = new List<InventoryItem> {
-								new InventoryItem("Masse"),
-								new InventoryItem("Bouclier")
-							}
-						}
-			};
-		}
-
-		private Character CreateBiscuit() {
-			return new Character("Biscuit",
-						Race.Human,
-						new Skills {
-							Agility = 60,
-							Force = 50,
-							Intelligence = 20,
-							Courage = 20,
-							Discretion = 60,
-							Persuasion = 40,
-							Observation = 40
-						}
-					) {
-				Illustration = new Illustration() { 
-					Content = File.ReadAllBytes(baseCharacterPath + "biscuit2.png")
-				},
-				HP = 12,
-				HPMax = 12,
-				Mana = 8,
-				ManaMax = 8,
-				Level = 1,
-				Spells = new List<Spell> {
-								new Spell {
-									Category = MagicCategory.Darkness,
-									Level = 1
-								},
-								new Spell {
-									Category = MagicCategory.Psy,
-									Level = 1
-								}
-							},
-				Inventory = new Inventory {
-					Objects = new List<InventoryItem> {
-								new InventoryItem("4 dagues")
-							}
-				}
-			};
-		}
-
-		private Character CreateLahir() {
-			return new Character("Lahir",
-						Race.Elve,
-						new Skills {
-							Agility = 50,
-							Force = 20,
-							Intelligence = 60,
-							Courage = 40,
-							Discretion = 50,
-							Persuasion = 30,
-							Observation = 40
-						}
-					) {
-				Illustration = new Illustration() {
-					Content = File.ReadAllBytes(baseCharacterPath + "lahir.png")
-				},
-				HP = 13,
-				HPMax = 13,
-				Mana = 7,
-				ManaMax = 7,
-				Level = 1,
-				Spells = new List<Spell> {
-								new Spell {
-									Category = MagicCategory.Animal,
-									Level = 1
-								},
-								new Spell {
-									Category = MagicCategory.Enchantement,
-									Level = 1
-								}
-							},
-				Inventory = new Inventory {
-					Objects = new List<InventoryItem> {
-								new InventoryItem("Arc court"),
-								new InventoryItem("Dague")
-							}
-				}
-			};
-		}
-
-		private Character CreateAilurus() {
-			return new Character("Ailurus",
-						Race.DwarfElve,
-						new Skills {
-							Agility = 50,
-							Force = 30,
-							Intelligence = 60,
-							Courage = 30,
-							Discretion = 50,
-							Persuasion = 30,
-							Observation = 50
-						}
-					) {
-				Illustration = new Illustration() {
-					Content = File.ReadAllBytes(baseCharacterPath + "ailurus.png")
-				},
-				HP = 11,
-				HPMax = 11,
-				Mana = 9,
-				ManaMax = 9,
-				Level = 1,
-				Spells = new List<Spell> {
-								new Spell {
-									Category = MagicCategory.Nature,
-									Level = 1
-								},
-								new Spell {
-									Category = MagicCategory.Animal,
-									Level = 1
-								}
-							},
-				Inventory = new Inventory {
-					Objects = new List<InventoryItem> {
-								new InventoryItem("Bâton")
-							}
-				}
-			};
-		}
-
         private Character CreateJulio()
         {
             var sdfdf = new FileInfo(baseCharacterPath + "julio.png");
             return new Character("Julio",
-						Race.Human,
+						new Race(),
 						new Skills
 						{
 							Agility = 35,

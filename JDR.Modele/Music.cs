@@ -8,6 +8,7 @@ namespace JDR.Model
 {
     public class Music
     {
+        public Guid Id { get; set; }
 
         public int DurationInSecond;
         public byte[]? Content { get; set; }

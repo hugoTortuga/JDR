@@ -41,15 +41,7 @@ namespace JDR.Core
 
         public IEnumerable<Race> GetAllRaces()
         {
-            return new List<Race>
-            {
-                Race.Human,
-                Race.Elve,
-                Race.Dwarf,
-                Race.HumanElve,
-                Race.HumanDwarf,
-                Race.DwarfElve
-            };
+            return _Repository.GetAllRaces();
         }
 
         public IList<Game> GetAvailableGames()

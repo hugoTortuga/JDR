@@ -18,7 +18,7 @@ namespace JDR.Infra
             _BasePath = basePath;
         }
 
-        public Illustration Get(string? backgroundImage)
+        public Illustration Get(string backgroundImage)
         {
             
             try

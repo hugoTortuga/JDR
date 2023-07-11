@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace JDR.Model {
 	public class Inventory {
 
-		public IList<InventoryItem> Objects { get; set; }
+        public Guid Id { get; set; }
+        public IList<InventoryItem> Objects { get; set; }
 
         public Inventory()
         {

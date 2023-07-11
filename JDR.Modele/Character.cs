@@ -1,8 +1,10 @@
-﻿namespace JDR.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace JDR.Model
 {
     public class Character : Entity
     {
-        public readonly Guid? Id;
+        public Guid Id { get; set; }
 
         private string? _Name;
         public string? Name { get => _Name; set
@@ -18,11 +20,13 @@
         public Illustration? Token { get; set; }
         public string? Description { get; set; }
         public int Level { get; set; }
+
         public Race Race { get; set; }
         public Skills Skills { get; set; }
         public Inventory Inventory { get; set; }
         public IList<Spell> Spells { get; set; }
         public int CurrentXP { get; set; }
+
 
         public Character()
         {
@@ -46,7 +50,7 @@
         }
 
         public override string ToString() {
-            return $"{Name}, {Races.ToString(Race)}";
+            return $"{Name}, {Race?.Name}";
         }
     }
 }

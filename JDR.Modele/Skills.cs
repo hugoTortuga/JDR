@@ -8,7 +8,6 @@ namespace JDR.Model
 {
     public class Skills
     {
-
         public int Force { get; set; }
         public int Agility { get; set; }
         public int Intelligence { get; set; }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using JDR.Core;
-using JDR.Infra.Entities;
 using JDR.Model;
 using JDR.Service;
 using Microsoft.EntityFrameworkCore;
@@ -30,12 +29,17 @@ namespace JDR.Infra
 
         public IEnumerable<Character> GetAllCharacters()
         {
-            return _DbContext.Characters.Select(c => c.ToCharacter(_Mapper)).ToList();
+            return _DbContext.Characters.ToList();
         }
 
         public IEnumerable<InventoryItem> GetAllItems()
         {
-            return _DbContext.InventoryItems.Select(i => i.ToInventoryItem()).ToList();
+            return _DbContext.InventoryItems.ToList();
+        }
+
+        public IEnumerable<Race> GetAllRaces()
+        {
+            return _DbContext.Races.ToList();
         }
 
         public List<Scene> GetAllScenes()
@@ -50,48 +54,34 @@ namespace JDR.Infra
 
         public Game GetLastGame()
         {
-            var lastGame = _DbContext.Games.OrderBy(g => g.Name).Last();
-            if (lastGame == null) return new Game();
-            return lastGame.ToGame(_ImageManager, _MusicManager);
+            return _DbContext.Games.OrderBy(g => g.Name).Last();
         }
 
         public IList<Game> GetYourGames()
         {
-            var gameEntities = _DbContext.Games
+            var games = _DbContext.Games
                 .Include(g => g.Scenes)
                 .ThenInclude(s => s.Musics)
                 .ToList();
-            if (gameEntities == null) return new List<Game>();
-
-            return gameEntities.Select(g => g.ToGame(_ImageManager, _MusicManager)).ToList();
+            return games;
         }
 
         public async void SaveCharacter(Character character)
         {
             if (character.Id == Guid.Empty || character.Id == null || !_DbContext.Characters.Any(c => c.Id == character.Id))
-                await _DbContext.Characters.AddAsync(CharacterEntity.ToCharacterEntity(character));
-            else
-            {
-                var characterEntity = _DbContext.Characters.FirstOrDefault(c => c.Id == character.Id);
-                characterEntity.UpdateAttributesFrom(character);
-            }
+                await _DbContext.Characters.AddAsync(character);
             await _DbContext.SaveChangesAsync();
         }
 
         public async Task SaveGame(Game game)
         {
-            await _DbContext.Games.AddAsync(new GameEntity
-            {
-                Name = game.Name,
-                MaxPlayer = game.MaxPlayer,
-                Scenes = game.Scenes.Select(s => SceneEntity.ToSceneEntity(s)).ToList()
-            });
+            await _DbContext.Games.AddAsync(game);
             await _DbContext.SaveChangesAsync();
         }
 
         public async Task SaveItem(InventoryItem item)
         {
-            await _DbContext.InventoryItems.AddAsync(new InventoryItemEntity { Name = item.Name });
+            await _DbContext.InventoryItems.AddAsync(item);
             await _DbContext.SaveChangesAsync();
         }
 
