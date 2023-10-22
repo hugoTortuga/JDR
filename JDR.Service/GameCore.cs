@@ -34,6 +34,11 @@ namespace JDR.Core
 
         }
 
+        public Character GetCharacter(Guid id)
+        {
+            return _Repository.GetCharacterById(id);
+        }
+
         public IEnumerable<InventoryItem> GetAllItems()
         {
             return _Repository.GetAllItems();
@@ -79,5 +84,53 @@ namespace JDR.Core
             if (character == null) return;
             _Repository.SaveCharacter(character);
         }
+
+        public object GetCharacterTest()
+        {
+
+            return new Character("Julio",
+                        new Race(),
+                        new Skills
+                        {
+                            Agility = 35,
+                            Force = 40,
+                            Intelligence = 50,
+                            Courage = 40,
+                            Discretion = 25,
+                            Persuasion = 50,
+                            Observation = 20
+                        }
+                    )
+            {
+
+                Illustration = new Illustration("julio", "jpg"),
+                HP = 14,
+                HPMax = 14,
+                Mana = 10,
+                ManaMax = 10,
+                Level = 1,
+                Spells = new List<Spell> {
+                                new Spell {
+                                    Category = MagicCategory.Heal,
+                                    Level = 1
+                                },
+                                new Spell {
+                                    Category = MagicCategory.Nature,
+                                    Level = 1
+                                }
+                            },
+                Inventory = new Inventory
+                {
+                    Objects = new List<InventoryItem> {
+                                new InventoryItem("Epée courte"),
+                                new InventoryItem("Bouclier"),
+                                new InventoryItem("Arc court (8 flèches)"),
+                                new InventoryItem("Calice"),
+                                new InventoryItem("Fiole")
+                            }
+                }
+            };
+        }
     }
+
 }

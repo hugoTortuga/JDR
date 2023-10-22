@@ -93,11 +93,10 @@ namespace JDR.Vue.ViewModels
             if (imageFileInfo != null)
             {
                 var illustration = new Illustration
-                {
-                    Content = File.ReadAllBytes(imageFileInfo.FullName),
-                    Extension = imageFileInfo.Extension,
-                    Name = imageFileInfo.Name.Substring(0, imageFileInfo.Name.Length - imageFileInfo.Extension.Length)
-                };
+                (
+                    imageFileInfo.Extension,
+                    imageFileInfo.Name[..^imageFileInfo.Extension.Length]
+                );
                 CurrentScene.Background = illustration;
                 CurrentScene.Obstacles = Obstacles ?? new List<Obstacle>();
             }

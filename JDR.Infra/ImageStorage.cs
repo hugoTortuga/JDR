@@ -18,20 +18,18 @@ namespace JDR.Infra
             _BasePath = basePath;
         }
 
-        public Illustration Get(string backgroundImage)
+        public Illustration Get(string imagePath)
         {
-            
             try
             {
-                var fileInfo = new FileInfo(_BasePath + backgroundImage);
+                var fileInfo = new FileInfo(_BasePath + imagePath);
                 return new Illustration
-                {
-                    Content = File.ReadAllBytes(_BasePath + backgroundImage),
-                    Name = fileInfo.Name.Substring(0, fileInfo.Name.Length - fileInfo.Extension.Length),
-                    Extension = fileInfo.Extension,
-                };
+                (
+                    fileInfo.Name[..^fileInfo.Extension.Length],
+                    fileInfo.Extension
+                );
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

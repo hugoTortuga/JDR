@@ -16,5 +16,6 @@ namespace JDR.Service {
         Task SaveGame(Game game);
 		Task SaveItem(InventoryItem item);
         IEnumerable<Race> GetAllRaces();
+        Character GetCharacterById(Guid id);
     }
 }

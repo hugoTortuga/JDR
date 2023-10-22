@@ -7,7 +7,9 @@ namespace JDR.Model
         public Guid Id { get; set; }
 
         private string? _Name;
-        public string? Name { get => _Name; set
+        public string? Name { 
+            get => _Name; 
+            set
             {
                 if (value == null || (value != null && value.Length <= 50))
                 {

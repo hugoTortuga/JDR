@@ -185,6 +185,7 @@ namespace JDR.Vue.ViewModels {
 			_MusicPlayer = musicPlayer;
 			GameCore = gameCore;
             var characters = gameCore.GetCharacters();
+			var characterTest = gameCore.GetCharacterTest();
             Players = new ObservableCollection<Character> {
 				characters.ToList()[0]
 			};
@@ -242,57 +243,5 @@ namespace JDR.Vue.ViewModels {
 			var test = CurrentScene.Background?.Name + " " + CurrentScene.Background?.Extension;
         }
 
-		private string baseCharacterPath = "C:\\Users\\Hugo\\Desktop\\jdr\\ArthosV2\\joueurs\\";
-
-        private Character CreateJulio()
-        {
-            var sdfdf = new FileInfo(baseCharacterPath + "julio.png");
-            return new Character("Julio",
-						new Race(),
-						new Skills
-						{
-							Agility = 35,
-							Force = 40,
-							Intelligence = 50,
-							Courage = 40,
-							Discretion = 25,
-							Persuasion = 50,
-							Observation = 20
-						}
-					)
-			{
-				
-                Illustration = new Illustration
-				{
-					Content = File.ReadAllBytes(sdfdf.FullName),
-					Name = sdfdf.FullName,
-                },
-                HP = 14,
-                HPMax = 14,
-                Mana = 10,
-                ManaMax = 10,
-                Level = 1,
-                Spells = new List<Spell> {
-                                new Spell {
-                                    Category = MagicCategory.Heal,
-                                    Level = 1
-                                },
-                                new Spell {
-                                    Category = MagicCategory.Nature,
-                                    Level = 1
-                                }
-                            },
-                Inventory = new Inventory
-                {
-                    Objects = new List<InventoryItem> {
-                                new InventoryItem("Epée courte"),
-                                new InventoryItem("Bouclier"),
-                                new InventoryItem("Arc court (8 flèches)"),
-								new InventoryItem("Calice"),
-								new InventoryItem("Fiole")
-                            }
-                }
-            };
-        }
     }
 }

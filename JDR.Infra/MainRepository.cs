@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JDR.Core;
+using JDR.Core.Exceptions;
 using JDR.Model;
 using JDR.Service;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,11 @@ namespace JDR.Infra
                 Background = _ImageManager.Get(s.BackgroundImage),
                 PlayerSpawnPoint = s.PlayerSpawnPoint
             }).ToList();
+        }
+
+        public Character GetCharacterById(Guid id)
+        {
+            return _DbContext.Characters.FirstOrDefault(c => c.Id == id) ?? throw new DataNotFoundException("Character not found");
         }
 
         public Game GetLastGame()

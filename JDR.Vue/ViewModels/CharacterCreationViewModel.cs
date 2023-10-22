@@ -201,11 +201,10 @@ namespace JDR.Vue.ViewModels
             var portraitFilePath = GetFilePath();
             if (string.IsNullOrEmpty(portraitFilePath)) return;
             Character.Illustration = new Illustration
-            {
-                Content = File.ReadAllBytes(portraitFilePath),
-                Extension = new FileInfo(portraitFilePath).Extension,
-                Name = Path.GetFileName(portraitFilePath)
-            };
+            (
+                new FileInfo(portraitFilePath).Extension,
+                Path.GetFileName(portraitFilePath)
+            );
             PortraitData = Character.Illustration.Content;
         }
         public void SelectAToken()
@@ -213,11 +212,10 @@ namespace JDR.Vue.ViewModels
             var tokenFilePath = GetFilePath();
             if (string.IsNullOrEmpty(tokenFilePath)) return;
             Character.Token = new Illustration
-            {
-                Content = File.ReadAllBytes(tokenFilePath),
-                Extension = new FileInfo(tokenFilePath).Extension,
-                Name = Path.GetFileName(tokenFilePath)
-            };
+            (
+                new FileInfo(tokenFilePath).Extension,
+                Path.GetFileName(tokenFilePath)
+            );
             TokenData = Character.Token.Content;
         }
         public void Confirm()
