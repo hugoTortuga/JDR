@@ -74,7 +74,7 @@ namespace JDR.Infra
 
         public async void SaveCharacter(Character character)
         {
-            if (character.Id == Guid.Empty || character.Id == null || !_DbContext.Characters.Any(c => c.Id == character.Id))
+            if (character.Id == Guid.Empty || !_DbContext.Characters.Any(c => c.Id == character.Id))
                 await _DbContext.Characters.AddAsync(character);
             await _DbContext.SaveChangesAsync();
         }

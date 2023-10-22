@@ -85,7 +85,7 @@ namespace JDR.Core
             _Repository.SaveCharacter(character);
         }
 
-        public object GetCharacterTest()
+        public Character GetCharacterTest()
         {
 
             return new Character("Julio",

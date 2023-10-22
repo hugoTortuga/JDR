@@ -7,14 +7,14 @@ namespace JDR.Model
         public Guid Id { get; set; }
 
         private string? _Name;
-        public string? Name { 
-            get => _Name; 
+        public string? Name
+        {
+            get => _Name;
             set
             {
-                if (value == null || (value != null && value.Length <= 50))
-                {
+                if (string.IsNullOrEmpty(value) || value.Length <= 50)
                     _Name = value;
-                }
+                else throw new ApplicationException("Name too long");
             }
         }
 
@@ -45,13 +45,14 @@ namespace JDR.Model
         public Character(string name, Race race, Skills skills)
         {
             Name = name;
-            Skills = skills; 
+            Skills = skills;
             Inventory = new Inventory();
             Spells = new List<Spell>();
             Race = race;
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return $"{Name}, {Race?.Name}";
         }
     }
