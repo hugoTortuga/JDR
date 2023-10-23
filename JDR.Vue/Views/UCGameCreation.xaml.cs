@@ -272,7 +272,7 @@ namespace JDR.Vue.Views
 
         private void BackgroundImage_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_IsDragging) return;
+            if (!_IsDragging) return;
             Point currentPosition = e.GetPosition(MyCanvas);
             double deltaX = currentPosition.X - _previousMousePosition.X;
             double deltaY = currentPosition.Y - _previousMousePosition.Y;

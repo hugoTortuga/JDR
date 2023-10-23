@@ -8,6 +8,7 @@ using JDR.Service;
 using JDR.Core;
 using System;
 using AutoMapper;
+using System.Windows.Forms;
 
 namespace JDR.Vue {
 	public class AppInjections {
@@ -21,7 +22,7 @@ namespace JDR.Vue {
 			.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
 			.Build();
 
-			string connectionString = configuration.GetConnectionString("MySqlConnection") ?? throw new ApplicationException("Aucune connexion string");
+            string connectionString = configuration.GetConnectionString("MySqlConnection") ?? throw new ApplicationException("Aucune connexion string");
 			string basePathImageDB = configuration.GetSection("Paths")["ImageDBPath"] ?? throw new ApplicationException("Aucune base de données d'images accessible");
             string basePathMusicDB = configuration.GetSection("Paths")["MusicDBPath"] ?? throw new ApplicationException("Aucune base de données de musiques accessible");
 
@@ -31,7 +32,7 @@ namespace JDR.Vue {
 				options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 			);
 
-			services.AddAutoMapper(typeof(MappingProfile));
+            services.AddAutoMapper(typeof(MappingProfile));
 
 			services.AddScoped<IMainRepository, MainRepository>();
 			services.AddScoped<IImageStorage, ImageStorage>(basePathParameter => {

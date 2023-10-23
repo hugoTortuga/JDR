@@ -187,8 +187,8 @@ namespace JDR.Vue.ViewModels {
             var characters = gameCore.GetCharacters();
 			var characterTest = gameCore.GetCharacterTest();
             Players = new ObservableCollection<Character> {
-				characters.ToList()[0]
-			};
+                characterTest
+            };
         }
 
 		public void MusicSelection()

@@ -1,4 +1,6 @@
-﻿using JDR.Vue.ViewModels;
+﻿using JDR.Infra;
+using JDR.Vue.ViewModels;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -22,7 +24,7 @@ namespace JDR.Vue {
 		protected override void OnStartup(StartupEventArgs e) {
 			base.OnStartup(e);
 
-			var mainViewModel = ServiceProvider.GetRequiredService<MainViewModel>();
+            var mainViewModel = ServiceProvider.GetRequiredService<MainViewModel>();
 			var mainWindow = new MainWindow { DataContext = mainViewModel };
 			mainWindow.Show();
 		}
